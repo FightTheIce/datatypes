@@ -1,1 +1,16 @@
 /vendor/
+/composer.phar
+/phpunit.xml
+/phpmd.xml
+/phpdox.xml
+/clover.xml
+/infectionlog.json
+/infectionlog.txt
+/.phpunit.result.cache
+.DS_Store
+Thumb.db
+Thumbs.db
+/php.save
+/.phpunit.results.cache
+/test.php
+/.php_cs.cache
