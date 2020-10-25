@@ -1,0 +1,12 @@
+{
+    "name": "fighttheice/datatypes",
+    "description": "Creating a standard for PHP datatypes",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "William Knauss",
+            "email": "william.knauss@kingdom.com"
+        }
+    ],
+    "require": {}
+}
