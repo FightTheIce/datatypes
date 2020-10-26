@@ -15,4 +15,8 @@ interface StringInterface {
     public function __toString();
 
     public function strlen();
+
+    public function strtolower();
+
+    public function strtoupper();
 }

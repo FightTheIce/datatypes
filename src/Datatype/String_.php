@@ -51,4 +51,16 @@ class String_ implements DataTypeInterface, StringInterface {
     public function __toString() {
         return $this->str;
     }
+
+    public function strtolower() {
+        $this->str = strtolower($this->str);
+
+        return $this;
+    }
+
+    public function strtoupper() {
+        $this->str = strtoupper($this->str);
+
+        return $this;
+    }
 }

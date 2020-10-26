@@ -12,7 +12,6 @@ class Utf8String_ implements DataTypeInterface, StringInterface {
     protected $str = null;
 
     public function __construct(string $str) {
-        //$this->str = new UnicodeString($str);
         $this->str = preg_match('//u', $str) ? new UnicodeString($str) : new ByteString($str);
     }
 
@@ -48,16 +47,11 @@ class Utf8String_ implements DataTypeInterface, StringInterface {
         return $this->str->__toString();
     }
 
-    public function toAscii() {
-        $str       = new UnicodeString($this->str);
-        $this->str = $str->ascii();
-
-        return $this;
+    public function strtolower() {
+        $this->str = $this->str->lower();
     }
 
-    public function isUtf8() {
-        $str = new ByteString($this->str);
-
-        return $str->isUtf8();
+    public function strtoupper() {
+        $this->str = $this->str->upper();
     }
 }
