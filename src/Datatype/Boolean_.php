@@ -2,29 +2,24 @@
 
 namespace FightTheIce\Datatypes\Datatype;
 
-use FightTheIce\Datatypes\Core\DataTypeInterface;
-use FightTheIce\Datatypes\Core\Macroable;
-use FightTheIce\Datatypes\Core\StringInterface;
-use Symfony\Component\String\ByteString;
-use Symfony\Component\String\UnicodeString;
+use FightTheIce\Datatypes\Core\Interfaces\DatatypeInterface;
+use Illuminate\Support\Traits\Macroable;
 
-class Boolean_ implements DataTypeInterface {
-    protected $bool = null;
+class Boolean_ implements DatatypeInterface {
+    use Macroable;
+
+    protected $boolean = null;
 
     public function __construct(bool $bool) {
-        $this->bool = $bool;
+        $this->boolean = $bool;
+    }
+
+    public function getBoolean() {
+        return $this->boolean;
     }
 
     public function isTrue() {
-        if ($this->bool == true) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function isStrictTrue() {
-        if ($this->bool === true) {
+        if ($this->boolean == true) {
             return true;
         }
 
@@ -32,15 +27,7 @@ class Boolean_ implements DataTypeInterface {
     }
 
     public function isFalse() {
-        if ($this->bool == false) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function isStrictFalse() {
-        if ($this->bool === false) {
+        if ($this->boolean == false) {
             return true;
         }
 
@@ -48,12 +35,20 @@ class Boolean_ implements DataTypeInterface {
     }
 
     public function inverse() {
-        if ($this->bool) {
-            $this->bool = false;
+        if ($this->boolean == true) {
+            self::__construct(false);
+        } else {
+            self::__construct(true);
         }
 
-        $this->bool = true;
-
         return $this;
+    }
+
+    public function getType() {
+        return 'boolean';
+    }
+
+    public function getValue() {
+        return $this->boolean;
     }
 }
