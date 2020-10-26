@@ -11,10 +11,6 @@ use StdClass;
 class StdClass_ extends StdClass implements DataTypeInterface {
     use Macroable;
 
-    public function cast() {
-        return new Castable_($this);
-    }
-
     public function newProperty(string $name, $value) {
         $this->{$name} = $value;
 
