@@ -10,7 +10,8 @@
     ],
     "require": {
         "php": "^7.3",
-        "illuminate/macroable": "^8.11"
+        "illuminate/macroable": "^8.11",
+        "symfony/string": "^5.1"
     },
     "autoload": {
         "psr-4": {

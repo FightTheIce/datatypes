@@ -2,7 +2,6 @@
 
 namespace FightTheIce\Datatypes\Datatype;
 
-use FightTheIce\Datatypes\Core\Castable_;
 use FightTheIce\Datatypes\Core\DataTypeInterface;
 use FightTheIce\Datatypes\Core\Macroable;
 use FightTheIce\Datatypes\Core\StringInterface;

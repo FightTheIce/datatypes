@@ -3,7 +3,6 @@
 namespace FightTheIce\Datatypes\Datatype;
 
 use Closure;
-use FightTheIce\Datatypes\Core\Castable_;
 use FightTheIce\Datatypes\Core\DataTypeInterface;
 use FightTheIce\Datatypes\Core\Macroable;
 use StdClass;
