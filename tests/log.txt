@@ -1,0 +1,9 @@
+Array
+(
+    [firstname] => William
+    [lastname] => Knauss
+    [gender] => male
+    [hobbies.0] => art
+    [hobbies.1] => programming
+    [hobbies.2] => photography
+)
