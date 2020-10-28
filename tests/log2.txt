@@ -1,25 +1,3 @@
-Array
-(
-    [0] => Array
-        (
-            [0] => firstname
-            [1] => lastname
-            [2] => gender
-            [3] => hobbies
-        )
+{"products":{"desk":{"price":100}}}
 
-    [1] => Array
-        (
-            [0] => William
-            [1] => Knauss
-            [2] => male
-            [3] => Array
-                (
-                    [0] => art
-                    [1] => programming
-                    [2] => photography
-                )
 
-        )
-
-)

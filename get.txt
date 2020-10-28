@@ -1,0 +1,1 @@
+1 = products.desk.price

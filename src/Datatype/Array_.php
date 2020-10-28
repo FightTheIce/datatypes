@@ -134,9 +134,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @return bool
      */
     public function exists($key) {
-        $currentValue = $this->toArray();
-
-        return $this->arr->exists($currentValue, $key);
+        return $this->offsetExists($key);
     }
 
     /**
@@ -281,7 +279,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @param  array  $arr
      * @return self
      */
-    public function refresh(array $arr): self{
+    public function refresh(array $arr = []): self{
         self::__construct($arr);
 
         return $this;

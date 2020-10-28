@@ -10,105 +10,126 @@ class Array_Test extends \PHPUnit\Framework\TestCase {
         $this->array = new Array_();
     }
 
-    public function test__construct_noarguments() {
-        $this->assertSame($this->array->toArray(), array());
-    }
+    public function test__construct() {
+        # no arguments should result in a blank array
+        $this->assertSame(array(), $this->array->toArray());
 
-    public function test__construct_withdefaultarray() {
-        $value = array(
-            0 => 'zero',
+        # test with arguments
+        $outcome = array(
+            1,
+            2,
+            3,
         );
-
-        $this->assertSame($this->array->refresh($value)->toArray(), $value);
+        $this->assertSame($outcome, $this->array->refresh($outcome)->toArray());
     }
 
     public function testgetType() {
-        $this->assertEquals($this->array->getType(), 'array');
+        $this->assertEquals('array', $this->array->getType());
     }
 
     public function testgetValue() {
+        $this->assertSame(array(), $this->array->getValue());
+    }
+
+    public function testoffsetExists() {
         $value = array(
-            0 => 'zero',
+            0 => 'test',
         );
 
-        $this->assertSame($this->array->refresh($value)->getValue(), $value);
+        $this->assertTrue($this->array->refresh($value)->offsetExists(0));
     }
 
-    public function testaddDot_basickey() {
-        $test = array(
-            0 => 'zero',
+    public function testoffsetGet() {
+        $value = array(
+            0 => 'test',
         );
 
-        $this->array->addDot(0, 'zero');
-
-        $this->assertSame($this->array->toArray(), $test);
+        $this->assertEquals($this->array->refresh($value)->offsetGet(0), 'test');
+        $this->assertNull($this->array->offsetGet(1));
     }
 
-    public function testaddDot_basickey_overwrite() {
-        $test = array(
-            0 => 'one',
-        );
+    public function testoffsetSet() {
+        $this->array->offsetSet(null, 'some string');
+        $this->assertEquals(array(0 => 'some string'), $this->array->toArray());
 
-        $this->array->addDot(0, 'zero');
-        $this->array->addDot(0, 'one');
-
-        $this->assertSame($this->array->toArray(), $test);
+        $this->array->offsetSet(0, 'new string');
+        $this->assertEquals(array(0 => 'new string'), $this->array->toArray());
     }
 
-    public function testaddDot_advanced() {
-        $test = array(
-            0 => array(
-                'developer' => 'William',
-            ),
-        );
+    public function testoffsetunset() {
+        $this->array->offsetUnset(1); //this should do nothing
+        $this->assertEquals(array(), $this->array->toArray());
 
-        $this->array->addDot('0.developer', 'William');
-
-        $this->assertSame($this->array->toArray(), $test);
-    }
-
-    public function testremoveDot_basickey() {
-        $outcome = array(
+        $values = array(
             0 => 'some string',
         );
-
-        $this->array->addDot(0, 'some string');
-        $this->array->addDot(1, 'other string');
-
-        $this->assertEquals($this->array->toArray(), array(
-            0 => 'some string',
-            1 => 'other string',
-        ));
-
-        $this->array->removeDot(1);
-
-        $this->assertEquals($this->array->toArray(), $outcome);
+        $this->array->offsetUnset(0);
+        $this->assertEquals(array(), $this->array->toArray());
     }
 
-    public function testremoveDot_advanced() {
-        $outcome = array(
+    public function testaddDot() {
+        $obj = $this->array->addDot(0, 'some string');
+        $this->assertEquals(array(0 => 'some string'), $this->array->toArray());
+        $this->assertSame($obj, $this->array);
+
+        $obj = $this->array->addDot('1.developer.name', 'William');
+        $this->assertEquals(array(0 => 'some string', 1 => array('developer' => array('name' => 'William'))), $this->array->toArray());
+        $this->assertSame($obj, $this->array);
+
+        $obj = $this->array->addDot('1.developer.name', 'Frank');
+        $this->assertEquals(array(0 => 'some string', 1 => array('developer' => array('name' => 'Frank'))), $this->array->toArray());
+        $this->assertSame($obj, $this->array);
+
+        //https://laravel.com/docs/8.x/helpers#method-array-add
+        $obj = $this->array->refresh(['name' => 'Desk']);
+        $this->assertSame($obj, $this->array);
+        $this->array->addDot('price', 100);
+        $this->assertEquals(array(
+            'name'  => 'Desk',
+            'price' => 100,
+        ), $this->array->toArray());
+    }
+
+    public function testremoveDot() {
+        $this->array->addDot('0.developer.name', 'William');
+        $this->array->addDot('0.developer.id', 1);
+
+        $this->assertEquals(array(
             0 => array(
-                'developer' => 'William',
+                'developer' => array(
+                    'name' => 'William',
+                    'id'   => 1,
+                ),
             ),
-            1 => array(
+        ), $this->array->toArray());
+
+        $obj = $this->array->removeDot('0.developer.name');
+        $this->assertEquals(array(
+            0 => array(
+                'developer' => array(
+                    'id' => 1,
+                ),
+            ),
+        ), $this->array->toArray());
+        $this->assertSame($obj, $this->array);
+
+        $obj = $this->array->removeDot(0);
+        $this->assertEquals(array(), $this->array->toArray());
+        $this->assertSame($obj, $this->array);
+
+        //https://laravel.com/docs/8.x/helpers#method-array-forget
+        $value = array(
+            'products' => array(
+                'desk' => array(
+                    'price' => 100,
+                ),
             ),
         );
-
-        $this->array->addDot(0, array('developer' => 'William'));
-        $this->array->addDot(1, array('developer' => 'William'));
-
-        $this->assertEquals($this->array->toArray(), array(
-            0 => array(
-                'developer' => 'William',
-            ),
-            1 => array(
-                'developer' => 'William',
-            ),
-        ));
-
-        $this->array->removeDot('1.developer');
-
-        $this->assertEquals($this->array->toArray(), $outcome);
+        $obj = $this->array->refresh($value);
+        $this->assertSame($obj, $this->array);
+        $obj = $this->array->removeDot('products.desk');
+        $this->assertSame($obj, $this->array);
+        $this->assertSame(array('products' => array()), $this->array->toArray());
     }
 
     public function testdivide() {
@@ -122,91 +143,108 @@ class Array_Test extends \PHPUnit\Framework\TestCase {
                 'photography',
             ),
         );
+        $obj = $this->array->refresh($value);
+        $this->assertSame($obj, $this->array);
+        $this->assertSame($value, $this->array->toArray());
 
-        $keys = array(
-            'firstname',
-            'lastname',
-            'gender',
-            'hobbies',
-        );
+        $obj = $this->array->divide();
+        $this->assertSame($obj, $this->array);
 
-        $values = array(
-            'William',
-            'Knauss',
-            'male',
-            array(
-                'art',
-                'programming',
-                'photography',
+        $this->assertSame(array(
+            0 => array(
+                'firstname',
+                'lastname',
+                'gender',
+                'hobbies',
             ),
-        );
+            1 => array(
+                'William',
+                'Knauss',
+                'male',
+                array(
+                    'art',
+                    'programming',
+                    'photography',
+                ),
+            ),
+        ), $this->array->toArray());
 
-        $this->array->refresh($value);
-
+        //https://laravel.com/docs/8.x/helpers#method-array-divide
+        $this->array->refresh(array('name' => 'desk'));
         $this->array->divide();
-        $array = $this->array->toArray();
-
-        $this->assertEquals($array[0], $keys);
-        $this->assertEquals($array[1], $values);
+        $this->assertSame(array(
+            0 => array('name'),
+            1 => array('desk'),
+        ), $this->array->toArray());
     }
 
     public function testdot() {
-        $values = array(
-            'firstname' => 'William',
-            'lastname'  => 'Knauss',
-            'gender'    => 'male',
-            'hobbies'   => array(
-                'art',
-                'programming',
-                'photography',
+        $array = array(
+            'names' => array(
+                'Fred',
+                'Frank',
+                'Ferrie',
             ),
         );
 
+        $obj = $this->array->refresh($array);
+        $this->assertSame($obj, $this->array);
+
         $outcome = array(
-            'firstname' => 'William',
-            'lastname'  => 'Knauss',
-            'gender'    => 'male',
-            'hobbies.0' => 'art',
-            'hobbies.1' => 'programming',
-            'hobbies.2' => 'photography',
+            'names.0' => 'Fred',
+            'names.1' => 'Frank',
+            'names.2' => 'Ferrie',
         );
+        $obj = $this->array->dot();
+        $this->assertSame($obj, $this->array);
+        $this->assertSame($outcome, $this->array->toArray());
 
+        $values = ['products' => ['desk' => ['price' => 100]]];
         $this->array->refresh($values);
-        $this->array->dot();
+        $obj = $this->array->dot('-');
+        $this->assertSame($obj, $this->array);
+        $this->assertEquals(array('-products.desk.price' => 100), $this->array->toArray());
 
-        $array = $this->array->toArray();
-        $this->assertEquals($outcome, $array);
+        //https://laravel.com/docs/8.x/helpers#method-array-dot
+        $values = ['products' => ['desk' => ['price' => 100]]];
+        $this->array->refresh($values);
+        $obj = $this->array->dot();
+        $this->assertSame($obj, $this->array);
+        $this->assertEquals(array('products.desk.price' => 100), $this->array->toArray());
     }
 
     public function testexists() {
-        $values = array(
-            'firstname' => 'William',
+        $array = array(
+            0 => 'some',
+            1 => 'thing',
         );
 
-        $this->array->refresh($values);
+        $obj = $this->array->refresh($array);
+        $this->assertSame($obj, $this->array);
 
-        $this->assertTrue($this->array->exists('firstname'));
+        $this->assertTrue($this->array->exists(0));
+        $this->assertFalse($this->array->exists(2));
+
+        //https://laravel.com/docs/8.x/helpers#method-array-exists
+        $this->array->refresh(['name' => 'John Doe', 'age' => 17]);
+        $this->assertTrue($this->array->exists('name'));
+        $this->assertFalse($this->array->exists('salary'));
     }
 
-    public function testgetdot() {
-        $values = array(
-            'firstname' => true,
-        );
+    public function testgetDot() {
+        $this->assertSame($this->array->getDot(0, 'does not exists'), 'does not exists');
+        $this->array->addDot(0, 'some string');
+        $this->assertSame($this->array->getDot(0), 'some string');
+        $this->array->addDot('0.developer', 'William');
+        $this->assertSame($this->array->getDot('0.developer'), 'William');
 
-        $this->array->refresh($values);
+        //https://laravel.com/docs/8.x/helpers#method-array-get
+        $array = ['products' => ['desk' => ['price' => 100]]];
+        $this->array->refresh($array);
 
-        $this->assertTrue($this->array->getDot('firstname'));
+        $this->array->addDot('products.desk.price', 100);
 
-        $values = array(
-            0 => array(
-                'developer' => array(
-                    'name' => 'William',
-                ),
-            ),
-        );
-        $this->array->refresh($values);
-
-        $this->assertEquals($this->array->getDot('0.developer.name'), 'William');
-        $this->assertEquals($this->array->getDot('1.developer.name', 'Does not exists yet!'), 'Does not exists yet!');
+        $price = $this->array->getDot('products.desk.price');
+        $this->assertEquals($price, 100);
     }
 }
