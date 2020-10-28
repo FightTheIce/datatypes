@@ -10,241 +10,117 @@ class Array_Test extends \PHPUnit\Framework\TestCase {
         $this->array = new Array_();
     }
 
+    public function testClassData() {
+        $this->assertInstanceOf(\FightTheIce\Datatypes\Datatype\Array_::class, $this->array);
+
+        $this->assertInstanceOf(\FightTheIce\Datatypes\Core\Interfaces\DatatypeInterface::class, $this->array);
+        $this->assertInstanceOf(\ArrayAccess::class, $this->array);
+        $this->assertInstanceOf(\IteratorAggregate::class, $this->array);
+
+        $this->assertHasTrait(\Illuminate\Support\Traits\ForwardsCalls::class, $this->array);
+        $this->assertHasTrait(\Illuminate\Support\Traits\Macroable::class, $this->array);
+
+        $this->assertClassHasProperty('collection', $this->array);
+        $this->assertClassHasProperty('arr', $this->array);
+    }
+
     public function test__construct() {
-        # no arguments should result in a blank array
-        $this->assertSame(array(), $this->array->toArray());
+        //make sure our class has the __construct method
+        $this->assertClassHasMethod('__construct', $this->array);
 
-        # test with arguments
-        $outcome = array(
-            1,
-            2,
-            3,
-        );
-        $this->assertSame($outcome, $this->array->refresh($outcome)->toArray());
+        //make sure __construct takes a parameter
+        $this->assertMethodHasParameter('arr', '__construct', $this->array);
+        $this->assertMethodParameterIsOptional('arr', '__construct', $this->array);
+
+        //lets test it with no parameters
+        $this->assertInstanceOf(\FightTheIce\Datatypes\Datatype\Array_::class, new Array_());
+
+        //lets test it with an empty array
+        $this->assertInstanceOf(\FightTheIce\Datatypes\Datatype\Array_::class, new Array_(array()));
+
+        //lets test it with an stdClass
+        $this->expectException(\TypeError::class);
+        $this->assertInstanceOf(\ArrayAccess::class, new Array_(new \StdClass()));
     }
 
-    public function testgetType() {
-        $this->assertEquals('array', $this->array->getType());
+    public function test_getType() {
+        $this->assertEquals($this->array->getType(), 'array');
     }
 
-    public function testgetValue() {
-        $this->assertSame(array(), $this->array->getValue());
+    public function test_getValue() {
+        $this->assertEquals(array(), $this->array->getValue());
     }
 
-    public function testoffsetExists() {
-        $value = array(
-            0 => 'test',
-        );
+    protected function assertHasTrait($trait, $obj) {
+        //this requires illuminate/support
+        $objectHasTraits = class_uses_recursive($obj);
+        $objectTraits    = array_values($objectHasTraits);
 
-        $this->assertTrue($this->array->refresh($value)->offsetExists(0));
+        $this->assertTrue(in_array($trait, $objectTraits));
     }
 
-    public function testoffsetGet() {
-        $value = array(
-            0 => 'test',
-        );
+    protected function assertClassHasProperty(string $name, $obj) {
+        if (is_object($obj)) {
+            $obj = get_class($obj);
+        }
 
-        $this->assertEquals($this->array->refresh($value)->offsetGet(0), 'test');
-        $this->assertNull($this->array->offsetGet(1));
+        $this->assertClassHasAttribute($name, $obj);
     }
 
-    public function testoffsetSet() {
-        $this->array->offsetSet(null, 'some string');
-        $this->assertEquals(array(0 => 'some string'), $this->array->toArray());
-
-        $this->array->offsetSet(0, 'new string');
-        $this->assertEquals(array(0 => 'new string'), $this->array->toArray());
+    protected function assertClassHasMethod(string $methodName, $obj) {
+        $this->assertTrue(method_exists($obj, $methodName), 'The object does not have a method named: ' . $methodName);
     }
 
-    public function testoffsetunset() {
-        $this->array->offsetUnset(1); //this should do nothing
-        $this->assertEquals(array(), $this->array->toArray());
+    protected function assertMethodHasParameter(string $parameterName, string $methodName, $obj) {
+        $classReflection = new \ReflectionClass($obj);
+        $methods         = $classReflection->getMethods();
 
-        $values = array(
-            0 => 'some string',
-        );
-        $this->array->offsetUnset(0);
-        $this->assertEquals(array(), $this->array->toArray());
+        $methodNames = array();
+        foreach ($methods as $method) {
+            $methodNames[] = $method->getName();
+        }
+
+        $method = $classReflection->getMethod($methodName);
+        if (!$method) {
+            $this->assertTrue(false, 'Object: ' . $classReflection->getName() . ' does not have a method named: ' . $methodName);
+            return;
+        }
+        $parameterNames = array();
+        foreach ($method->getParameters() as $parameter) {
+            $parameterNames[] = $parameter->getName();
+        }
+
+        $this->assertTrue(in_array($parameterName, $parameterNames), 'Object: ' . $classReflection->getName() . ' does not have a parameter named: ' . $parameterName);
     }
 
-    public function testaddDot() {
-        $obj = $this->array->addDot(0, 'some string');
-        $this->assertEquals(array(0 => 'some string'), $this->array->toArray());
-        $this->assertSame($obj, $this->array);
+    protected function assertMethodParameterIsOptional(string $parameterName, string $methodName, $obj) {
+        $classReflection = new \ReflectionClass($obj);
+        $methods         = $classReflection->getMethods();
 
-        $obj = $this->array->addDot('1.developer.name', 'William');
-        $this->assertEquals(array(0 => 'some string', 1 => array('developer' => array('name' => 'William'))), $this->array->toArray());
-        $this->assertSame($obj, $this->array);
+        $methodNames = array();
+        foreach ($methods as $method) {
+            $methodNames[] = $method->getName();
+        }
 
-        $obj = $this->array->addDot('1.developer.name', 'Frank');
-        $this->assertEquals(array(0 => 'some string', 1 => array('developer' => array('name' => 'Frank'))), $this->array->toArray());
-        $this->assertSame($obj, $this->array);
+        if (!in_array($methodName, $methodNames)) {
+            $this->assertTrue(false, 'Object: ' . $classReflection->getName() . ' does not have a method by the name of: ' . $methodName);
+            return;
+        }
 
-        //https://laravel.com/docs/8.x/helpers#method-array-add
-        $obj = $this->array->refresh(['name' => 'Desk']);
-        $this->assertSame($obj, $this->array);
-        $this->array->addDot('price', 100);
-        $this->assertEquals(array(
-            'name'  => 'Desk',
-            'price' => 100,
-        ), $this->array->toArray());
-    }
+        $method     = $classReflection->getMethod($methodName);
+        $parameters = $method->getParameters();
+        if (!$parameters) {
+            $this->assertTrue(false, 'Object: ' . $classReflection->getName() . ' method: ' . $methodName . ' does not have a parameter with the name: ' . $parameterName);
+            return;
+        }
 
-    public function testremoveDot() {
-        $this->array->addDot('0.developer.name', 'William');
-        $this->array->addDot('0.developer.id', 1);
+        foreach ($parameters as $param) {
+            if ($param->getName() == $parameterName) {
+                $this->assertTrue($param->isOptional());
+                return;
+            }
+        }
 
-        $this->assertEquals(array(
-            0 => array(
-                'developer' => array(
-                    'name' => 'William',
-                    'id'   => 1,
-                ),
-            ),
-        ), $this->array->toArray());
-
-        $obj = $this->array->removeDot('0.developer.name');
-        $this->assertEquals(array(
-            0 => array(
-                'developer' => array(
-                    'id' => 1,
-                ),
-            ),
-        ), $this->array->toArray());
-        $this->assertSame($obj, $this->array);
-
-        $obj = $this->array->removeDot(0);
-        $this->assertEquals(array(), $this->array->toArray());
-        $this->assertSame($obj, $this->array);
-
-        //https://laravel.com/docs/8.x/helpers#method-array-forget
-        $value = array(
-            'products' => array(
-                'desk' => array(
-                    'price' => 100,
-                ),
-            ),
-        );
-        $obj = $this->array->refresh($value);
-        $this->assertSame($obj, $this->array);
-        $obj = $this->array->removeDot('products.desk');
-        $this->assertSame($obj, $this->array);
-        $this->assertSame(array('products' => array()), $this->array->toArray());
-    }
-
-    public function testdivide() {
-        $value = array(
-            'firstname' => 'William',
-            'lastname'  => 'Knauss',
-            'gender'    => 'male',
-            'hobbies'   => array(
-                'art',
-                'programming',
-                'photography',
-            ),
-        );
-        $obj = $this->array->refresh($value);
-        $this->assertSame($obj, $this->array);
-        $this->assertSame($value, $this->array->toArray());
-
-        $obj = $this->array->divide();
-        $this->assertSame($obj, $this->array);
-
-        $this->assertSame(array(
-            0 => array(
-                'firstname',
-                'lastname',
-                'gender',
-                'hobbies',
-            ),
-            1 => array(
-                'William',
-                'Knauss',
-                'male',
-                array(
-                    'art',
-                    'programming',
-                    'photography',
-                ),
-            ),
-        ), $this->array->toArray());
-
-        //https://laravel.com/docs/8.x/helpers#method-array-divide
-        $this->array->refresh(array('name' => 'desk'));
-        $this->array->divide();
-        $this->assertSame(array(
-            0 => array('name'),
-            1 => array('desk'),
-        ), $this->array->toArray());
-    }
-
-    public function testdot() {
-        $array = array(
-            'names' => array(
-                'Fred',
-                'Frank',
-                'Ferrie',
-            ),
-        );
-
-        $obj = $this->array->refresh($array);
-        $this->assertSame($obj, $this->array);
-
-        $outcome = array(
-            'names.0' => 'Fred',
-            'names.1' => 'Frank',
-            'names.2' => 'Ferrie',
-        );
-        $obj = $this->array->dot();
-        $this->assertSame($obj, $this->array);
-        $this->assertSame($outcome, $this->array->toArray());
-
-        $values = ['products' => ['desk' => ['price' => 100]]];
-        $this->array->refresh($values);
-        $obj = $this->array->dot('-');
-        $this->assertSame($obj, $this->array);
-        $this->assertEquals(array('-products.desk.price' => 100), $this->array->toArray());
-
-        //https://laravel.com/docs/8.x/helpers#method-array-dot
-        $values = ['products' => ['desk' => ['price' => 100]]];
-        $this->array->refresh($values);
-        $obj = $this->array->dot();
-        $this->assertSame($obj, $this->array);
-        $this->assertEquals(array('products.desk.price' => 100), $this->array->toArray());
-    }
-
-    public function testexists() {
-        $array = array(
-            0 => 'some',
-            1 => 'thing',
-        );
-
-        $obj = $this->array->refresh($array);
-        $this->assertSame($obj, $this->array);
-
-        $this->assertTrue($this->array->exists(0));
-        $this->assertFalse($this->array->exists(2));
-
-        //https://laravel.com/docs/8.x/helpers#method-array-exists
-        $this->array->refresh(['name' => 'John Doe', 'age' => 17]);
-        $this->assertTrue($this->array->exists('name'));
-        $this->assertFalse($this->array->exists('salary'));
-    }
-
-    public function testgetDot() {
-        $this->assertSame($this->array->getDot(0, 'does not exists'), 'does not exists');
-        $this->array->addDot(0, 'some string');
-        $this->assertSame($this->array->getDot(0), 'some string');
-        $this->array->addDot('0.developer', 'William');
-        $this->assertSame($this->array->getDot('0.developer'), 'William');
-
-        //https://laravel.com/docs/8.x/helpers#method-array-get
-        $array = ['products' => ['desk' => ['price' => 100]]];
-        $this->array->refresh($array);
-
-        $this->array->addDot('products.desk.price', 100);
-
-        $price = $this->array->getDot('products.desk.price');
-        $this->assertEquals($price, 100);
+        $this->assertTrue(false, 'You should have never made it this far');
     }
 }
