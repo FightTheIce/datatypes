@@ -829,4 +829,16 @@ class Array_Test extends TestCase {
 
         $this->assertEquals(array('Fred'), $this->array->toArray());
     }
+
+    public function test_using_obj_as_array() {
+        $this->array['name'] = 'William';
+
+        $this->assertSame('William', $this->array->offsetGet('name'));
+
+        $this->array['name'] = 'Donald';
+        $this->assertSame('Donald', $this->array->offsetGet('name'));
+
+        $this->array[0] = 'Fred';
+        $this->assertSame('Fred', $this->array->offsetGet(0));
+    }
 }
