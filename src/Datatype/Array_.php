@@ -47,7 +47,11 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
     }
 
     public function offsetGet($offset) {
-        return isset($this->collection[$offset]) ? $this->collection[$offset] : null;
+        if (isset($this->collection[$offset])) {
+            return $this->collection[$offset];
+        }
+
+        return null;
     }
 
     public function offsetSet($offset, $value): void {
@@ -87,11 +91,13 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @param  string  $key
      * @return self
      */
-    public function removeDot(string $key): self{
-        $currentValue = $this->collection->toArray();
-        $this->arr->forget($currentValue, $key);
+    public function removeDot(string $key): self {
+        if ($this->hasDot($key) == true) {
+            $currentValue = $this->collection->toArray();
+            $this->arr->forget($currentValue, $key);
 
-        $this->collection = new Collection($currentValue);
+            $this->collection = new Collection($currentValue);
+        }
 
         return $this;
     }
@@ -117,7 +123,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @param  string  $prepend
      * @return self
      */
-    public function dot($prepend = '') {
+    public function dot(string $prepend = '') {
         $currentValue = $this->toArray();
 
         $newValue = $this->arr->dot($currentValue, $prepend);
@@ -140,26 +146,20 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
     /**
      * Get an item from an array using "dot" notation.
      *
-     * @param  string|int|null  $key
+     * @param  string  $key
      * @param  mixed  $default
      * @return mixed
      */
-    public function getDot($key, $default = null) {
+    public function getDot(string $key, $default = null) {
+        if ($this->hasDot($key) == false) {
+            if (is_null($default) == false) {
+                $this->setDot($key, $default);
+            }
+        }
+
         $currentValue = $this->toArray();
 
         return $this->arr->get($currentValue, $key, $default);
-    }
-
-    /**
-     * Determine if any of the keys exist in an array using "dot" notation.
-     *
-     * @param  string|array  $keys
-     * @return bool
-     */
-    public function hasAny(string $key) {
-        $currentValue = $this->toArray();
-
-        return $this->arr->hasAny($currentValue, $key);
     }
 
     /**
@@ -189,23 +189,6 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
         $this->arr->set($currentValue, $key, $value);
 
         $this->collection = new Collection($currentValue);
-
-        return $this;
-    }
-
-    /**
-     * Recursively sort an array by keys and values.
-     *
-     * @param  int  $options
-     * @param  bool  $descending
-     * @return self
-     */
-    public function sortRecursive($options = SORT_REGULAR, $descending = false) {
-        $currentValue = $this->toArray();
-
-        $newValue = $this->arr->sortRecursive($currentValue, $options, $descending);
-
-        $this->collection = new Collection($newValue);
 
         return $this;
     }

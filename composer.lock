@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1218fbe6cc1e16585715e8ebf5172413",
+    "content-hash": "41b248946d962ca0455cadc415da65aa",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1836,6 +1836,43 @@
                 "server"
             ],
             "time": "2020-10-23T13:55:30+00:00"
+        },
+        {
+            "name": "fighttheice/phpunit-assertions",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FightTheIce/phpunit-assertions.git",
+                "reference": "47378c173f28b7119cbe2c9482f5b3cfb2ea8b7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FightTheIce/phpunit-assertions/zipball/47378c173f28b7119cbe2c9482f5b3cfb2ea8b7b",
+                "reference": "47378c173f28b7119cbe2c9482f5b3cfb2ea8b7b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.11",
+                "phpunit/phpunit": "^9.4"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Knauss",
+                    "email": "william.knauss@kingdom.com"
+                }
+            ],
+            "description": "Additional assertions that can be run with PHPUnit",
+            "time": "2020-10-28T23:21:32+00:00"
         },
         {
             "name": "myclabs/deep-copy",

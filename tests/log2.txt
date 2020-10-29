@@ -1,3 +1,24 @@
-{"products":{"desk":{"price":100}}}
+FightTheIce\Datatypes\Datatype\Array_ Object
+(
+    [collection:protected] => Illuminate\Support\Collection Object
+        (
+            [items:protected] => Array
+                (
+                    [0] => Array
+                        (
+                            [developers] => Array
+                                (
+                                    [id] => 1
+                                )
 
+                        )
 
+                )
+
+        )
+
+    [arr:protected] => Illuminate\Support\Arr Object
+        (
+        )
+
+)
