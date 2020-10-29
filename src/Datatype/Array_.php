@@ -57,9 +57,10 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
     public function offsetSet($offset, $value): void {
         if ($offset === null) {
             $this->collection[] = $value;
-        } else {
-            $this->collection[$offset] = $value;
+            return;
         }
+
+        $this->collection[$offset] = $value;
     }
 
     public function offsetUnset($offset): void {
@@ -274,5 +275,9 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
 
     public function array_values(): array{
         return array_values($this->collection->toArray());
+    }
+
+    public function implode(string $glue = ''): string {
+        return implode($glue, $this->collection->toArray());
     }
 }
