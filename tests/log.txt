@@ -1,5 +1,0 @@
-Array
-(
-    [Illuminate\Support\Traits\ForwardsCalls] => Illuminate\Support\Traits\ForwardsCalls
-    [Illuminate\Support\Traits\Macroable] => Illuminate\Support\Traits\Macroable
-)

@@ -1,5 +1,0 @@
-2 = products.desk.price
-3 = products.desk.price
-4 = products.desk.price
-5 = products.desk.price
-8 = products.desk.price
