@@ -1,10 +1,14 @@
 <?php
+declare (strict_types = 1);
 
 namespace FightTheIce\Datatypes\Datatype;
 
 use FightTheIce\Datatypes\Core\Interfaces\DatatypeInterface;
+use Illuminate\Support\Traits\Macroable;
 
 class Boolean_ implements DatatypeInterface {
+    use Macroable;
+
     protected $value;
 
     public function __construct(bool $value = false) {
@@ -101,5 +105,11 @@ class Boolean_ implements DatatypeInterface {
 
     public function getValue() {
         return $this->value;
+    }
+
+    public function refresh(bool $value = false) {
+        self::__construct($value);
+
+        return $this;
     }
 }

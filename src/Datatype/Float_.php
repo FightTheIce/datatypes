@@ -1,10 +1,14 @@
 <?php
+declare (strict_types = 1);
 
 namespace FightTheIce\Datatypes\Datatype;
 
 use FightTheIce\Datatypes\Core\Interfaces\DatatypeInterface;
+use Illuminate\Support\Traits\Macroable;
 
 class Float_ implements DatatypeInterface {
+    use Macroable;
+
     protected $value;
 
     public function __construct(float $value = 0) {
@@ -49,5 +53,11 @@ class Float_ implements DatatypeInterface {
 
     public function getValue() {
         return $this->value;
+    }
+
+    public function refresh(float $value = 0) {
+        self::__construct($value);
+
+        return $this;
     }
 }

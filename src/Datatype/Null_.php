@@ -1,10 +1,14 @@
 <?php
+declare (strict_types = 1);
 
 namespace FightTheIce\Datatypes\Datatype;
 
 use FightTheIce\Datatypes\Core\Interfaces\DatatypeInterface;
+use Illuminate\Support\Traits\Macroable;
 
 class Null_ implements DatatypeInterface {
+    use Macroable;
+
     public function getType(): string {
         return 'null';
     }
@@ -60,5 +64,9 @@ class Null_ implements DatatypeInterface {
      */
     public function strictCompare($comparator): bool {
         return $this->hardCompare($comparator);
+    }
+
+    public function refresh() {
+        return $this;
     }
 }

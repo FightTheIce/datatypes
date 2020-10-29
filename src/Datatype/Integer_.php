@@ -1,10 +1,14 @@
 <?php
+declare (strict_types = 1);
 
 namespace FightTheIce\Datatypes\Datatype;
 
 use FightTheIce\Datatypes\Core\Interfaces\DatatypeInterface;
+use Illuminate\Support\Traits\Macroable;
 
 class Integer_ implements DatatypeInterface {
+    use Macroable;
+
     protected $value;
 
     public function __construct(int $value = 0) {
@@ -101,5 +105,11 @@ class Integer_ implements DatatypeInterface {
         }
 
         return false;
+    }
+
+    public function refresh(int $value = 0) {
+        self::__construct($value);
+
+        return $this;
     }
 }

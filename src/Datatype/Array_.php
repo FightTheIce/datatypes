@@ -263,7 +263,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @param  array  $arr
      * @return self
      */
-    public function refresh(array $arr = []): self{
+    public function refresh(array $value = []): self{
         self::__construct($arr);
 
         return $this;
