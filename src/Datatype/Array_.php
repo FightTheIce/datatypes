@@ -55,14 +55,14 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
     }
 
     public function offsetSet($offset, $value): void {
-        if (is_null($offset)) {
+        if ($offset === null) {
             $this->collection[] = $value;
         } else {
             $this->collection[$offset] = $value;
         }
     }
 
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset): void {
         unset($this->collection[$offset]);
     }
 
@@ -107,7 +107,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      *
      * @return self
      */
-    public function divide() {
+    public function divide(): self{
         $currentValue = $this->toArray();
 
         $newValue = $this->arr->divide($currentValue);
@@ -123,7 +123,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @param  string  $prepend
      * @return self
      */
-    public function dot(string $prepend = '') {
+    public function dot(string $prepend = ''): self{
         $currentValue = $this->toArray();
 
         $newValue = $this->arr->dot($currentValue, $prepend);
@@ -139,7 +139,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @param  string|int  $key
      * @return bool
      */
-    public function exists($key) {
+    public function exists($key): bool {
         return $this->offsetExists($key);
     }
 
@@ -169,7 +169,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      *
      * @return bool
      */
-    public function isAssoc() {
+    public function isAssoc(): bool{
         $currentValue = $this->toArray();
 
         return $this->arr->isAssoc($currentValue);
@@ -184,7 +184,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @param  mixed  $value
      * @return self
      */
-    public function setDot($key, $value) {
+    public function setDot($key, $value): self{
         $currentValue = $this->toArray();
         $this->arr->set($currentValue, $key, $value);
 
@@ -199,7 +199,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @param  array  $array
      * @return string
      */
-    public function query() {
+    public function query(): string{
         $currentValue = $this->toArray();
 
         return $this->arr->query($currentValue);
@@ -212,7 +212,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @param  callable  $callback
      * @return self
      */
-    public function where(callable $callback) {
+    public function where(callable $callback): self{
         $currentValue = $this->toArray();
 
         $newValue = $this->arr->where($currentValue, $callback);
@@ -228,7 +228,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      * @param  string|array  $keys
      * @return bool
      */
-    public function hasDot(string $key) {
+    public function hasDot(string $key): bool {
         return $this->arr->has($this->toArray(), $key);
     }
 
@@ -237,7 +237,7 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
      *
      * @return \ArrayIterator
      */
-    public function getIterator() {
+    public function getIterator(): ArrayIterator {
         return new ArrayIterator($this->collection->toArray());
     }
 
@@ -268,4 +268,11 @@ class Array_ implements DatatypeInterface, ArrayAccess, IteratorAggregate {
         return $this;
     }
 
+    public function array_keys(): array{
+        return array_keys($this->collection->toArray());
+    }
+
+    public function array_values(): array{
+        return array_values($this->collection->toArray());
+    }
 }
