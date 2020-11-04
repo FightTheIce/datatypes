@@ -89,7 +89,7 @@ class UnicodeString_ implements Stringable, ArrayAccess
      *
      * @return UnicodeString_
      */
-    public function substr(int $start, ? int $length = null) : UnicodeString_
+    public function substr(int $start, ? int $length = null): UnicodeString_
     {
         return new self($this->value->slice($start, $length)->__toString());
     }

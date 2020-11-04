@@ -82,7 +82,7 @@ class String_ implements Stringable, ArrayAccess
      *
      * @return String_
      */
-    public function substr(int $start, ? int $length = null) : String_
+    public function substr(int $start, ? int $length = null): String_
     {
         $test = '';
         if ($length === null) {
