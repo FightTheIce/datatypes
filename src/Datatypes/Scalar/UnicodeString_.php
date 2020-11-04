@@ -154,6 +154,7 @@ class UnicodeString_ implements Stringable, ArrayAccess, Datatype
      * @see https://www.php.net/manual/en/function.str-split.php
      *
      * @param int|int $split_length
+     * @psalm-suppress InvalidArgument
      *
      * @return array
      */
@@ -164,10 +165,6 @@ class UnicodeString_ implements Stringable, ArrayAccess, Datatype
         //if this is possible?
         foreach ($split as $key => &$value) {
             $value = $value->__toString();
-        }
-
-        if (!is_array($split)) {
-            throw new \ErrorException(__METHOD__);
         }
 
         if (count($split) == 1) {
