@@ -80,6 +80,9 @@ class Array_ extends Collection implements Datatype
         parent::__construct($items);
     }
 
+    /**
+     * @return array
+     */
     public function getValue()
     {
         return $this->toArray();

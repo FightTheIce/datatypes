@@ -34,6 +34,11 @@ class Object_ implements Datatype
         return $this->object;
     }
 
+    /**
+     * @return ReflectionClass|ReflectionFunction
+     *
+     * @psalm-return ReflectionClass<mixed>|ReflectionFunction
+     */
     function getReflection()
     {
         if ($this->object instanceof Closure) {

@@ -83,7 +83,7 @@ class Mixed_ implements Datatype
         return $this->object;
     }
 
-    public function getClass()
+    public function getClass(): Datatype
     {
         return $this->class;
     }

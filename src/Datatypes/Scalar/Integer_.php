@@ -17,6 +17,9 @@ class Integer_ implements Datatype
         $this->value = $value;
     }
 
+    /**
+     * @return int
+     */
     public function getValue()
     {
         return $this->value;

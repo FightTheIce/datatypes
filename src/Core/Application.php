@@ -48,57 +48,57 @@ class Application
         }
     }
 
-    public static function newArray_(array $default = [])
+    public static function newArray_(array $default = []): Array_
     {
         return new Array_($default);
     }
 
-    public static function newBoolean_(bool $default = false)
+    public static function newBoolean_(bool $default = false): Boolean_
     {
         return new Boolean_($default);
     }
 
-    public static function newFloat_(float $default = 0.00)
+    public static function newFloat_(float $default = 0.00): Float_
     {
         return new Float_($default);
     }
 
-    public static function newInteger_(int $default = 0)
+    public static function newInteger_(int $default = 0): Integer_
     {
         return new Integer_($default);
     }
 
-    public static function newString_(string $default = '')
+    public static function newString_(string $default = ''): String_
     {
         return new String_($default);
     }
 
-    public static function newUnicodeString_(string $default = '')
+    public static function newUnicodeString_(string $default = ''): UnicodeString_
     {
         return new UnicodeString_($default);
     }
 
-    public static function newObject_($obj = null)
+    public static function newObject_($obj = null): Object_
     {
         return new Object_($obj);
     }
 
-    public static function newNull_()
+    public static function newNull_(): Null_
     {
         return new Null_();
     }
 
-    public static function newMixed_($obj)
+    public static function newMixed_($obj): Mixed_
     {
         return new Mixed_($obj);
     }
 
-    public static function newNumber_($number)
+    public static function newNumber_($number): Number_
     {
         return new Number_($number);
     }
 
-    public static function newGenericString(string $default = '')
+    public static function newGenericString(string $default = ''): GenericString_
     {
         return new GenericString_($default);
     }

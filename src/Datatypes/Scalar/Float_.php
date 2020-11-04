@@ -17,6 +17,9 @@ class Float_ implements Datatype
         $this->value = $value;
     }
 
+    /**
+     * @return float
+     */
     public function getValue()
     {
         return $this->value;

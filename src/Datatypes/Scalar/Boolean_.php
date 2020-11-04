@@ -17,6 +17,9 @@ class Boolean_ implements Datatype
         $this->value = $value;
     }
 
+    /**
+     * @return bool
+     */
     public function getValue()
     {
         return $this->value;
@@ -35,12 +38,12 @@ class Boolean_ implements Datatype
         return false;
     }
 
-    public function isFalse(bool $strict = false)
+    public function isFalse(bool $strict = false): bool
     {
         return !$this->isTrue($strict);
     }
 
-    public function isStrictTrue()
+    public function isStrictTrue(): bool
     {
         if ($this->value === true) {
             return true;
@@ -49,12 +52,12 @@ class Boolean_ implements Datatype
         return false;
     }
 
-    public function isStrictFalse()
+    public function isStrictFalse(): bool
     {
         return !$this->isStrictFalse();
     }
 
-    public function inverse()
+    public function inverse(): self
     {
         return new self(!$this->value);
     }
