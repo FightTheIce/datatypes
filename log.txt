@@ -1,0 +1,39 @@
+ReflectionClass
+ReflectionFunction
+FightTheIce\Datatypes\Compounds\Array_FightTheIce\Datatypes\Pseudo\Mixed_ Object
+(
+    [object:protected] => Array
+        (
+            [0] => taylor
+            [1] => abigail
+            [2] => 
+        )
+
+    [class:protected] => FightTheIce\Datatypes\Compounds\Array_ Object
+        (
+            [items:protected] => Array
+                (
+                    [0] => taylor
+                    [1] => abigail
+                    [2] => 
+                )
+
+        )
+
+)
+
+FightTheIce\Datatypes\Scalar\String_
+FightTheIce\Datatypes\Scalar\UnicodeString_
+FightTheIce\Datatypes\Scalar\Boolean_
+FightTheIce\Datatypes\Scalar\Float_
+FightTheIce\Datatypes\Scalar\Integer_
+FightTheIce\Datatypes\Compounds\Object_
+FightTheIce\Datatypes\Special\Null_
+
+
+FightTheIce\Datatypes\Scalar\Integer_
+FightTheIce\Datatypes\Pseudo\Number_
+FightTheIce\Datatypes\Scalar\Float_
+FightTheIce\Datatypes\Pseudo\Number_
+
+HELLO WORLD

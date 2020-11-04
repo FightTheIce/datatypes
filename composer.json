@@ -9,17 +9,17 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
         "illuminate/macroable": "^8.11",
+        "symfony/polyfill-php80": "^1.20",
         "symfony/string": "^5.1",
-        "illuminate/collections": "^8.11",
-        "symfony/var-dumper": "^5.1",
-        "illuminate/support": "^8.11"
+        "illuminate/collections": "^8.13",
+        "illuminate/container": "^8.13",
+        "spatie/laravel-collection-macros": "^7.0",
+        "illuminate/support": "^8.13"
     },
     "autoload": {
-        "psr-4": {
-            "FightTheIce\\Datatypes\\": "src"
-        }
+        "classmap": ["src"]
     },
     "require-dev": {
         "phpunit/phpunit": "^9.4",
