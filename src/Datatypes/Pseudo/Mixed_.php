@@ -24,9 +24,9 @@ class Mixed_ implements Datatype
     use ForwardsCalls;
 
     protected $object;
-    protected $class;
+    protected Datatype $class;
 
-    function __construct($obj)
+    public function __construct($obj)
     {
         $this->object = $obj;
 
@@ -78,17 +78,17 @@ class Mixed_ implements Datatype
         }
     }
 
-    function getValue()
+    public function getValue()
     {
         return $this->object;
     }
 
-    function getClass()
+    public function getClass()
     {
         return $this->class;
     }
 
-    function __call($method, $parameters)
+    public function __call($method, $parameters)
     {
         if (method_exists($this->class, $method)) {
             return $this->forwardCallTo($this->class, $method, $parameters);

@@ -16,7 +16,8 @@
         "illuminate/collections": "^8.13",
         "illuminate/container": "^8.13",
         "spatie/laravel-collection-macros": "^7.0",
-        "illuminate/support": "^8.13"
+        "illuminate/support": "^8.13",
+        "nikic/php-parser": "^4.10"
     },
     "autoload": {
         "classmap": ["src"]
