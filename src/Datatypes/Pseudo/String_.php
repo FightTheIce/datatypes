@@ -6,10 +6,12 @@ namespace FightTheIce\Datatypes\Pseudo;
 
 use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
+use FightTheIce\Datatypes\Scalar\String_ as NonUnicodeString_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
+use FightTheIce\Datatypes\Core\Contracts\ResolvableInterface;
 
-class String_ implements DatatypeInterface
+class String_ implements DatatypeInterface, ResolvableInterface
 {
     use Macroable {
         __call as __parentcall;
@@ -20,17 +22,17 @@ class String_ implements DatatypeInterface
     protected string $string;
     protected DatatypeInterface $class;
 
-    public function __construct(string $obj)
+    public function __construct(string $obj = '')
     {
         $this->string = $obj;
 
         if (strlen($obj) != strlen(utf8_decode($obj))) {
             //unicode
             $this->class = new UnicodeString_($obj);
+        } else {
+            //no unicode
+            $this->class = new NonUnicodeString_($obj);
         }
-
-        //no unicode
-        $this->class = new String_($obj);
     }
 
     /**
@@ -61,5 +63,14 @@ class String_ implements DatatypeInterface
         }
 
         return $this->__parentcall($method, $parameters);
+    }
+
+    /**
+     * resolve
+     *
+     * @return  mixed
+     */
+    public function resolve() {
+        return $this->class;
     }
 }
