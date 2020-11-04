@@ -69,4 +69,14 @@ class Integer_ implements DatatypeInterface, MathInterface
     {
         return $this->math()->__toString();
     }
+
+    public function __toFloat(): Float_
+    {
+        return new Float_($this->math()->toFloat());
+    }
+
+    public function __toInteger(): self
+    {
+        return new self($this->value);
+    }
 }
