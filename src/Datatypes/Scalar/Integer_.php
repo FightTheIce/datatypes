@@ -65,7 +65,8 @@ class Integer_ implements DatatypeInterface, MathInterface
         return BigInteger::of($this->value);
     }
 
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->math()->__toString();
     }
 }

@@ -14,9 +14,9 @@ interface MathInterface
     public function math();
 
     /**
-     * __toString
+     * __toString.
      *
-     * @return  string 
+     * @return string
      */
     public function __toString(): string;
 }

@@ -65,7 +65,8 @@ class Float_ implements DatatypeInterface, MathInterface
         return BigDecimal::of($this->value);
     }
 
-    public function __toString():string {
+    public function __toString(): string
+    {
         return $this->math()->__toString();
     }
 }
