@@ -66,11 +66,12 @@ class String_ implements DatatypeInterface, ResolvableInterface
     }
 
     /**
-     * resolve
+     * resolve.
      *
-     * @return  mixed
+     * @return mixed
      */
-    public function resolve() {
+    public function resolve()
+    {
         return $this->class;
     }
 }

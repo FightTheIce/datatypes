@@ -27,54 +27,54 @@ class Application
                 $ns .= '\\';
             }
 
-            $classes = array(
-                \FightTheIce\Datatypes\Compounds\Array_::class => array(
-                    $ns.'Arr_',
-                    $ns.'Array_'
-                ),
-                \FightTheIce\Datatypes\Compounds\Object_::class => array(
-                    $ns.'Obj_',
-                    $ns.'Object_'
-                ),
-                \FightTheIce\Datatypes\Scalar\Boolean_::class => array(
-                     $ns.'Bool_',
-                    $ns.'Boolean_'
-                ),
-                \FightTheIce\Datatypes\Scalar\Float_::class => array(
-                    $ns.'Float_',
-                    $ns.'Flt_',
-                    $ns.'Double_',
-                    $ns.'Dbl_'
-                ),
-                \FightTheIce\Datatypes\Scalar\Integer_::class => array(
-                    $ns.'Int_',
-                    $ns.'Integer_'
-                ),
-                \FightTheIce\Datatypes\Scalar\String_::class => array(
-                    $ns.'Str_',
-                    $ns.'String_'
-                ),
-                \FightTheIce\Datatypes\Scalar\UnicodeString_::class => array(
-                    $ns.'UniStr_',
-                    $ns.'UnicodeStr_',
-                    $ns.'UnicodeString_',
-                    $ns.'UniString_'
-                ),
-                \FightTheIce\Datatypes\Special\Null_::class => array(
-                    $ns.'Null_'
-                ),
-                \FightTheIce\Datatypes\Pseudo\Mixed_::class => array(
-                    $ns.'Mixed_'
-                ),
-                \FightTheIce\Datatypes\Pseudo\Number_::class => array(
-                    $ns.'Number_',
-                    $ns.'Num_'
-                ),
-                \FightTheIce\Datatypes\Pseudo\String_::class => array(
-                    $ns.'GenericString_',
-                    $ns.'GenericStr_'
-                )
-            );
+            $classes = [
+                \FightTheIce\Datatypes\Compounds\Array_::class => [
+                    $ns . 'Arr_',
+                    $ns . 'Array_'
+                ],
+                \FightTheIce\Datatypes\Compounds\Object_::class => [
+                    $ns . 'Obj_',
+                    $ns . 'Object_'
+                ],
+                \FightTheIce\Datatypes\Scalar\Boolean_::class => [
+                    $ns . 'Bool_',
+                    $ns . 'Boolean_'
+                ],
+                \FightTheIce\Datatypes\Scalar\Float_::class => [
+                    $ns . 'Float_',
+                    $ns . 'Flt_',
+                    $ns . 'Double_',
+                    $ns . 'Dbl_'
+                ],
+                \FightTheIce\Datatypes\Scalar\Integer_::class => [
+                    $ns . 'Int_',
+                    $ns . 'Integer_'
+                ],
+                \FightTheIce\Datatypes\Scalar\String_::class => [
+                    $ns . 'Str_',
+                    $ns . 'String_'
+                ],
+                \FightTheIce\Datatypes\Scalar\UnicodeString_::class => [
+                    $ns . 'UniStr_',
+                    $ns . 'UnicodeStr_',
+                    $ns . 'UnicodeString_',
+                    $ns . 'UniString_'
+                ],
+                \FightTheIce\Datatypes\Special\Null_::class => [
+                    $ns . 'Null_'
+                ],
+                \FightTheIce\Datatypes\Pseudo\Mixed_::class => [
+                    $ns . 'Mixed_'
+                ],
+                \FightTheIce\Datatypes\Pseudo\Number_::class => [
+                    $ns . 'Number_',
+                    $ns . 'Num_'
+                ],
+                \FightTheIce\Datatypes\Pseudo\String_::class => [
+                    $ns . 'GenericString_',
+                    $ns . 'GenericStr_'
+                ]
+            ];
 
             foreach ($classes as $class => $aliasList) {
                 foreach ($aliasList as $alias) {
