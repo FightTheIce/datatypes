@@ -6,6 +6,7 @@ namespace FightTheIce\Datatypes\Scalar;
 
 use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use Illuminate\Support\Traits\Macroable;
+use Brick\Math\BigInteger;
 
 class Integer_ implements DatatypeInterface
 {
@@ -56,5 +57,10 @@ class Integer_ implements DatatypeInterface
         }
 
         return $this->absolute();
+    }
+
+    public function math() : BigInteger
+    {
+        return BigInteger::of($this->value);
     }
 }
