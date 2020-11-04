@@ -11,7 +11,7 @@ return PhpCsFixer\Config::create()
         'single_quote' => true,
 
         'binary_operator_spaces' => array(
-            'align_double_arrow' => false,
+            'align_double_arrow' => true,
             'align_equals' => true,
         ),
          'blank_line_after_opening_tag' => true,
