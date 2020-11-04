@@ -41,7 +41,7 @@ class Mixed_ implements Datatype
 
             case 'string':
                 //https://stackoverflow.com/questions/1350758/check-unicode-in-php
-                //we need to determine unicode or not
+                //we need to determine unicode or not    
                 if (strlen($obj) != strlen(utf8_decode($obj))) {
                     //unicode
                     $this->class = new UnicodeString_($obj);
