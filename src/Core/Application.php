@@ -15,6 +15,7 @@ use FightTheIce\Datatypes\Scalar\Integer_;
 use FightTheIce\Datatypes\Scalar\String_;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use FightTheIce\Datatypes\Special\Null_;
+use FightTheIce\Datatypes\Advanced\Uuid_;
 
 class Application
 {
@@ -73,6 +74,10 @@ class Application
                 \FightTheIce\Datatypes\Pseudo\String_::class => [
                     $ns . 'GenericString_',
                     $ns . 'GenericStr_'
+                ],
+                \FightTheIce\Datatypes\Advanced\Uuid_::class => [
+                    $ns.'Uuid_',
+                    $ns.'UUID_'
                 ]
             ];
 
@@ -160,5 +165,9 @@ class Application
     public static function newGenericString_(string $default = ''): GenericString_
     {
         return new GenericString_($default);
+    }
+
+    public function newUuid_(string $uuid = '') : Uuid_ {
+        return new Uuid_($uuid);
     }
 }
