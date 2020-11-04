@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace FightTheIce\Datatypes\Scalar;
 
@@ -79,7 +79,7 @@ class UnicodeString_ implements Stringable, ArrayAccess
      * @param  int|null $length
      * @return UnicodeString_
      */
-    public function substr(int $start,  ? int $length = null) : UnicodeString_
+    public function substr(int $start, ? int $length = null) : UnicodeString_
     {
         return new self($this->value->slice($start, $length)->__toString());
     }
@@ -241,7 +241,6 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
         //this one needs some logic....
         if ($this->offsetExists($offset) == true) {
-
             $explode[$offset] = $value;
             $implode          = implode('', $explode);
             $this->value      = preg_match('//u', $implode) ? new UnicodeString($implode) : new ByteString($implode);

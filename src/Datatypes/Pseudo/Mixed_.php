@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace FightTheIce\Datatypes\Pseudo;
 
@@ -69,7 +69,7 @@ class Mixed_ implements Datatype
                 $this->class = new Object_($obj);
                 break;
 
-            case 'null';
+            case 'null':
                 $this->class = new Null_();
                 break;
 
@@ -81,43 +81,53 @@ class Mixed_ implements Datatype
         }
     }
 
-    public function is_null(): bool {
+    public function is_null(): bool
+    {
         return is_null($this->object);
     }
 
-    public function is_empty(): bool {
+    public function is_empty(): bool
+    {
         return empty($this->object);
     }
 
-    public function is_string(): bool {
+    public function is_string(): bool
+    {
         return is_string($this->object);
     }
 
-    public function is_scalar(): bool {
+    public function is_scalar(): bool
+    {
         return is_scalar($this->object);
     }
 
-    public function is_float(): bool {
+    public function is_float(): bool
+    {
         return is_float($this->object);
     }
 
-    public function is_int(): bool {
+    public function is_int(): bool
+    {
         return is_int($this->object);
     }
 
-    public function is_bool(): bool {
+    public function is_bool(): bool
+    {
         return is_bool($this->object);
     }
 
-    public function is_object(): bool {
+    public function is_object(): bool
+    {
         return is_object($this->object);
     }
 
-    public function is_array(): bool {
+    public function is_array(): bool
+    {
         return is_array($this->object);
     }
 
-    public function is_numeric(): bool {
+    public function is_numeric(): bool
+    {
         return is_numeric($this->object);
     }
  
@@ -140,7 +150,8 @@ class Mixed_ implements Datatype
         return $this->__parentcall($method, $parameters);
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return $this->gettype;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace FightTheIce\Datatypes\Pseudo;
 
@@ -26,7 +26,7 @@ class Number_ implements Datatype
     protected $number;
     protected Datatype $class;
 
-    function __construct($number)
+    public function __construct($number)
     {
         $this->number = $number;
 
@@ -43,17 +43,17 @@ class Number_ implements Datatype
         }
     }
 
-    function getValue()
+    public function getValue()
     {
         return $this->number;
     }
 
-    function getClass(): Datatype
+    public function getClass(): Datatype
     {
         return $this->class;
     }
 
-    function __call($method, $parameters)
+    public function __call($method, $parameters)
     {
         if (method_exists($this->class, $method)) {
             return $this->forwardCallTo($this->class, $method, $parameters);

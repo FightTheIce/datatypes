@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace FightTheIce\Datatypes\Pseudo;
 
@@ -20,7 +20,7 @@ class String_ implements Datatype
     protected string $string;
     protected Datatype $class;
 
-    function __construct(string $obj)
+    public function __construct(string $obj)
     {
         $this->string = $obj;
 
@@ -31,23 +31,22 @@ class String_ implements Datatype
 
         //no unicode
         $this->class = new String_($obj);
-
     }
 
     /**
      * @return string
      */
-    function getValue()
+    public function getValue()
     {
         return $this->string;
     }
 
-    function getClass(): Datatype
+    public function getClass(): Datatype
     {
         return $this->class;
     }
 
-    function __call($method, $parameters)
+    public function __call($method, $parameters)
     {
         if (method_exists($this->class, $method)) {
             return $this->forwardCallTo($this->class, $method, $parameters);

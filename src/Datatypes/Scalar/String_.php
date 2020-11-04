@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace FightTheIce\Datatypes\Scalar;
 
@@ -73,7 +73,7 @@ class String_ implements Stringable, ArrayAccess
      * @param  int|null $length
      * @return String_
      */
-    public function substr(int $start,  ? int $length = null) : String_
+    public function substr(int $start, ? int $length = null) : String_
     {
         $test = '';
         if ($length === null) {
@@ -240,7 +240,6 @@ class String_ implements Stringable, ArrayAccess
 
         //this one needs some logic....
         if ($this->offsetExists($offset) == true) {
-
             $explode[$offset] = $value;
             $this->value      = implode('', $explode);
             return;

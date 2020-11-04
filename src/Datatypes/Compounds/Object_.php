@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace FightTheIce\Datatypes\Compounds;
 
@@ -20,7 +20,7 @@ class Object_ implements Datatype
 
     protected $object;
 
-    function __construct($obj)
+    public function __construct($obj)
     {
         if (!is_object($obj)) {
             throw new \ErrorException('Must be an object');
@@ -29,7 +29,7 @@ class Object_ implements Datatype
         $this->object = $obj;
     }
 
-    function getValue()
+    public function getValue()
     {
         return $this->object;
     }
@@ -39,7 +39,7 @@ class Object_ implements Datatype
      *
      * @psalm-return ReflectionClass<mixed>|ReflectionFunction
      */
-    function getReflection()
+    public function getReflection()
     {
         if ($this->object instanceof Closure) {
             return new ReflectionFunction($this->object);
@@ -48,7 +48,7 @@ class Object_ implements Datatype
         return new ReflectionClass($this->object);
     }
 
-    function __call($method, $parameters)
+    public function __call($method, $parameters)
     {
         if (method_exists($this->class, $method)) {
             return $this->forwardCallTo($this->class, $method, $parameters);
