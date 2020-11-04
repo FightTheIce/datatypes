@@ -53,8 +53,7 @@ class Object_ implements Datatype
     /**
      * @return ReflectionClass|ReflectionFunction
      *
-     * @psalm-return ReflectionClass<mixed>|ReflectionFunction
-     * @phpstan-return ReflectionClass|ReflectionFunction
+
      */
     public function getReflection()
     {
