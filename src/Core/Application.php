@@ -76,8 +76,8 @@ class Application
                     $ns . 'GenericStr_'
                 ],
                 \FightTheIce\Datatypes\Advanced\Uuid_::class => [
-                    $ns.'Uuid_',
-                    $ns.'UUID_'
+                    $ns . 'Uuid_',
+                    $ns . 'UUID_'
                 ]
             ];
 
@@ -167,7 +167,8 @@ class Application
         return new GenericString_($default);
     }
 
-    public function newUuid_(string $uuid = '') : Uuid_ {
+    public function newUuid_(string $uuid = ''): Uuid_
+    {
         return new Uuid_($uuid);
     }
 }
