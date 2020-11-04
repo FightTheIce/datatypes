@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace FightTheIce\Datatypes\Scalar;
 
 use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
+use FightTheIce\Datatypes\Core\Contracts\MathInterface;
 use Illuminate\Support\Traits\Macroable;
 use Brick\Math\BigDecimal;
 
-class Float_ implements DatatypeInterface
+class Float_ implements DatatypeInterface, MathInterface
 {
     use Macroable;
 
@@ -59,7 +60,7 @@ class Float_ implements DatatypeInterface
         return $this->absolute();
     }
 
-    public function math():BigDecimal
+    public function math(): BigDecimal
     {
         return BigDecimal::of($this->value);
     }
