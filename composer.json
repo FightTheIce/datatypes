@@ -17,7 +17,8 @@
         "spatie/laravel-collection-macros": "^7.0",
         "illuminate/support": "^8.13",
         "nikic/php-parser": "^4.10",
-        "brick/math": "^0.9.1"
+        "brick/math": "^0.9.1",
+        "ramsey/uuid": "^4.1"
     },
     "autoload": {
         "classmap": ["src"]
