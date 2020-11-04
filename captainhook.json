@@ -30,7 +30,7 @@
                 "conditions": []
             },
             {
-                "action": "./vendor/bin/psalm",
+                "action": "./vendor/bin/psalm --show-info=true",
                 "options": [],
                 "conditions": []
             }
