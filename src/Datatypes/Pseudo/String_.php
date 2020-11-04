@@ -34,12 +34,15 @@ class String_ implements Datatype
 
     }
 
+    /**
+     * @return string
+     */
     function getValue()
     {
         return $this->string;
     }
 
-    function getClass()
+    function getClass(): Datatype
     {
         return $this->class;
     }

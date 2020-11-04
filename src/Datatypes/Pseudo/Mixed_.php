@@ -81,43 +81,43 @@ class Mixed_ implements Datatype
         }
     }
 
-    public function is_null() {
+    public function is_null(): bool {
         return is_null($this->object);
     }
 
-    public function is_empty() {
+    public function is_empty(): bool {
         return empty($this->object);
     }
 
-    public function is_string() {
+    public function is_string(): bool {
         return is_string($this->object);
     }
 
-    public function is_scalar() {
+    public function is_scalar(): bool {
         return is_scalar($this->object);
     }
 
-    public function is_float() {
+    public function is_float(): bool {
         return is_float($this->object);
     }
 
-    public function is_int() {
+    public function is_int(): bool {
         return is_int($this->object);
     }
 
-    public function is_bool() {
+    public function is_bool(): bool {
         return is_bool($this->object);
     }
 
-    public function is_object() {
+    public function is_object(): bool {
         return is_object($this->object);
     }
 
-    public function is_array() {
+    public function is_array(): bool {
         return is_array($this->object);
     }
 
-    public function is_numeric() {
+    public function is_numeric(): bool {
         return is_numeric($this->object);
     }
  
@@ -140,7 +140,7 @@ class Mixed_ implements Datatype
         return $this->__parentcall($method, $parameters);
     }
 
-    public function getType() {
+    public function getType(): string {
         return $this->gettype;
     }
 }

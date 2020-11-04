@@ -48,7 +48,7 @@ class Number_ implements Datatype
         return $this->number;
     }
 
-    function getClass()
+    function getClass(): Datatype
     {
         return $this->class;
     }
