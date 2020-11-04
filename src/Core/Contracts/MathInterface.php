@@ -7,9 +7,16 @@ namespace FightTheIce\Datatypes\Core\Contracts;
 interface MathInterface
 {
     /**
-     * math
+     * math.
      *
      * @return mixed
      */
     public function math();
+
+    /**
+     * __toString
+     *
+     * @return  string 
+     */
+    public function __toString(): string;
 }
