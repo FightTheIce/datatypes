@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Core;
 
@@ -27,17 +28,17 @@ class Application
             }
 
             $classes = [
-                \FightTheIce\Datatypes\Compounds\Array_::class      => $ns . 'Arr_',
-                \FightTheIce\Datatypes\Compounds\Object_::class     => $ns . 'Obj_',
-                \FightTheIce\Datatypes\Scalar\Boolean_::class       => $ns . 'Bool_',
-                \FightTheIce\Datatypes\Scalar\Float_::class         => $ns . 'Double_',
-                \FightTheIce\Datatypes\Scalar\Integer_::class       => $ns . 'Int_',
-                \FightTheIce\Datatypes\Scalar\String_::class        => $ns . 'Str_',
+                \FightTheIce\Datatypes\Compounds\Array_::class => $ns . 'Arr_',
+                \FightTheIce\Datatypes\Compounds\Object_::class => $ns . 'Obj_',
+                \FightTheIce\Datatypes\Scalar\Boolean_::class => $ns . 'Bool_',
+                \FightTheIce\Datatypes\Scalar\Float_::class => $ns . 'Double_',
+                \FightTheIce\Datatypes\Scalar\Integer_::class => $ns . 'Int_',
+                \FightTheIce\Datatypes\Scalar\String_::class => $ns . 'Str_',
                 \FightTheIce\Datatypes\Scalar\UnicodeString_::class => $ns . 'UnicodeStr_',
-                \FightTheIce\Datatypes\Special\Null_::class         => $ns . 'Null_',
-                \FightTheIce\Datatypes\Pseudo\Mixed_::class         => $ns . 'Mixed_',
-                \FightTheIce\Datatypes\Pseudo\Number_::class        => $ns . 'Number_',
-                \FightTheIce\Datatypes\Pseudo\String_::class        => $ns . 'String_',
+                \FightTheIce\Datatypes\Special\Null_::class => $ns . 'Null_',
+                \FightTheIce\Datatypes\Pseudo\Mixed_::class => $ns . 'Mixed_',
+                \FightTheIce\Datatypes\Pseudo\Number_::class => $ns . 'Number_',
+                \FightTheIce\Datatypes\Pseudo\String_::class => $ns . 'String_',
             ];
 
             foreach ($classes as $class => $alias) {

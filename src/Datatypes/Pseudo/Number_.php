@@ -1,17 +1,12 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Pseudo;
 
-use FightTheIce\Datatypes\Compounds\Array_;
-use FightTheIce\Datatypes\Compounds\Object_;
 use FightTheIce\Datatypes\Core\Datatype;
-use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Datatypes\Scalar\Integer_;
-use FightTheIce\Datatypes\Scalar\String_;
-use FightTheIce\Datatypes\Scalar\UnicodeString_;
-use FightTheIce\Datatypes\Special\Null_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 

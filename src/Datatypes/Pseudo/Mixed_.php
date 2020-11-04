@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Pseudo;
 
@@ -30,7 +31,7 @@ class Mixed_ implements Datatype
 
     public function __construct($obj)
     {
-        $this->object = $obj;
+        $this->object  = $obj;
         $this->gettype = strtolower(gettype($this->object));
 
         switch ($this->gettype) {
@@ -130,7 +131,7 @@ class Mixed_ implements Datatype
     {
         return is_numeric($this->object);
     }
- 
+
     public function getValue()
     {
         return $this->object;

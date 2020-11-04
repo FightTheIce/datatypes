@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Scalar;
 
@@ -14,7 +15,8 @@ class UnicodeString_ implements Stringable, ArrayAccess
     use Macroable;
 
     /**
-     * value
+     * value.
+     *
      * @var \Symfony\Component\String\ByteString|\Symfony\Component\String\UnicodeString
      */
     protected \Symfony\Component\String\AbstractString $value;
@@ -23,8 +25,8 @@ class UnicodeString_ implements Stringable, ArrayAccess
      * Create a string.
      *
      * @psalm-consistent-constructor
-     * @param  string  $value
-     * @return void
+     *
+     * @param string $value
      */
     public function __construct(string $value = '')
     {
@@ -33,10 +35,12 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * ltrim
-     * Strip whitespace (or other characters) from the beginning of a string
+     * Strip whitespace (or other characters) from the beginning of a string.
      *
      * @see https://www.php.net/manual/en/function.ltrim.php
-     * @param  string $character_mask
+     *
+     * @param string $character_mask
+     *
      * @return UnicodeString_
      */
     public function ltrim(string $character_mask = " \t\n\r\0\x0B\x0C\u{A0}\u{FEFF}"): UnicodeString_
@@ -46,10 +50,12 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * rtrim
-     * Strip whitespace (or other characters) from the end of a string
+     * Strip whitespace (or other characters) from the end of a string.
      *
      * @see https://www.php.net/manual/en/function.rtrim.php
-     * @param  string $character_mask
+     *
+     * @param string $character_mask
+     *
      * @return UnicodeString_
      */
     public function rtrim(string $character_mask = " \t\n\r\0\x0B\x0C\u{A0}\u{FEFF}"): UnicodeString_
@@ -59,10 +65,12 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * trim
-     * Strip whitespace (or other characters) from the beginning and end of a string
+     * Strip whitespace (or other characters) from the beginning and end of a string.
      *
      * @see https://www.php.net/manual/en/function.trim.php
-     * @param  string $character_mask
+     *
+     * @param string $character_mask
+     *
      * @return UnicodeString_
      */
     public function trim(string $character_mask = " \t\n\r\0\x0B\x0C\u{A0}\u{FEFF}"): UnicodeString_
@@ -72,11 +80,13 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * substr
-     * Return part of a string
+     * Return part of a string.
      *
      * @see https://www.php.net/manual/en/function.substr.php
-     * @param  int      $start
-     * @param  int|null $length
+     *
+     * @param int      $start
+     * @param int|null $length
+     *
      * @return UnicodeString_
      */
     public function substr(int $start, ? int $length = null) : UnicodeString_
@@ -86,9 +96,10 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * strtolower
-     * Make a string lowercase
+     * Make a string lowercase.
      *
      * @see https://www.php.net/manual/en/function.strtolower.php
+     *
      * @return UnicodeString_
      */
     public function strtolower(): UnicodeString_
@@ -98,9 +109,10 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * strtoupper
-     * Make a string uppercase
+     * Make a string uppercase.
      *
      * @see https://www.php.net/manual/en/function.strtoupper.php
+     *
      * @return UnicodeString_
      */
     public function strtoupper(): UnicodeString_
@@ -110,10 +122,11 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * isEmpty
-     * Determine whether the value is empty
+     * Determine whether the value is empty.
      *
      * @see https://www.php.net/manual/en/function.empty.php
-     * @return boolean
+     *
+     * @return bool
      */
     public function isEmpty(): bool
     {
@@ -125,6 +138,7 @@ class UnicodeString_ implements Stringable, ArrayAccess
      * method allows a class to decide how it will react when it is treated like a string.
      *
      * @see https://www.php.net/manual/en/language.oop5.magic.php#object.tostring
+     *
      * @return string
      */
     public function __toString(): string
@@ -134,10 +148,12 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * str_split
-     * Convert a string to an array
+     * Convert a string to an array.
      *
      * @see https://www.php.net/manual/en/function.str-split.php
-     * @param  int|integer $split_length
+     *
+     * @param int|int $split_length
+     *
      * @return array
      */
     public function str_split(int $split_length = 1): array
@@ -155,7 +171,7 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
         if (count($split) == 1) {
             if (strlen($split[0]) == 0) {
-                $split = array();
+                $split = [];
             }
         }
 
@@ -164,9 +180,10 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * strlen
-     * Get string length
+     * Get string length.
      *
      * @see https://www.php.net/manual/en/function.strlen.php
+     *
      * @return int
      */
     public function strlen(): int
@@ -176,24 +193,29 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * offsetExists
-     * Whether an offset exists
+     * Whether an offset exists.
      *
      * @see https://www.php.net/manual/en/arrayaccess.offsetexists.php
-     * @param  mixed $offset
+     *
+     * @param mixed $offset
+     *
      * @return bool
      */
     public function offsetExists($offset): bool
     {
         $explode = $this->str_split();
+
         return isset($explode[$offset]);
     }
 
     /**
      * offsetGet
-     * Offset to retrieve
+     * Offset to retrieve.
      *
      * @see https://www.php.net/manual/en/arrayaccess.offsetget.php
-     * @param  mixed $offset
+     *
+     * @param mixed $offset
+     *
      * @return mixed
      */
     public function offsetGet($offset)
@@ -203,17 +225,18 @@ class UnicodeString_ implements Stringable, ArrayAccess
         }
 
         $explode = $this->str_split();
+
         return $explode[$offset];
     }
 
     /**
      * offsetSet
-     * Assign a value to the specified offset
+     * Assign a value to the specified offset.
      *
      * @see https://www.php.net/manual/en/arrayaccess.offsetset.php
-     * @param  mixed $offset
-     * @param  mixed $value
-     * @return void
+     *
+     * @param mixed $offset
+     * @param mixed $value
      */
     public function offsetSet($offset, $value): void
     {
@@ -244,6 +267,7 @@ class UnicodeString_ implements Stringable, ArrayAccess
             $explode[$offset] = $value;
             $implode          = implode('', $explode);
             $this->value      = preg_match('//u', $implode) ? new UnicodeString($implode) : new ByteString($implode);
+
             return;
         }
 
@@ -252,6 +276,7 @@ class UnicodeString_ implements Stringable, ArrayAccess
             $explode[0]  = $value;
             $implode     = implode('', $explode);
             $this->value = preg_match('//u', $implode) ? new UnicodeString($implode) : new ByteString($implode);
+
             return;
         }
 
@@ -273,11 +298,11 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
     /**
      * offsetUnset
-     * Unset an offset
+     * Unset an offset.
      *
      * @see https://www.php.net/manual/en/arrayaccess.offsetunset.php
-     * @param  mixed $offset
-     * @return void
+     *
+     * @param mixed $offset
      */
     public function offsetUnset($offset): void
     {
