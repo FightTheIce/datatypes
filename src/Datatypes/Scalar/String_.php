@@ -7,8 +7,9 @@ namespace FightTheIce\Datatypes\Scalar;
 use ArrayAccess;
 use Illuminate\Support\Traits\Macroable;
 use Stringable;
+use FightTheIce\Datatypes\Core\Datatype;
 
-class String_ implements Stringable, ArrayAccess
+class String_ implements Stringable, ArrayAccess, Datatype
 {
     use Macroable;
 
@@ -311,5 +312,10 @@ class String_ implements Stringable, ArrayAccess
         unset($explode[$offset]);
 
         $this->value = implode('', $explode);
+    }
+
+    public function getValue()
+    {
+        return $this->value;
     }
 }

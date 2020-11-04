@@ -102,7 +102,7 @@ class Array_ extends Collection implements Datatype
             return $this->setDot($key, $value);
         }
 
-        $newValue = (new Arr())->add($this->collection->toArray(), $key, $value);
+        $newValue = (new Arr())->add($this->toArray(), $key, $value);
 
         return new self($newValue);
     }
@@ -116,7 +116,7 @@ class Array_ extends Collection implements Datatype
      */
     public function removeDot(string $key): Array_
     {
-        $currentValue = $this->collection->toArray();
+        $currentValue = $this->toArray();
 
         if ($this->hasDot($key) == true) {
             (new Arr())->forget($currentValue, $key);
@@ -179,7 +179,7 @@ class Array_ extends Collection implements Datatype
     /**
      * Check if an item exist in an array using "dot" notation.
      *
-     * @param string|array $keys
+     * @param string $key
      *
      * @return bool
      */

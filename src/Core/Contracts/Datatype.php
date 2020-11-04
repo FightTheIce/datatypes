@@ -6,5 +6,10 @@ namespace FightTheIce\Datatypes\Core;
 
 interface Datatype
 {
+    /**
+     * getValue.
+     *
+     * @return mixed
+     */
     public function getValue();
 }

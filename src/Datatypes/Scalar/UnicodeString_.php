@@ -9,8 +9,9 @@ use Illuminate\Support\Traits\Macroable;
 use Stringable;
 use Symfony\Component\String\ByteString;
 use Symfony\Component\String\UnicodeString;
+use FightTheIce\Datatypes\Core\Datatype;
 
-class UnicodeString_ implements Stringable, ArrayAccess
+class UnicodeString_ implements Stringable, ArrayAccess, Datatype
 {
     use Macroable;
 
@@ -170,6 +171,7 @@ class UnicodeString_ implements Stringable, ArrayAccess
         }
 
         if (count($split) == 1) {
+            /* @phpstan-ignore-next-line */
             if (strlen($split[0]) == 0) {
                 $split = [];
             }
@@ -315,5 +317,10 @@ class UnicodeString_ implements Stringable, ArrayAccess
 
         $implode     = implode('', $explode);
         $this->value = preg_match('//u', $implode) ? new UnicodeString($implode) : new ByteString($implode);
+    }
+
+    public function getValue()
+    {
+        return $this->value;
     }
 }

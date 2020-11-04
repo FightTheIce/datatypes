@@ -20,12 +20,22 @@
         "enabled": true,
         "actions": [
             {
+                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
+                "options": [],
+                "conditions": []
+            },
+            {
                 "action": "./vendor/bin/php-cs-fixer fix src/",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "./vendor/bin/psalm --show-info=true --no-cache",
+                "action": "./vendor/bin/psalm --show-info=true --stats",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "./vendor/bin/phpstan analyse -l 8 src/",
                 "options": [],
                 "conditions": []
             }

@@ -79,6 +79,13 @@ class Application
         return new UnicodeString_($default);
     }
 
+    /**
+     * newObject_.
+     *
+     * @param mixed $obj
+     *
+     * @return Object_
+     */
     public static function newObject_($obj = null): Object_
     {
         return new Object_($obj);
@@ -89,11 +96,25 @@ class Application
         return new Null_();
     }
 
+    /**
+     * newMixed_.
+     *
+     * @param mixed $obj
+     *
+     * @return Mixed_
+     */
     public static function newMixed_($obj): Mixed_
     {
         return new Mixed_($obj);
     }
 
+    /**
+     * newNumber_.
+     *
+     * @param int|float $number
+     *
+     * @return Number_
+     */
     public static function newNumber_($number): Number_
     {
         return new Number_($number);

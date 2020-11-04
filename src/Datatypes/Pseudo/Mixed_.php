@@ -24,11 +24,22 @@ class Mixed_ implements Datatype
 
     use ForwardsCalls;
 
+    /**
+     * object.
+     *
+     * @var mixed
+     */
     protected $object;
+
     protected Datatype $class;
     protected array $is = [];
     protected string $gettype;
 
+    /**
+     * __construct.
+     *
+     * @param mixed $obj
+     */
     public function __construct($obj)
     {
         $this->object  = $obj;
@@ -41,7 +52,7 @@ class Mixed_ implements Datatype
 
             case 'string':
                 //https://stackoverflow.com/questions/1350758/check-unicode-in-php
-                //we need to determine unicode or not    
+                //we need to determine unicode or not
                 if (strlen($obj) != strlen(utf8_decode($obj))) {
                     //unicode
                     $this->class = new UnicodeString_($obj);
@@ -142,6 +153,14 @@ class Mixed_ implements Datatype
         return $this->class;
     }
 
+    /**
+     * __call.
+     *
+     * @param string $method
+     * @param mixed  $parameters
+     *
+     * @return mixed
+     */
     public function __call($method, $parameters)
     {
         if (method_exists($this->class, $method)) {

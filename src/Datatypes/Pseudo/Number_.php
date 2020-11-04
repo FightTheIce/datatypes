@@ -18,9 +18,21 @@ class Number_ implements Datatype
 
     use ForwardsCalls;
 
+    /**
+     * number.
+     *
+     * @var int|float
+     */
     protected $number;
+
     protected Datatype $class;
 
+    /**
+     * __construct.
+     *
+     * @param mixed $number
+     *
+     */
     public function __construct($number)
     {
         $this->number = $number;
@@ -48,6 +60,14 @@ class Number_ implements Datatype
         return $this->class;
     }
 
+    /**
+     * __call.
+     *
+     * @param string $method
+     * @param mixed  $parameters
+     *
+     * @return mixed
+     */
     public function __call($method, $parameters)
     {
         if (method_exists($this->class, $method)) {

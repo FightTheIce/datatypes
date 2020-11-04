@@ -46,6 +46,14 @@ class String_ implements Datatype
         return $this->class;
     }
 
+    /**
+     * __call.
+     *
+     * @param string $method
+     * @param mixed  $parameters
+     *
+     * @return mixed
+     */
     public function __call($method, $parameters)
     {
         if (method_exists($this->class, $method)) {

@@ -19,8 +19,18 @@ class Object_ implements Datatype
 
     use ForwardsCalls;
 
+    /**
+     * object.
+     *
+     * @var mixed
+     */
     protected $object;
 
+    /**
+     * __construct.
+     *
+     * @param mixed $obj
+     */
     public function __construct($obj)
     {
         if (!is_object($obj)) {
@@ -30,6 +40,11 @@ class Object_ implements Datatype
         $this->object = $obj;
     }
 
+    /**
+     * getValue.
+     *
+     * @return mixed
+     */
     public function getValue()
     {
         return $this->object;
@@ -39,6 +54,7 @@ class Object_ implements Datatype
      * @return ReflectionClass|ReflectionFunction
      *
      * @psalm-return ReflectionClass<mixed>|ReflectionFunction
+     * @phpstan-return ReflectionClass|ReflectionFunction
      */
     public function getReflection()
     {
@@ -49,10 +65,18 @@ class Object_ implements Datatype
         return new ReflectionClass($this->object);
     }
 
+    /**
+     * __call.
+     *
+     * @param string $method
+     * @param mixed  $parameters
+     *
+     * @return mixed
+     */
     public function __call($method, $parameters)
     {
-        if (method_exists($this->class, $method)) {
-            return $this->forwardCallTo($this->class, $method, $parameters);
+        if (method_exists($this->object, $method)) {
+            return $this->forwardCallTo($this->object, $method, $parameters);
         }
 
         return $this->__parentcall($method, $parameters);

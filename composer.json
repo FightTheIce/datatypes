@@ -27,6 +27,7 @@
         "vimeo/psalm": "^4.0",
         "fighttheice/phpunit-assertions": "^1.0",
         "friendsofphp/php-cs-fixer": "^2.16",
-        "captainhook/captainhook": "^5.4"
+        "captainhook/captainhook": "^5.4",
+        "phpstan/phpstan": "^0.12.53"
     }
 }
