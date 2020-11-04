@@ -14,7 +14,6 @@
         "symfony/polyfill-php80": "^1.20",
         "symfony/string": "^5.1",
         "illuminate/collections": "^8.13",
-        "illuminate/container": "^8.13",
         "spatie/laravel-collection-macros": "^7.0",
         "illuminate/support": "^8.13",
         "nikic/php-parser": "^4.10",
