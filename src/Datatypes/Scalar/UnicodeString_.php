@@ -9,9 +9,10 @@ use Illuminate\Support\Traits\Macroable;
 use Stringable;
 use Symfony\Component\String\ByteString;
 use Symfony\Component\String\UnicodeString;
-use FightTheIce\Datatypes\Core\Contracts\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
+use FightTheIce\Datatypes\Core\Contracts\StringInterface;
 
-class UnicodeString_ implements Stringable, ArrayAccess, Datatype
+class UnicodeString_ implements Stringable, ArrayAccess, DatatypeInterface, StringInterface
 {
     use Macroable;
 

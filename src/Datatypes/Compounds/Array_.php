@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Compounds;
 
-use FightTheIce\Datatypes\Core\Contracts\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 
-class Array_ extends Collection implements Datatype
+class Array_ extends Collection implements DatatypeInterface
 {
     use Macroable;
 

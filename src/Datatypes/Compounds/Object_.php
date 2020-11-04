@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace FightTheIce\Datatypes\Compounds;
 
 use Closure;
-use FightTheIce\Datatypes\Core\Contracts\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 use ReflectionClass;
 use ReflectionFunction;
 
-class Object_ implements Datatype
+class Object_ implements DatatypeInterface
 {
     use Macroable {
         __call as __parentcall;

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Scalar;
 
-use FightTheIce\Datatypes\Core\Contracts\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use Illuminate\Support\Traits\Macroable;
 
-class Float_ implements Datatype
+class Float_ implements DatatypeInterface
 {
     use Macroable;
 

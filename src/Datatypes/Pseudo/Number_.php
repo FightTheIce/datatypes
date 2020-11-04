@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Pseudo;
 
-use FightTheIce\Datatypes\Core\Contracts\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Datatypes\Scalar\Integer_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 
-class Number_ implements Datatype
+class Number_ implements DatatypeInterface
 {
     use Macroable {
         __call as __parentcall;
@@ -25,7 +25,7 @@ class Number_ implements Datatype
      */
     protected $number;
 
-    protected Datatype $class;
+    protected DatatypeInterface $class;
 
     /**
      * __construct.
@@ -55,7 +55,7 @@ class Number_ implements Datatype
         return $this->number;
     }
 
-    public function getClass(): Datatype
+    public function getClass(): DatatypeInterface
     {
         return $this->class;
     }

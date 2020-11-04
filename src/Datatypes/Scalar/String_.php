@@ -7,9 +7,10 @@ namespace FightTheIce\Datatypes\Scalar;
 use ArrayAccess;
 use Illuminate\Support\Traits\Macroable;
 use Stringable;
-use FightTheIce\Datatypes\Core\Contracts\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
+use FightTheIce\Datatypes\Core\Contracts\StringInterface;
 
-class String_ implements Stringable, ArrayAccess, Datatype
+class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInterface
 {
     use Macroable;
 

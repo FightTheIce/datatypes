@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Pseudo;
 
-use FightTheIce\Datatypes\Core\Contracts\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 
-class String_ implements Datatype
+class String_ implements DatatypeInterface
 {
     use Macroable {
         __call as __parentcall;
@@ -18,7 +18,7 @@ class String_ implements Datatype
     use ForwardsCalls;
 
     protected string $string;
-    protected Datatype $class;
+    protected DatatypeInterface $class;
 
     public function __construct(string $obj)
     {
@@ -41,7 +41,7 @@ class String_ implements Datatype
         return $this->string;
     }
 
-    public function getClass(): Datatype
+    public function getClass(): DatatypeInterface
     {
         return $this->class;
     }

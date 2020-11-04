@@ -6,7 +6,7 @@ namespace FightTheIce\Datatypes\Pseudo;
 
 use FightTheIce\Datatypes\Compounds\Array_;
 use FightTheIce\Datatypes\Compounds\Object_;
-use FightTheIce\Datatypes\Core\Contracts\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Datatypes\Scalar\Integer_;
@@ -16,7 +16,7 @@ use FightTheIce\Datatypes\Special\Null_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 
-class Mixed_ implements Datatype
+class Mixed_ implements DatatypeInterface
 {
     use Macroable {
         __call as __parentcall;
@@ -31,7 +31,7 @@ class Mixed_ implements Datatype
      */
     protected $object;
 
-    protected Datatype $class;
+    protected DatatypeInterface $class;
     protected array $is = [];
     protected string $gettype;
 
@@ -148,7 +148,7 @@ class Mixed_ implements Datatype
         return $this->object;
     }
 
-    public function getClass(): Datatype
+    public function getClass(): DatatypeInterface
     {
         return $this->class;
     }
