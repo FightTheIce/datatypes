@@ -26,6 +26,7 @@
         "phpunit/phpunit": "^9.4",
         "vimeo/psalm": "^4.0",
         "fighttheice/phpunit-assertions": "^1.0",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "captainhook/captainhook": "^5.4"
     }
 }
