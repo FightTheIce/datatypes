@@ -25,6 +25,11 @@
                 "conditions": []
             },
             {
+                "action": "./vendor/bin/composer dump-autoload -o",
+                "options": [],
+                "conditions": []
+            },
+            {
                 "action": "./vendor/bin/php-cs-fixer fix src/",
                 "options": [],
                 "conditions": []

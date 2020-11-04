@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Pseudo;
 
-use FightTheIce\Datatypes\Core\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\Datatype;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;

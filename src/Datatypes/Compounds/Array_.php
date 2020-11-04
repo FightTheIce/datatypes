@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Compounds;
 
-use FightTheIce\Datatypes\Core\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\Datatype;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;

@@ -6,7 +6,7 @@ namespace FightTheIce\Datatypes\Pseudo;
 
 use FightTheIce\Datatypes\Compounds\Array_;
 use FightTheIce\Datatypes\Compounds\Object_;
-use FightTheIce\Datatypes\Core\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\Datatype;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Datatypes\Scalar\Integer_;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Scalar;
 
-use FightTheIce\Datatypes\Core\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\Datatype;
 use Illuminate\Support\Traits\Macroable;
 
 class Integer_ implements Datatype

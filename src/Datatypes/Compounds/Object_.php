@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FightTheIce\Datatypes\Compounds;
 
 use Closure;
-use FightTheIce\Datatypes\Core\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\Datatype;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 use ReflectionClass;

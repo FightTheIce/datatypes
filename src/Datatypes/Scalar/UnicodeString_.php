@@ -9,7 +9,7 @@ use Illuminate\Support\Traits\Macroable;
 use Stringable;
 use Symfony\Component\String\ByteString;
 use Symfony\Component\String\UnicodeString;
-use FightTheIce\Datatypes\Core\Datatype;
+use FightTheIce\Datatypes\Core\Contracts\Datatype;
 
 class UnicodeString_ implements Stringable, ArrayAccess, Datatype
 {

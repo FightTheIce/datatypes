@@ -28,6 +28,7 @@
         "fighttheice/phpunit-assertions": "^1.0",
         "friendsofphp/php-cs-fixer": "^2.16",
         "captainhook/captainhook": "^5.4",
-        "phpstan/phpstan": "^0.12.53"
+        "phpstan/phpstan": "^0.12.53",
+        "composer/composer": "^2.0"
     }
 }
