@@ -10,7 +10,7 @@ class Boolean_ implements Datatype
 {
     use Macroable;
 
-    protected $value = false;
+    protected bool $value = false;
 
     public function __construct(bool $value = false)
     {
@@ -25,7 +25,7 @@ class Boolean_ implements Datatype
         return $this->value;
     }
 
-    public function isTrue(bool $strict = false)
+    public function isTrue(bool $strict = false): bool
     {
         if ($strict == true) {
             return $this->isStrictTrue();

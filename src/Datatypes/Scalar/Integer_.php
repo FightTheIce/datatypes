@@ -10,7 +10,7 @@ class Integer_ implements Datatype
 {
     use Macroable;
 
-    protected $value = 0;
+    protected int $value = 0;
 
     public function __construct(int $value = 0)
     {

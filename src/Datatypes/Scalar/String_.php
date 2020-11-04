@@ -11,7 +11,7 @@ class String_ implements Stringable, ArrayAccess
 {
     use Macroable;
 
-    protected $value = '';
+    protected string $value = '';
 
     /**
      * Create a string.

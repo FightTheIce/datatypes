@@ -10,7 +10,7 @@ class Float_ implements Datatype
 {
     use Macroable;
 
-    protected $value = 0.00;
+    protected float $value = 0.00;
 
     public function __construct(float $value = 0.00)
     {

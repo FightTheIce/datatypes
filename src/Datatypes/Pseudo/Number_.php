@@ -24,7 +24,7 @@ class Number_ implements Datatype
     use ForwardsCalls;
 
     protected $number;
-    protected $class;
+    protected Datatype $class;
 
     function __construct($number)
     {

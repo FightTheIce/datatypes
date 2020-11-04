@@ -7,7 +7,7 @@ use FightTheIce\Datatypes\Compounds\Array_;
 use FightTheIce\Datatypes\Compounds\Object_;
 use FightTheIce\Datatypes\Pseudo\Mixed_;
 use FightTheIce\Datatypes\Pseudo\Number_;
-use FightTheIce\Datatypes\Pseudo\String_ as GenericString;
+use FightTheIce\Datatypes\Pseudo\String_ as GenericString_;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Datatypes\Scalar\Integer_;
@@ -17,7 +17,7 @@ use FightTheIce\Datatypes\Special\Null_;
 
 class Application
 {
-    public function __construct($aliasClasses = false, string $ns = '')
+    public function __construct(bool $aliasClasses = false, string $ns = '')
     {
         if ($aliasClasses == true) {
             $ns = ltrim($ns, '\\');
@@ -98,7 +98,7 @@ class Application
         return new Number_($number);
     }
 
-    public static function newGenericString(string $default = ''): GenericString_
+    public static function newGenericString_(string $default = ''): GenericString_
     {
         return new GenericString_($default);
     }

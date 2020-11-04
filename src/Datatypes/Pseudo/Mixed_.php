@@ -25,12 +25,15 @@ class Mixed_ implements Datatype
 
     protected $object;
     protected Datatype $class;
+    protected array $is = [];
+    protected string $gettype;
 
     public function __construct($obj)
     {
         $this->object = $obj;
+        $this->gettype = strtolower(gettype($this->object));
 
-        switch (strtolower(gettype($obj))) {
+        switch ($this->gettype) {
             case 'array':
                 $this->class = new Array_($obj);
                 break;
@@ -78,6 +81,46 @@ class Mixed_ implements Datatype
         }
     }
 
+    public function is_null() {
+        return is_null($this->object);
+    }
+
+    public function is_empty() {
+        return empty($this->object);
+    }
+
+    public function is_string() {
+        return is_string($this->object);
+    }
+
+    public function is_scalar() {
+        return is_scalar($this->object);
+    }
+
+    public function is_float() {
+        return is_float($this->object);
+    }
+
+    public function is_int() {
+        return is_int($this->object);
+    }
+
+    public function is_bool() {
+        return is_bool($this->object);
+    }
+
+    public function is_object() {
+        return is_object($this->object);
+    }
+
+    public function is_array() {
+        return is_array($this->object);
+    }
+
+    public function is_numeric() {
+        return is_numeric($this->object);
+    }
+ 
     public function getValue()
     {
         return $this->object;
@@ -95,5 +138,9 @@ class Mixed_ implements Datatype
         }
 
         return $this->__parentcall($method, $parameters);
+    }
+
+    public function getType() {
+        return $this->gettype;
     }
 }

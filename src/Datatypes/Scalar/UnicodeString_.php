@@ -17,7 +17,7 @@ class UnicodeString_ implements Stringable, ArrayAccess
      * value
      * @var \Symfony\Component\String\ByteString|\Symfony\Component\String\UnicodeString
      */
-    protected $value;
+    protected \Symfony\Component\String\AbstractString $value;
 
     /**
      * Create a string.

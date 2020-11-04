@@ -3,6 +3,7 @@ declare (strict_types = 1);
 
 namespace FightTheIce\Datatypes\Pseudo;
 
+use FightTheIce\Datatypes\Core\Datatype;
 use FightTheIce\Datatypes\Scalar\String_ as SString_;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use Illuminate\Support\Traits\ForwardsCalls;
@@ -16,8 +17,8 @@ class String_ implements Datatype
 
     use ForwardsCalls;
 
-    protected $string;
-    protected $class;
+    protected string $string;
+    protected Datatype $class;
 
     function __construct(string $obj)
     {
