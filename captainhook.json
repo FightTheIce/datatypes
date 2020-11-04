@@ -1,6 +1,6 @@
 {
     "commit-msg": {
-        "enabled": true,
+        "enabled": false,
         "actions": [
             {
                 "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams",
@@ -25,7 +25,12 @@
                 "conditions": []
             },
             {
-                "action": "phpcs src",
+                "action": "./vendor/bin/php-cs-fixer fix src/",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "./vendor/bin/psalm",
                 "options": [],
                 "conditions": []
             }
