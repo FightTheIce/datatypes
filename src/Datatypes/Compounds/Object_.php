@@ -6,12 +6,13 @@ namespace FightTheIce\Datatypes\Compounds;
 
 use Closure;
 use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
+use FightTheIce\Datatypes\Core\Contracts\ResolvableInterface;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 use ReflectionClass;
 use ReflectionFunction;
 
-class Object_ implements DatatypeInterface
+class Object_ implements DatatypeInterface, ResolvableInterface
 {
     use Macroable {
         __call as __parentcall;
@@ -79,5 +80,14 @@ class Object_ implements DatatypeInterface
         }
 
         return $this->__parentcall($method, $parameters);
+    }
+
+    /**
+     * resolve
+     *
+     * @return  mixed
+     */
+    public function resolve() {
+        return $this->object;
     }
 }

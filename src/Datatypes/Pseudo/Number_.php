@@ -9,8 +9,9 @@ use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Datatypes\Scalar\Integer_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
+use FightTheIce\Datatypes\Core\Contracts\ResolvableInterface;
 
-class Number_ implements DatatypeInterface
+class Number_ implements DatatypeInterface, ResolvableInterface
 {
     use Macroable {
         __call as __parentcall;
@@ -75,5 +76,14 @@ class Number_ implements DatatypeInterface
         }
 
         return $this->__parentcall($method, $parameters);
+    }
+
+    /**
+     * resolve
+     *
+     * @return  mixed
+     */
+    public function resolve() {
+        return $this->class;
     }
 }

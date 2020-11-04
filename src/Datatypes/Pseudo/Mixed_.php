@@ -7,6 +7,7 @@ namespace FightTheIce\Datatypes\Pseudo;
 use FightTheIce\Datatypes\Compounds\Array_;
 use FightTheIce\Datatypes\Compounds\Object_;
 use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
+use FightTheIce\Datatypes\Core\Contracts\ResolvableInterface;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Datatypes\Scalar\Integer_;
@@ -16,7 +17,7 @@ use FightTheIce\Datatypes\Special\Null_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 
-class Mixed_ implements DatatypeInterface
+class Mixed_ implements DatatypeInterface, ResolvableInterface
 {
     use Macroable {
         __call as __parentcall;
@@ -173,5 +174,14 @@ class Mixed_ implements DatatypeInterface
     public function getType(): string
     {
         return $this->gettype;
+    }
+
+    /**
+     * resolve
+     *
+     * @return  mixed
+     */
+    public function resolve() {
+        return $this->class;
     }
 }
