@@ -7,7 +7,7 @@ namespace FightTheIce\Datatypes\Core\Contracts;
 interface ResolvableInterface
 {
     /**
-     * resolve
+     * resolve.
      *
      * @return mixed
      */
