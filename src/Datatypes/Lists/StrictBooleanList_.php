@@ -8,15 +8,16 @@ use Spatie\Typed\Collection;
 use Spatie\Typed\T;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use Illuminate\Support\Traits\Macroable;
+use FightTheIce\Datatypes\Core\Contracts\ListInterface;
 
-class StrictBooleanList_ extends Collection 
+class StrictBooleanList_ extends Collection implements ListInterface
 {
     use Macroable;
-    
+
     public function __construct(array $data = [])
     {
         parent::__construct(T::generic(Boolean_::class));
-        if (empty($data)==false) {
+        if (empty($data) == false) {
             $this->set($data);
         }
     }

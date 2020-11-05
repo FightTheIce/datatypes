@@ -8,15 +8,16 @@ use Spatie\Typed\Collection;
 use Spatie\Typed\T;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use Illuminate\Support\Traits\Macroable;
+use FightTheIce\Datatypes\Core\Contracts\ListInterface;
 
-class UnicodeStringList_ extends Collection 
+class UnicodeStringList_ extends Collection implements ListInterface
 {
     use Macroable;
-    
+
     public function __construct(array $data = [])
     {
-        parent::__construct(T::union(T::string(),T::generic(UnicodeString_::class)));
-        if (empty($data)==false) {
+        parent::__construct(T::union(T::string(), T::generic(UnicodeString_::class)));
+        if (empty($data) == false) {
             $this->set($data);
         }
     }

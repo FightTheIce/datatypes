@@ -91,4 +91,12 @@ class Object_ implements DatatypeInterface, ResolvableInterface
     {
         return $this->object;
     }
+
+    public function getHash(): string {
+        return spl_object_hash($this->resolve());
+    }
+
+    public function getId(): int {
+        return spl_object_id($this->resolve());
+    }
 }
