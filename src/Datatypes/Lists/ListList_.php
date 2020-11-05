@@ -6,7 +6,6 @@ namespace FightTheIce\Datatypes\Lists;
 
 use Spatie\Typed\Collection;
 use Spatie\Typed\T;
-use FightTheIce\Datatypes\Compount\Array_;
 use Illuminate\Support\Traits\Macroable;
 
 class ListList_ extends Collection

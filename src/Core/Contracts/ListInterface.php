@@ -6,5 +6,4 @@ namespace FightTheIce\Datatypes\Core\Contracts;
 
 interface ListInterface
 {
-
 }

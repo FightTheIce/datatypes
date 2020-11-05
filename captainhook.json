@@ -40,7 +40,7 @@
                 "conditions": []
             },
             {
-                "action": "./vendor/bin/phpstan analyse -l 8 src/",
+                "action": "./vendor/bin/phpstan analyse",
                 "options": [],
                 "conditions": []
             }

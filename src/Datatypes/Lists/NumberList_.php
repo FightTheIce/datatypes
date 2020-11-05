@@ -18,7 +18,7 @@ class NumberList_ extends Collection implements ListInterface
 
     public function __construct(array $data = [])
     {
-        parent::__construct(T::union(T::generic(Number_::class), T::float(), T::integer(),T::generic(Float_::class),T::generic(Integer_::class)));
+        parent::__construct(T::union(T::generic(Number_::class), T::float(), T::integer(), T::generic(Float_::class), T::generic(Integer_::class)));
         if (empty($data) == false) {
             $this->set($data);
         }
