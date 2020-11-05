@@ -31,5 +31,16 @@
         "captainhook/captainhook": "^5.4",
         "phpstan/phpstan": "^0.12.53",
         "composer/composer": "^2.0"
+    },
+    "scripts": {
+        "psalm": [
+            "./vendor/bin/psalm --show-info=true --stats"
+        ],
+        "phpstan": [
+            "./vendor/bin/phpstan analyse"
+        ],
+        "php-cs-fixer": [
+            "./vendor/bin/php-cs-fixer fix src/"
+        ]
     }
 }
