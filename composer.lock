@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "445982e333f30563e643bb14e8c6f930",
+    "content-hash": "aebe6eadfd5b9c10d46352ad150833aa",
     "packages": [
         {
             "name": "brick/math",
@@ -703,6 +703,62 @@
                 }
             ],
             "time": "2020-09-08T18:54:26+00:00"
+        },
+        {
+            "name": "spatie/typed",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/typed.git",
+                "reference": "40e4ac886a95db5e2efe489be4c699ff307c4b2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/typed/zipball/40e4ac886a95db5e2efe489be4c699ff307c4b2b",
+                "reference": "40e4ac886a95db5e2efe489be4c699ff307c4b2b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "larapack/dd": "^1.1",
+                "phpunit/phpunit": "^7.1",
+                "symfony/stopwatch": "^4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Typed\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Improvements to PHP's type system in userland: generics, typed lists, tuples and structs",
+            "homepage": "https://github.com/spatie/typed",
+            "keywords": [
+                "generics",
+                "spatie",
+                "structs",
+                "tuple",
+                "typed",
+                "typed list"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/typed/issues",
+                "source": "https://github.com/spatie/typed/tree/master"
+            },
+            "time": "2018-07-23T13:34:33+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
