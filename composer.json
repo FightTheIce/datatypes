@@ -21,15 +21,16 @@
         "spatie/typed": "^0.1.1"
     },
     "autoload": {
-        "classmap": ["src"]
+        "classmap": ["src"],
+        "files": ["src/Functions/Functions.php"]
     },
     "require-dev": {
         "phpunit/phpunit": "^9.4",
-        "vimeo/psalm": "^4.0",
+        "vimeo/psalm": "^4.1",
         "fighttheice/phpunit-assertions": "^1.0",
         "friendsofphp/php-cs-fixer": "^2.16",
         "captainhook/captainhook": "^5.4",
-        "phpstan/phpstan": "^0.12.53",
+        "phpstan/phpstan": "^0.12.54",
         "composer/composer": "^2.0"
     },
     "scripts": {
@@ -41,6 +42,14 @@
         ],
         "php-cs-fixer": [
             "./vendor/bin/php-cs-fixer fix src/"
+        ],
+        "baseinstall": [
+            "composer require php",
+            "./vendor/bin/composer require phpunit/phpunit --dev",
+            "./vendor/bin/composer require vimeo/psalm --dev",
+            "./vendor/bin/composer require friendsofphp/php-cs-fixer --dev",
+            "./vendor/bin/composer require captainhook/captainhook --dev",
+            "./vendor/bin/composer require phpstan/phpstan --dev"
         ]
     }
 }

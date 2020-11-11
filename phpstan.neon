@@ -4,3 +4,5 @@ parameters:
     checkGenericClassInNonGenericObjectType: false
     paths:
         - src
+    excludes_analyse:
+        - src/Functions/*
