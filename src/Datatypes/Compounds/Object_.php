@@ -11,6 +11,7 @@ use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 use ReflectionClass;
 use ReflectionFunction;
+use FightTheIce\Exceptions\InvalidArgumentException;
 
 class Object_ implements DatatypeInterface, ResolvableInterface
 {
@@ -35,7 +36,10 @@ class Object_ implements DatatypeInterface, ResolvableInterface
     public function __construct($obj)
     {
         if (!is_object($obj)) {
-            throw new \ErrorException('Must be an object');
+            $exception = new InvalidArgumentException('Parameter $obj must be an object');
+            $exception->setComponentName('datatypes');
+            
+            throw $exception;
         }
 
         $this->object = $obj;
