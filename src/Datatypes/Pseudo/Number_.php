@@ -10,6 +10,7 @@ use FightTheIce\Datatypes\Scalar\Integer_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 use FightTheIce\Datatypes\Core\Contracts\ResolvableInterface;
+use FightTheIce\Exceptions\InvalidArgumentException;
 
 class Number_ implements DatatypeInterface, ResolvableInterface
 {
@@ -34,20 +35,20 @@ class Number_ implements DatatypeInterface, ResolvableInterface
      * @param mixed $number
      *
      */
-    public function __construct($number)
+    public function __construct($number = 0)
     {
-        $this->number = $number;
-
         if (!is_numeric($number)) {
-            throw new \ErrorException('Only numbers are allowed.');
+            $exception = new InvalidArgumentException('Only numbers are allowed.');
+            $exception->setComponentName('datatypes');
+            throw $exception;
         }
 
-        if (is_float($number) == true) {
-            $this->class = new Float_($number);
-        } elseif (is_int($number) == true) {
-            $this->class = new Integer_($number);
-        } else {
-            throw new \ErrorException('Must be a numeric number of int, or float');
+        if (is_float($number+0) == true) {
+            $this->number = floatval($number);
+            $this->class = new Float_($this->number);
+        } elseif (is_int($number+0) == true) {
+            $this->number = intval($number);
+            $this->class = new Integer_($this->number);
         }
     }
 
@@ -56,26 +57,9 @@ class Number_ implements DatatypeInterface, ResolvableInterface
         return $this->number;
     }
 
-    public function getClass(): DatatypeInterface
+    public function getDatatypeClass(): DatatypeInterface
     {
         return $this->class;
-    }
-
-    /**
-     * __call.
-     *
-     * @param string $method
-     * @param mixed  $parameters
-     *
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        if (method_exists($this->class, $method)) {
-            return $this->forwardCallTo($this->class, $method, $parameters);
-        }
-
-        return $this->__parentcall($method, $parameters);
     }
 
     /**
@@ -85,6 +69,6 @@ class Number_ implements DatatypeInterface, ResolvableInterface
      */
     public function resolve()
     {
-        return $this->class;
+        return $this->getDatatypeClass();
     }
 }

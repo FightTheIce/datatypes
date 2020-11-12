@@ -21,6 +21,7 @@ class String_ implements DatatypeInterface, ResolvableInterface
 
     protected string $string;
     protected DatatypeInterface $class;
+    protected bool $isUnicode = false;
 
     public function __construct(string $obj = '')
     {
@@ -29,6 +30,7 @@ class String_ implements DatatypeInterface, ResolvableInterface
         if (strlen($obj) != strlen(utf8_decode($obj))) {
             //unicode
             $this->class = new UnicodeString_($obj);
+            $this->isUnicode = true;
         } else {
             //no unicode
             $this->class = new NonUnicodeString_($obj);
@@ -43,26 +45,13 @@ class String_ implements DatatypeInterface, ResolvableInterface
         return $this->string;
     }
 
-    public function getClass(): DatatypeInterface
+    public function getDatatypeClass(): DatatypeInterface
     {
         return $this->class;
     }
 
-    /**
-     * __call.
-     *
-     * @param string $method
-     * @param mixed  $parameters
-     *
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        if (method_exists($this->class, $method)) {
-            return $this->forwardCallTo($this->class, $method, $parameters);
-        }
-
-        return $this->__parentcall($method, $parameters);
+    public function isUnicode(): bool {
+        return $this->isUnicode;
     }
 
     /**
@@ -72,6 +61,6 @@ class String_ implements DatatypeInterface, ResolvableInterface
      */
     public function resolve()
     {
-        return $this->class;
+        return $this->getDatatypeClass();
     }
 }

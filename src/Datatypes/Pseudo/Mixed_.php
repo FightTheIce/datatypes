@@ -16,6 +16,7 @@ use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use FightTheIce\Datatypes\Special\Null_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
+use Closure;
 
 class Mixed_ implements DatatypeInterface, ResolvableInterface
 {
@@ -33,8 +34,8 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
     protected $object;
 
     protected DatatypeInterface $class;
-    protected array $is = [];
     protected string $gettype;
+    private bool $determined = false;
 
     /**
      * __construct.
@@ -46,51 +47,57 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
         $this->object  = $obj;
         $this->gettype = strtolower(gettype($this->object));
 
-        switch ($this->gettype) {
-            case 'array':
-                $this->class = new Array_($obj);
-                break;
+        if (is_array($obj)) {
+            $this->class = new Array_($obj);
+            $this->determined = true;
+        }
 
-            case 'string':
-                //https://stackoverflow.com/questions/1350758/check-unicode-in-php
-                //we need to determine unicode or not
-                if (strlen($obj) != strlen(utf8_decode($obj))) {
-                    //unicode
-                    $this->class = new UnicodeString_($obj);
-                } else {
-                    //no unicode
-                    $this->class = new String_($obj);
-                }
-                break;
+        if (($this->determined==false) and (is_string($obj))) {
+            //https://stackoverflow.com/questions/1350758/check-unicode-in-php
+            //we need to determine unicode or not
+            if (strlen($obj) != strlen(utf8_decode($obj))) {
+                //unicode
+                $this->class = new UnicodeString_($obj);
+            } else {
+                //no unicode
+                $this->class = new String_($obj);
+            }
+            $this->determined = true;
+        }
 
-            case 'boolean':
-            case 'bool':
-                $this->class = new Boolean_($obj);
-                break;
+        if (($this->determined==false) and (is_bool($obj))) {
+            $this->class = new Boolean_($obj);
+            $this->determined = true;
+        }
 
-            case 'double':
-            case 'float':
-                $this->class = new Float_($obj);
-                break;
+        if (($this->determined==false) and (is_float($obj))) {
+            $this->class = new Float_($obj);
+            $this->determined = true;
+            $this->gettype = 'float';
+        }
 
-            case 'integer':
-            case 'int':
-                $this->class = new Integer_($obj);
-                break;
+        if (($this->determined==false) and (is_int($obj))) {
+            $this->class = new Integer_($obj);
+            $this->determined = true;
+        }
 
-            case 'object':
-                $this->class = new Object_($obj);
-                break;
+        if (($this->determined==false) and (is_object($obj))) {
+            if ($obj instanceOf Closure) {
+                //this is a closure
+                $this->gettype = 'closure';
+            }
+            
+            $this->class = new Object_($obj);
+            $this->determined = true;
+        }
 
-            case 'null':
-                $this->class = new Null_();
-                break;
+        if (($this->determined==false) and (is_null($obj))) {
+            $this->class = new Null_;
+            $this->determined = true;
+        }
 
-            default:
-                echo PHP_EOL;
-                echo gettype($obj) . PHP_EOL;
-                echo '----EXIT';
-                exit;
+        if ($this->determined==false) {
+            throw new \ErrorException('Unable to determine object type');
         }
     }
 
@@ -107,6 +114,19 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
     public function is_string(): bool
     {
         return is_string($this->object);
+    }
+
+    public function is_unicode_string(): bool
+    {
+        if ($this->is_string()==false) {
+            return false;
+        }
+
+        if (strlen($this->object) != strlen(utf8_decode($this->object))) {
+            return true;
+        }
+        
+        return false;
     }
 
     public function is_scalar(): bool
@@ -144,31 +164,23 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
         return is_numeric($this->object);
     }
 
+    public function is_closure(): bool
+    {
+        if ($this->is_object()==false) {
+            return false;
+        }
+
+        return $this->object instanceOf Closure;
+    }
+
     public function getValue()
     {
         return $this->object;
     }
 
-    public function getClass(): DatatypeInterface
+    public function getDatatypeClass(): DatatypeInterface
     {
         return $this->class;
-    }
-
-    /**
-     * __call.
-     *
-     * @param string $method
-     * @param mixed  $parameters
-     *
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        if (method_exists($this->class, $method)) {
-            return $this->forwardCallTo($this->class, $method, $parameters);
-        }
-
-        return $this->__parentcall($method, $parameters);
     }
 
     public function getType(): string
@@ -184,5 +196,15 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
     public function resolve()
     {
         return $this->class;
+    }
+
+    /**
+     * getObject
+     * Returns the mixed object
+     *
+     * @return  mixed
+     */
+    public function getObject() {
+        return $this->getValue();
     }
 }

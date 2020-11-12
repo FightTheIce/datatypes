@@ -26,25 +26,7 @@ class Boolean_ implements DatatypeInterface
         return $this->value;
     }
 
-    public function isTrue(bool $strict = false): bool
-    {
-        if ($strict == true) {
-            return $this->isStrictTrue();
-        }
-
-        if ($this->value == true) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function isFalse(bool $strict = false): bool
-    {
-        return !$this->isTrue($strict);
-    }
-
-    public function isStrictTrue(): bool
+    public function isTrue(): bool
     {
         if ($this->value === true) {
             return true;
@@ -53,9 +35,9 @@ class Boolean_ implements DatatypeInterface
         return false;
     }
 
-    public function isStrictFalse(): bool
+    public function isFalse(): bool
     {
-        return !$this->isStrictFalse();
+        return !$this->isTrue();
     }
 
     public function inverse(): self
@@ -63,9 +45,9 @@ class Boolean_ implements DatatypeInterface
         return new self(!$this->value);
     }
 
-    public function transform(string $true, string $false, bool $strict = true): string
+    public function transform(string $true, string $false): string
     {
-        if ($this->isTrue($strict)) {
+        if ($this->isTrue()) {
             return $true;
         }
 
