@@ -64,9 +64,8 @@ class Uuid_ implements DatatypeInterface
      *
      * @param int $type
      *
-     * @return void
      */
-    private function generateUuid(int $type) : void
+    private function generateUuid(int $type): void
     {
         switch ($type) {
             case self::UUID1:
@@ -103,9 +102,9 @@ class Uuid_ implements DatatypeInterface
     }
 
     /**
-     * getuuidObj
+     * getuuidObj.
      *
-     * @return  mixed
+     * @return mixed
      */
     public function getUuidObj()
     {
