@@ -29,7 +29,7 @@ class String_ implements DatatypeInterface, ResolvableInterface
 
         if (strlen($obj) != strlen(utf8_decode($obj))) {
             //unicode
-            $this->class = new UnicodeString_($obj);
+            $this->class     = new UnicodeString_($obj);
             $this->isUnicode = true;
         } else {
             //no unicode
@@ -50,7 +50,8 @@ class String_ implements DatatypeInterface, ResolvableInterface
         return $this->class;
     }
 
-    public function isUnicode(): bool {
+    public function isUnicode(): bool
+    {
         return $this->isUnicode;
     }
 

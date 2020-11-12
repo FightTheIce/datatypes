@@ -43,12 +43,12 @@ class Number_ implements DatatypeInterface, ResolvableInterface
             throw $exception;
         }
 
-        if (is_float($number+0) == true) {
+        if (is_float($number + 0) == true) {
             $this->number = floatval($number);
-            $this->class = new Float_($this->number);
-        } elseif (is_int($number+0) == true) {
+            $this->class  = new Float_($this->number);
+        } elseif (is_int($number + 0) == true) {
             $this->number = intval($number);
-            $this->class = new Integer_($this->number);
+            $this->class  = new Integer_($this->number);
         }
     }
 

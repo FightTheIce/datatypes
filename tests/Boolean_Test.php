@@ -4,30 +4,34 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 
-
 final class Boolean_Test extends TestCase
 {
-    public function test_construct() {
+    public function test_construct()
+    {
         $bool = new Boolean_();
         $this->assertFalse($bool->getValue());
     }
 
-    public function test_construct_true() {
+    public function test_construct_true()
+    {
         $bool = new Boolean_(true);
         $this->assertTrue($bool->getValue());
     }
 
-    public function test_construct_false() {
+    public function test_construct_false()
+    {
         $bool = new Boolean_(false);
         $this->assertFalse($bool->getValue());
     }
 
-    public function test_construct_exception() {
+    public function test_construct_exception()
+    {
         $this->expectException(\TypeError::class);
-        $bool = new Boolean_(new StdClass);
+        $bool = new Boolean_(new StdClass());
     }
 
-    public function test_isTrue() {
+    public function test_isTrue()
+    {
         $bool = new Boolean_(false);
         $this->assertFalse($bool->isTrue());
         $this->assertTrue($bool->isFalse());
@@ -37,7 +41,8 @@ final class Boolean_Test extends TestCase
         $this->assertFalse($bool->isFalse());
     }
 
-    public function test_isFalse() {
+    public function test_isFalse()
+    {
         $bool = new Boolean_(false);
         $this->assertFalse($bool->isTrue());
         $this->assertTrue($bool->isFalse());
@@ -47,7 +52,8 @@ final class Boolean_Test extends TestCase
         $this->assertFalse($bool->isFalse());
     }
 
-    public function test_inverse() {
+    public function test_inverse()
+    {
         $bool = new Boolean_(false);
         $this->assertTrue($bool->inverse()->getValue());
 
@@ -55,11 +61,12 @@ final class Boolean_Test extends TestCase
         $this->assertFalse($bool->inverse()->getValue());
     }
 
-    public function test_transform() {
+    public function test_transform()
+    {
         $bool = new Boolean_(false);
-        $this->assertSame('false',$bool->transform('true','false'));
+        $this->assertSame('false', $bool->transform('true', 'false'));
 
         $bool = new Boolean_(true);
-        $this->assertSame('true',$bool->transform('true','false'));
+        $this->assertSame('true', $bool->transform('true', 'false'));
     }
 }

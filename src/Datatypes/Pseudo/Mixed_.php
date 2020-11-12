@@ -48,11 +48,11 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
         $this->gettype = strtolower(gettype($this->object));
 
         if (is_array($obj)) {
-            $this->class = new Array_($obj);
+            $this->class      = new Array_($obj);
             $this->determined = true;
         }
 
-        if (($this->determined==false) and (is_string($obj))) {
+        if (($this->determined == false) and (is_string($obj))) {
             //https://stackoverflow.com/questions/1350758/check-unicode-in-php
             //we need to determine unicode or not
             if (strlen($obj) != strlen(utf8_decode($obj))) {
@@ -65,38 +65,38 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
             $this->determined = true;
         }
 
-        if (($this->determined==false) and (is_bool($obj))) {
-            $this->class = new Boolean_($obj);
+        if (($this->determined == false) and (is_bool($obj))) {
+            $this->class      = new Boolean_($obj);
             $this->determined = true;
         }
 
-        if (($this->determined==false) and (is_float($obj))) {
-            $this->class = new Float_($obj);
+        if (($this->determined == false) and (is_float($obj))) {
+            $this->class      = new Float_($obj);
             $this->determined = true;
-            $this->gettype = 'float';
+            $this->gettype    = 'float';
         }
 
-        if (($this->determined==false) and (is_int($obj))) {
-            $this->class = new Integer_($obj);
+        if (($this->determined == false) and (is_int($obj))) {
+            $this->class      = new Integer_($obj);
             $this->determined = true;
         }
 
-        if (($this->determined==false) and (is_object($obj))) {
-            if ($obj instanceOf Closure) {
+        if (($this->determined == false) and (is_object($obj))) {
+            if ($obj instanceof Closure) {
                 //this is a closure
                 $this->gettype = 'closure';
             }
-            
-            $this->class = new Object_($obj);
+
+            $this->class      = new Object_($obj);
             $this->determined = true;
         }
 
-        if (($this->determined==false) and (is_null($obj))) {
-            $this->class = new Null_;
+        if (($this->determined == false) and (is_null($obj))) {
+            $this->class      = new Null_();
             $this->determined = true;
         }
 
-        if ($this->determined==false) {
+        if ($this->determined == false) {
             throw new \ErrorException('Unable to determine object type');
         }
     }
@@ -118,14 +118,14 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
 
     public function is_unicode_string(): bool
     {
-        if ($this->is_string()==false) {
+        if ($this->is_string() == false) {
             return false;
         }
 
         if (strlen($this->object) != strlen(utf8_decode($this->object))) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -166,11 +166,11 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
 
     public function is_closure(): bool
     {
-        if ($this->is_object()==false) {
+        if ($this->is_object() == false) {
             return false;
         }
 
-        return $this->object instanceOf Closure;
+        return $this->object instanceof Closure;
     }
 
     public function getValue()
@@ -200,11 +200,12 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
 
     /**
      * getObject
-     * Returns the mixed object
+     * Returns the mixed object.
      *
-     * @return  mixed
+     * @return mixed
      */
-    public function getObject() {
+    public function getObject()
+    {
         return $this->getValue();
     }
 }
