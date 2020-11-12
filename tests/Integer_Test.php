@@ -7,9 +7,10 @@ use Brick\Math\BigInteger;
 
 final class Integer_Test extends TestCase
 {
-    public function test_construct() {
+    public function test_construct()
+    {
         $int = new Integer_();
-        $this->assertSame(0,$int->getValue());
+        $this->assertSame(0, $int->getValue());
     }
 
     public function test_construct_exception()
@@ -18,17 +19,20 @@ final class Integer_Test extends TestCase
         $number = new Integer_(new stdClass());
     }
 
-    public function test_standard_num() {
+    public function test_standard_num()
+    {
         $int = new Integer_(1);
-        $this->assertSame(1,$int->getValue());
+        $this->assertSame(1, $int->getValue());
     }
 
-    public function test_getValue() {
+    public function test_getValue()
+    {
         $int = new Integer_(1);
-        $this->assertSame(1,$int->getValue());
+        $this->assertSame(1, $int->getValue());
     }
 
-    public function test_isPositive() {
+    public function test_isPositive()
+    {
         $int = new Integer_(1);
         $this->assertTrue($int->isPositive());
 
@@ -36,7 +40,8 @@ final class Integer_Test extends TestCase
         $this->assertFalse($int->isPositive());
     }
 
-    public function test_isNegative() {
+    public function test_isNegative()
+    {
         $int = new Integer_(1);
         $this->assertFalse($int->isNegative());
 
@@ -44,39 +49,45 @@ final class Integer_Test extends TestCase
         $this->assertTrue($int->isNegative());
     }
 
-    public function test_absolute() {
+    public function test_absolute()
+    {
         $int = new Integer_(1);
-        $this->assertSame(1,$int->absolute()->getValue());
+        $this->assertSame(1, $int->absolute()->getValue());
 
         $int = new Integer_(-1);
-        $this->assertSame(1,$int->absolute()->getValue());
+        $this->assertSame(1, $int->absolute()->getValue());
     }
 
-    public function test_opposite() {
+    public function test_opposite()
+    {
         $int = new Integer_(1);
-        $this->assertEquals(-1,$int->opposite()->getValue());
+        $this->assertEquals(-1, $int->opposite()->getValue());
 
         $int = new Integer_(-1);
-        $this->assertSame(1,$int->opposite()->getValue());
+        $this->assertSame(1, $int->opposite()->getValue());
     }
 
-    public function test_math() {
+    public function test_math()
+    {
         $int = new Integer_(1);
-        $this->assertInstanceOf(BigInteger::class,$int->math());
+        $this->assertInstanceOf(BigInteger::class, $int->math());
     }
 
-    public function test__toString() {
+    public function test__toString()
+    {
         $int = new Integer_(123456789);
-        $this->assertSame('123456789',$int->__toString());
+        $this->assertSame('123456789', $int->__toString());
     }
 
-    public function test__toFloat() {
+    public function test__toFloat()
+    {
         $int = new Integer_(123456789);
-        $this->assertSame(123456789.0,$int->__toFloat()->getValue());
+        $this->assertSame(123456789.0, $int->__toFloat()->getValue());
     }
 
-    public function test__toInteger() {
+    public function test__toInteger()
+    {
         $int = new Integer_(123456789);
-        $this->assertSame(123456789,$int->__toInteger()->getValue());
+        $this->assertSame(123456789, $int->__toInteger()->getValue());
     }
 }
