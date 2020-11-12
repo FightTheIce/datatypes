@@ -319,6 +319,6 @@ class UnicodeString_ implements Stringable, ArrayAccess, DatatypeInterface, Stri
 
     public function getValue()
     {
-        return $this->value;
+        return $this->value->__toString();
     }
 }
