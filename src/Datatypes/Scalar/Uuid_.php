@@ -12,10 +12,6 @@ class Uuid_ implements DatatypeInterface
 {
     use Macroable;
 
-    const UUID1 = 1;
-    const UUID4 = 4;
-    const UUID6 = 6;
-
     /**
      * value.
      *
@@ -34,13 +30,12 @@ class Uuid_ implements DatatypeInterface
      * __construct.
      *
      * @param mixed $uuid
-     * @param int   $preference
      */
-    public function __construct($uuid = null, int $preference = 6)
+    public function __construct($uuid = null)
     {
         if (is_null($uuid)) {
             //this means we need to generate one
-            $this->generateUuid($preference);
+            $this->generateUuid();
         } else {
             //now we need to "determine" the uuid convert it to a string and check that it is valid
             if (is_numeric($uuid)) {
@@ -62,28 +57,10 @@ class Uuid_ implements DatatypeInterface
     /**
      * generateUuid.
      *
-     * @param int $type
-     *
      */
-    private function generateUuid(int $type): void
+    private function generateUuid(): void
     {
-        switch ($type) {
-            case self::UUID1:
-                $this->uuidObj = Uuid::uuid1();
-            break;
-
-            case self::UUID4:
-                $this->uuidObj = Uuid::uuid4();
-            break;
-
-            case self::UUID6:
-                $this->uuidObj = Uuid::uuid6();
-            break;
-
-            default:
-                $this->uuidObj = Uuid::uuid6();
-            break;
-        }
+        $this->uuidObj = Uuid::uuid6();
     }
 
     public function getValue()
@@ -96,7 +73,7 @@ class Uuid_ implements DatatypeInterface
      *
      * @return string
      */
-    public function getInteger()
+    public function getIntegerString()
     {
         return $this->uuidObj->getInteger()->__toString();
     }
