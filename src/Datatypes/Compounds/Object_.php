@@ -38,7 +38,7 @@ class Object_ implements DatatypeInterface, ResolvableInterface
         if (!is_object($obj)) {
             $exception = new InvalidArgumentException('Parameter $obj must be an object');
             $exception->setComponentName('datatypes');
-            
+
             throw $exception;
         }
 
