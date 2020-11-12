@@ -68,7 +68,7 @@ final class UnicodeString_Test extends TestCase
         $data = 'déjà';
         $str  = new String_($data);
         $ustr = new UnicodeString($data);
-        $this->assertSame($ustr->slice(0,1)->__toString(), $str->substr(0, 1)->__toString());
+        $this->assertSame($ustr->slice(0, 1)->__toString(), $str->substr(0, 1)->__toString());
     }
 
     public function test_strtolower()

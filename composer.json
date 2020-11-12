@@ -17,7 +17,8 @@
         "spatie/laravel-collection-macros": "^7.0",
         "brick/math": "^0.9.1",
         "spatie/typed": "^0.1.1",
-        "fighttheice/exceptions": "^0.6.0"
+        "fighttheice/exceptions": "^0.6.0",
+        "ramsey/uuid": "^4.1"
     },
     "autoload": {
         "classmap": ["src"],
@@ -39,9 +40,7 @@
             "./vendor/bin/phpstan analyse"
         ],
         "php-cs-fixer": [
-            "./vendor/bin/php-cs-fixer fix src/"
-        ],
-        "php-cs-fixer-tests": [
+            "./vendor/bin/php-cs-fixer fix src/",
             "./vendor/bin/php-cs-fixer fix tests/"
         ],
         "baseinstall": [
