@@ -53,11 +53,7 @@ class Integer_ implements DatatypeInterface, MathInterface
 
     public function opposite(): self
     {
-        if ($this->isPositive() == true) {
-            return new self(0 - $this->value);
-        }
-
-        return $this->absolute();
+        return new self($this->math()->negated()->toInt());
     }
 
     public function math(): BigInteger

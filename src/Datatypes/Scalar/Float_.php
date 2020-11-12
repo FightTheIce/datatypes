@@ -53,11 +53,7 @@ class Float_ implements DatatypeInterface, MathInterface
 
     public function opposite(): self
     {
-        if ($this->isPositive() == true) {
-            new self(0 - $this->value);
-        }
-
-        return $this->absolute();
+        return new self($this->math()->negated()->toFloat());
     }
 
     public function math(): BigDecimal
@@ -77,6 +73,6 @@ class Float_ implements DatatypeInterface, MathInterface
 
     public function __toInteger(): Integer_
     {
-        return new Integer_($this->math()->toInt());
+        return new Integer_(intval($this->value));
     }
 }
