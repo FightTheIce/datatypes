@@ -168,13 +168,6 @@ class UnicodeString_ implements Stringable, ArrayAccess, DatatypeInterface, Stri
             $value = $value->__toString();
         }
 
-        if (count($split) == 1) {
-            /* @phpstan-ignore-next-line */
-            if (strlen($split[0]) == 0) {
-                $split = [];
-            }
-        }
-
         return $split;
     }
 

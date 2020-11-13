@@ -107,9 +107,157 @@ final class UnicodeString_Test extends TestCase
 
     public function test_strlen()
     {
-        $data = 'garçon';
+        $data = 'नमस्ते';
         $str  = new String_($data);
         $ustr = new UnicodeString($data);
         $this->assertSame($ustr->width(), $str->strlen());
+    }
+
+    public function test_str_split()
+    {
+        $data  = 'नमस्ते';
+        $str   = new String_($data);
+        $ustr  = new UnicodeString($data);
+        $udata = [];
+        foreach ($ustr->chunk(1) as $key => $value) {
+            $udata[] = $value->__toString();
+        }
+
+        $this->assertSame($udata, $str->str_split());
+
+        $str   = new String_($data);
+        $udata = [];
+        foreach ($ustr->chunk(3) as $key => $value) {
+            $udata[] = $value->__toString();
+        }
+        $this->assertSame($udata, $str->str_split(3));
+
+        $data = '';
+        $str  = new String_($data);
+        $this->assertSame([], $str->str_split());
+
+        $data = '';
+        $str  = new String_($data);
+        $this->assertSame([], $str->str_split(2));
+    }
+
+    public function test_offsetExists()
+    {
+        $data = '';
+        $str  = new String_($data);
+        $this->assertFalse($str->offsetExists(0));
+
+        $data = 'नमस्ते';
+        $str  = new String_($data);
+        $this->assertTrue($str->offsetExists(3));
+        $this->assertFalse($str->offsetExists(5));
+    }
+
+    public function test_offsetGet()
+    {
+        $data = 'न';
+        $str  = new String_($data);
+        $this->assertSame('न', $str->offsetGet(0));
+
+        $this->expectException(\ErrorException::class);
+        $str->offsetGet(1);
+    }
+
+    public function test_offsetSet()
+    {
+        $str = new String_();
+        $str->offsetSet(0, 'a');
+        $this->assertSame('a', $str->__toString());
+
+        $str    = new String_();
+        $str[0] = 'a';
+        $this->assertSame('a', $str->__toString());
+
+        $str    = new String_();
+        $str[0] = new class() {
+            public function __toString()
+            {
+                return 'नमस्ते';
+            }
+        };
+        $this->assertSame('नमस्ते', $str->__toString());
+
+        $this->expectException(\ErrorException::class);
+        $str[5];
+    }
+
+    public function test_offsetSet_object_no_toString()
+    {
+        $this->expectException(\ErrorException::class);
+        $str    = new String_();
+        $str[0] = new class() {
+            public function moo()
+            {
+                echo 'नमस्ते';
+            }
+        };
+    }
+
+    public function test_offsetSet_non_numeric_key()
+    {
+        $this->expectException(\ErrorException::class);
+        $str         = new String_();
+        $str['name'] = 'नमस्ते';
+    }
+
+    public function test_offsetSet_float()
+    {
+        $this->expectException(\ErrorException::class);
+        $str      = new String_();
+        $str[0.1] = 'नमस्ते';
+    }
+
+    public function test_offsetSet_overwrite()
+    {
+        //नमस्ते
+        $str    = new String_();
+        $str[0] = 'न';
+        $str[0] = 'ते';
+        $this->assertSame('ते', $str->__toString());
+    }
+
+    public function test_offsetSet_greater_than_count_plus_one()
+    {
+        $this->expectException(\ErrorException::class);
+        $str    = new String_();
+        $str[2] = 'ते';
+    }
+
+    public function test_offsetSet_greater_than_count_plus_one_v2()
+    {
+        $this->expectException(\ErrorException::class);
+        $str    = new String_();
+        $str[0] = 'ते';
+        $str[2] = 'ते';
+    }
+
+    public function test_offsetGet_continue()
+    {
+        //नमस्ते
+        $str    = new String_();
+        $str[0] = 'न';
+        $str[1] = 'म';
+        $str[2] = 'स्ते';
+        $this->assertSame('नमस्ते', $str->__toString());
+    }
+
+    public function test_offsetUnset()
+    {
+        $str    = new String_();
+        $str[0] = 'न';
+        $str->offsetUnset(0);
+
+        $this->assertSame('', $str->__toString());
+
+        $str    = new String_();
+        $str[0] = 'न';
+        $str->offsetUnset(10);
+
+        $this->assertSame('न', $str->__toString());
     }
 }

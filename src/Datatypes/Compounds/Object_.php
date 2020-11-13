@@ -70,23 +70,6 @@ class Object_ implements DatatypeInterface, ResolvableInterface
     }
 
     /**
-     * __call.
-     *
-     * @param string $method
-     * @param mixed  $parameters
-     *
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        if (method_exists($this->object, $method)) {
-            return $this->forwardCallTo($this->object, $method, $parameters);
-        }
-
-        return $this->__parentcall($method, $parameters);
-    }
-
-    /**
      * resolve.
      *
      * @return mixed

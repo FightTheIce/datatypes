@@ -14,6 +14,7 @@ use FightTheIce\Datatypes\Scalar\Integer_;
 use FightTheIce\Datatypes\Scalar\String_;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use FightTheIce\Datatypes\Special\Null_;
+use FightTheIce\Datatypes\Special\Resource_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 use Closure;
@@ -44,6 +45,10 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
      */
     public function __construct($obj)
     {
+        if ($obj instanceof DatatypeInterface) {
+            $obj = $obj->getValue();
+        }
+
         $this->object  = $obj;
         $this->gettype = strtolower(gettype($this->object));
 
@@ -93,6 +98,11 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
 
         if (($this->determined == false) and (is_null($obj))) {
             $this->class      = new Null_();
+            $this->determined = true;
+        }
+
+        if (($this->determined == false) and (is_resource($obj))) {
+            $this->class      = new Resource_($obj);
             $this->determined = true;
         }
 

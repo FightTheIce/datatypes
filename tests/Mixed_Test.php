@@ -286,4 +286,18 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_(null);
         $this->assertInstanceOf(Null_::class, $mixed->resolve());
     }
+
+    public function test_resource()
+    {
+        $resource = @\fopen('php://memory', 'rb');
+        $mixed    = new Mixed_($resource);
+        $this->assertSame($resource, $mixed->resolve()->getValue());
+    }
+
+    public function test_mixed_from_datatype()
+    {
+        $str   = new String_('Hello World');
+        $mixed = new Mixed_($str);
+        $this->assertInstanceOf(String_::class, $mixed->resolve());
+    }
 }

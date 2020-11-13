@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Yaml\Yaml;
+use Nette\Neon\Neon;
 
 final class Array_Test extends TestCase
 {
@@ -124,5 +126,41 @@ final class Array_Test extends TestCase
 
         $arr = $arr->addDot('0.developers', 'Hello');
         $this->assertTrue($arr->hasDot('0.developers'));
+    }
+
+    public function test__toJson()
+    {
+        $data = [
+            1,
+            2,
+            3
+        ];
+
+        $arr = new \FightTheIce\Datatypes\Compounds\Array_($data);
+        $this->assertSame(json_encode($data, JSON_PRETTY_PRINT), $arr->_toJson());
+    }
+
+    public function test__toYaml()
+    {
+        $data = [
+            1,
+            2,
+            3
+        ];
+
+        $arr = new \FightTheIce\Datatypes\Compounds\Array_($data);
+        $this->assertSame(Yaml::dump($data, 3), $arr->_toYaml());
+    }
+
+    public function test__toNeon()
+    {
+        $data = [
+            1,
+            2,
+            3
+        ];
+
+        $arr = new \FightTheIce\Datatypes\Compounds\Array_($data);
+        $this->assertSame(Neon::encode($data, Neon::BLOCK), $arr->_toNeon());
     }
 }

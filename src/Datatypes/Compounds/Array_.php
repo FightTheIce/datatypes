@@ -8,6 +8,8 @@ use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
+use Symfony\Component\Yaml\Yaml;
+use Nette\Neon\Neon;
 
 class Array_ extends Collection implements DatatypeInterface
 {
@@ -186,5 +188,25 @@ class Array_ extends Collection implements DatatypeInterface
     public function hasDot(string $key): bool
     {
         return (new Arr())->has($this->toArray(), $key);
+    }
+
+    public function _toJson(): string
+    {
+        $data = json_encode($this->toArray(), JSON_PRETTY_PRINT);
+        if ($data==false) {
+            throw new \ErrorException(__METHOD__);
+        }
+
+        return $data;
+    }
+
+    public function _toYaml(): string
+    {
+        return Yaml::dump($this->toArray(), 3);
+    }
+
+    public function _toNeon(): string
+    {
+        return Neon::encode($this->toArray(), Neon::BLOCK);
     }
 }
