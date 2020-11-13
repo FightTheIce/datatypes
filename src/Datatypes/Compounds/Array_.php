@@ -193,7 +193,7 @@ class Array_ extends Collection implements DatatypeInterface
     public function _toJson(): string
     {
         $data = json_encode($this->toArray(), JSON_PRETTY_PRINT);
-        if ($data==false) {
+        if ($data == false) {
             throw new \ErrorException(__METHOD__);
         }
 

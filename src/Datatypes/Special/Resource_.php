@@ -12,16 +12,16 @@ class Resource_ implements DatatypeInterface
     use Macroable;
 
     /**
-     * value
+     * value.
      *
      * @var mixed
      */
     protected $value;
 
     /**
-     * __construct
+     * __construct.
      *
-     * @param   mixed  $res
+     * @param mixed $res
      */
     public function __construct($res)
     {
