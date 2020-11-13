@@ -1,7 +1,7 @@
 # Arrays
 FightTheIce\Datatypes\Compounds\Arrays_ are just Laravel Collections under the hood... no literally the class Array_ just extends Illuminate\Support\Collection.
 
-Have a look at the (Laravel Manual)[https://laravel.com/docs/8.x/collections] to see the base features of this datatype.
+Have a look at the [Laravel Manual](https://laravel.com/docs/8.x/collections) to see the base features of this datatype.
 
 FightTheIce also added some premade macros by spatie. [spatie/laravel-collection-macros](https://github.com/spatie/laravel-collection-macros).
 
@@ -69,6 +69,9 @@ $yaml = $arr->toYaml();
 
 //export as neon
 $neon = $arr->toNeon();
+
+//export as json
+$json = $arr->toJson();
 ```
 
 
