@@ -127,13 +127,3 @@ function get_class($object): \FighttheIce\Datatypes\Scalar\String_
 {
     return new \FighttheIce\Datatypes\Scalar\String_(\get_class($object));
 }
-
-function strlen(string $string): \FightTheIce\Datatypes\Scalar\Integer_
-{
-    return new \FightTheIce\Datatypes\Scalar\Integer_(\strlen($string));
-}
-
-function strtolower(string $string): \FighttheIce\Datatypes\Scalar\String_
-{
-    return new \FighttheIce\Datatypes\Scalar\String_(strtolower($string));
-}

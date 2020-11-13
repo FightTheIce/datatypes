@@ -300,4 +300,65 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($str);
         $this->assertInstanceOf(String_::class, $mixed->resolve());
     }
+
+    public function test_describe()
+    {
+        $mixed = new Mixed_([]);
+        $this->assertEquals('empty array',$mixed->describe());
+
+        $mixed = new Mixed_([1,2,3]);
+        $this->assertEquals('indexed array',$mixed->describe());
+
+        $mixed = new Mixed_(array('name' => 'William'));
+        $this->assertEquals('associative array',$mixed->describe());
+
+        $mixed = new Mixed_(array($this,'test_describe'));
+        $this->assertEquals('callable array',$mixed->describe());
+
+        $mixed = new Mixed_($this);
+        $this->assertEquals('object of class Mixed_Test',$mixed->describe());
+
+        $resource = @\fopen('php://memory', 'rb');
+        $mixed = new Mixed_($resource);
+        $this->assertEquals('resource of type stream',$mixed->describe());
+
+        $mixed = new Mixed_(1);
+        $this->assertEquals('positive integer',$mixed->describe());
+
+        $mixed = new Mixed_(+1);
+        $this->assertEquals('positive integer',$mixed->describe());
+
+        $mixed = new Mixed_(-1);
+        $this->assertEquals('negative integer',$mixed->describe());
+
+        $mixed = new Mixed_(0);
+        $this->assertEquals('zero integer',$mixed->describe());
+
+        $mixed = new Mixed_(-1.0);
+        $this->assertEquals('negative float',$mixed->describe());
+
+        $mixed = new Mixed_(1.0);
+        $this->assertEquals('positive float',$mixed->describe());
+
+        $mixed = new Mixed_(0.0);
+        $this->assertEquals('zero float',$mixed->describe());
+
+        $mixed = new Mixed_('');
+        $this->assertEquals('empty string',$mixed->describe());
+
+        $mixed = new Mixed_('strtolower');
+        $this->assertEquals('callable string',$mixed->describe());
+
+        $mixed = new Mixed_('12345');
+        $this->assertEquals('numeric string',$mixed->describe());
+
+        $mixed = new Mixed_('hello world');
+        $this->assertEquals('string',$mixed->describe());
+
+        $mixed = new Mixed_(true);
+        $this->assertEquals('boolean true',$mixed->describe());
+
+        $mixed = new Mixed_(false);
+        $this->assertEquals('boolean false',$mixed->describe());
+    }
 }

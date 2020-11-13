@@ -18,6 +18,7 @@ use FightTheIce\Datatypes\Special\Resource_;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 use Closure;
+use Thunder\Nevar\Nevar;
 
 class Mixed_ implements DatatypeInterface, ResolvableInterface
 {
@@ -217,5 +218,10 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
     public function getObject()
     {
         return $this->getValue();
+    }
+
+    public function describe(): string
+    {
+        return Nevar::describe($this->object);
     }
 }
