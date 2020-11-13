@@ -161,3 +161,27 @@ $unknown = new Mixed_('Späßchen');
 $resolved = $unknown->resolve();
 //returns FightTheIce\Datatypes\Scalar\UnicodeString_
 ```
+
+## Useless but fun
+FightTheIce includes some useless but never the less fun data types to
+
+### Objects
+```php
+use FightTheIce\Datatypes\Compounds\Object_;
+
+$obj = new Object_(new stdClass);
+```
+
+### Nulls
+```php
+use FightTheIce\Datatypes\Special\Null_;
+
+$null = new Null_;
+```
+
+### Resources
+```php
+use FightTheIce\Datatypes\Special\Resource_;
+
+$resource = new Resource_();
+```

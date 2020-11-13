@@ -23,13 +23,15 @@ class Resource_ implements DatatypeInterface
      *
      * @param mixed $res
      */
-    public function __construct($res)
+    public function __construct($res = null)
     {
-        if (is_resource($res) == false) {
-            throw new \ErrorException('X-1');
+        if (!is_null($res)) {
+            if (is_resource($res) == false) {
+                throw new \ErrorException('X-1');
+            }
+        
+            $this->value = $res;
         }
-
-        $this->value = $res;
     }
 
     public function getValue()
