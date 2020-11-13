@@ -1,123 +1,51 @@
 # FightTheIce\Datatypes
 
-Creating confusion since 2020. Lets make PHP a bit more "typed" (hahaha)....
+Creating confusion since 2020. Lets make PHP a bit more "typed" (ROFL)....
 
+# Installation
 
-```php
-//native PHP
-$bool = false; /* or */ $bool = true;
-if (($bool==false) or ($bool==true)) {
-    //soft check
-}
+You can install the package via composer:
 
-if (($bool===false) or ($bool===true)) {
-    //strict check
-}
-
-//FTI
-$bool = new FightTheIce\Datatypes\Scalar\Boolean_(true);
-if ($bool->isTrue()) {
-    //soft check
-}
-
-if ($bool->isStrictTrue()) {
-    //strict check
-}
+```
+$ composer install fighttheice/datatypes
 ```
 
-```php
-//native php
-$float = -1.0;
-if ($float > 0) {
-    //float is positive
-} else {
-    //float is negative
-}
-$float = abs($float);
+# Usage
 
-//FTI
-$float = new FightTheIce\Datatypes\Scalar\Float_(1.0);
-if ($float->isPositive()) {
-    //float is positive
-} else {
-    //float is negative
-}
+## Arrays
 
-$float = $float->absolute();
-```
+FightTheIce - Arrays are just an extended class of [Illuminate\Support\Collection](https://github.com/illuminate/collections)
 
 ```php
-$int = 1;
-if ($int > 0) {
-    //int is positive
-} else {
-    //int is negative
-}
-
-//FTI
-$int = new FightTheIce\Datatypes\Scalar\Integer_(1);
-if ($int->isPositive()) {
-    //int is positive
-} else {
-    //int is negative
-}
+$arr = new FightTheIce\Datatypes\Compounds\Array_(array(1,2,3));
 ```
+
+## Booleans
 
 ```php
-$str = '       zzzzhello worldzzzz     ';
-$str = rtrim(ltrim(trim($str),'z'),'z');
-//hello world
-
-//FTI
-$str = new FightTheIce\Datatypes\Scalar\String_('       zzzzhello worldzzzz     ');
-$str = $str->trim()->ltrim('z')->rtrim('z');
-//hello world
+$bool = new FightTheIce\Datatypes\Scalar\Boolean_(false);
 ```
+
+## Floats
 
 ```php
-//FTI
-$uniStr = new FightTheIce\Datatypes\Scalar\UnicodeString_('नमस्ते दुनिया');
- //FTI Unicode is just a transparent layer on top of Symfony/String
+$float = new FightTheIce\Datatypes\Scalar\Float_(1.23);
 ```
+
+## Integers
 
 ```php
-//native PHP
-$arr = array(
-    'William',
-    'Frank',
-    'Saul',
-    null,
-    false,
-    new stdClass,
-    'Mary',
-    'Paul'
-);
-
-//remove non strings from array
-$count = count($arr);
-for ($a=0; $a<$count; $a++){
-    if (!is_string($arr[$a])) {
-        unset($arr[$a]);
-    }
-}
-
-//reindex
-$arr = array_values($arr);
-
-//FTI
-$arr = new FightTheIce\Datatypes\Compounds\Array_((
-    'William',
-    'Frank',
-    'Saul',
-    null,
-    false,
-    new stdClass,
-    'Mary',
-    'Paul'
-));
-
-$arr = $arr->reject(function ($name) {
-    if !is_string($name);
-});
+$int = new FightTheIce\Datatypes\Scalar\Integer_(8);
 ```
 
+## Strings
+
+There are two types of strings ... Standard strings and UnicodeStrings. UnicodeStrings are based on [symfony/string](https://github.com/symfony/string)
+
+```php
+//standard string
+$standardStr = new FightTheIce\Datatypes\Scalar\String_('hello world');
+
+//unicode string
+$unicodeStr = new FightTheIce\Datatypes\Scalar\UnicodeString_('Späßchen');
+```
