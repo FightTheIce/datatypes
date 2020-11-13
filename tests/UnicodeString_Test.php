@@ -91,11 +91,11 @@ final class UnicodeString_Test extends TestCase
     {
         $data = '';
         $str  = new String_($data);
-        $this->assertTrue($str->isEmpty());
+        $this->assertTrue($str->isEmpty()->isTrue());
 
         $data = 'garçon';
         $str  = new String_($data);
-        $this->assertFalse($str->isEmpty());
+        $this->assertFalse($str->isEmpty()->isTrue());
     }
 
     public function test__toString()
@@ -110,7 +110,7 @@ final class UnicodeString_Test extends TestCase
         $data = 'नमस्ते';
         $str  = new String_($data);
         $ustr = new UnicodeString($data);
-        $this->assertSame($ustr->width(), $str->strlen());
+        $this->assertSame($ustr->width(), $str->strlen()->getValue());
     }
 
     public function test_str_split()

@@ -28,22 +28,22 @@ class Float_ implements DatatypeInterface, MathInterface
         return $this->value;
     }
 
-    public function isPositive(): bool
+    public function isPositive(): Boolean_
     {
         if ($this->value >= 0) {
-            return true;
+            return new Boolean_(true);
         }
 
-        return false;
+        return new Boolean_(false);
     }
 
-    public function isNegative(): bool
+    public function isNegative(): Boolean_
     {
         if ($this->value < 0) {
-            return true;
+            return new Boolean_(true);
         }
 
-        return false;
+        return new Boolean_(false);
     }
 
     public function absolute(): self

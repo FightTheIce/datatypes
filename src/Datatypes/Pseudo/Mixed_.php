@@ -112,76 +112,76 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
         }
     }
 
-    public function is_null(): bool
+    public function is_null(): Boolean_
     {
-        return is_null($this->object);
+        return new Boolean_(is_null($this->object));
     }
 
-    public function is_empty(): bool
+    public function is_empty(): Boolean_
     {
-        return empty($this->object);
+        return new Boolean_(empty($this->object));
     }
 
-    public function is_string(): bool
+    public function is_string(): Boolean_
     {
-        return is_string($this->object);
+        return new Boolean_(is_string($this->object));
     }
 
-    public function is_unicode_string(): bool
+    public function is_unicode_string(): Boolean_
     {
-        if ($this->is_string() == false) {
-            return false;
+        if ($this->is_string()->isFalse()) {
+            return new Boolean_(false);
         }
 
         if (strlen($this->object) != strlen(utf8_decode($this->object))) {
-            return true;
+            return new Boolean_(true);
         }
 
-        return false;
+        return new Boolean_(false);
     }
 
-    public function is_scalar(): bool
+    public function is_scalar(): Boolean_
     {
-        return is_scalar($this->object);
+        return new Boolean_(is_scalar($this->object));
     }
 
-    public function is_float(): bool
+    public function is_float(): Boolean_
     {
-        return is_float($this->object);
+        return new Boolean_(is_float($this->object));
     }
 
-    public function is_int(): bool
+    public function is_int(): Boolean_
     {
-        return is_int($this->object);
+        return new Boolean_(is_int($this->object));
     }
 
-    public function is_bool(): bool
+    public function is_bool(): Boolean_
     {
-        return is_bool($this->object);
+        return new Boolean_(is_bool($this->object));
     }
 
-    public function is_object(): bool
+    public function is_object(): Boolean_
     {
-        return is_object($this->object);
+        return new Boolean_(is_object($this->object));
     }
 
-    public function is_array(): bool
+    public function is_array(): Boolean_
     {
-        return is_array($this->object);
+        return new Boolean_(is_array($this->object));
     }
 
-    public function is_numeric(): bool
+    public function is_numeric(): Boolean_
     {
-        return is_numeric($this->object);
+        return new Boolean_(is_numeric($this->object));
     }
 
-    public function is_closure(): bool
+    public function is_closure(): Boolean_
     {
-        if ($this->is_object() == false) {
-            return false;
+        if ($this->is_object()->isFalse()) {
+            return new Boolean_(false);
         }
 
-        return $this->object instanceof Closure;
+        return new Boolean_($this->object instanceof Closure);
     }
 
     public function getValue()

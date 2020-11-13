@@ -34,7 +34,7 @@ final class Uuid_Test extends TestCase
     public function test_getIntegerString()
     {
         $uuid = new Uuid_('1eb25356-44a3-69ee-ab36-38c98603aedf');
-        $this->assertSame('40802758989228290647962411573446946527', $uuid->getIntegerString());
+        $this->assertSame('40802758989228290647962411573446946527', $uuid->getIntegerString()->__toString());
     }
 
     public function test__toString()

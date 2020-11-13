@@ -45,12 +45,12 @@ class Boolean_ implements DatatypeInterface
         return new self(!$this->value);
     }
 
-    public function transform(string $true, string $false): string
+    public function transform(string $true, string $false): String_
     {
         if ($this->isTrue()) {
-            return $true;
+            return new String_($true);
         }
 
-        return $false;
+        return new String_($false);
     }
 }

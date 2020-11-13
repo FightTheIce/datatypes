@@ -128,11 +128,11 @@ class UnicodeString_ implements Stringable, ArrayAccess, DatatypeInterface, Stri
      *
      * @see https://www.php.net/manual/en/function.empty.php
      *
-     * @return bool
+     * @return Boolean_
      */
-    public function isEmpty(): bool
+    public function isEmpty(): Boolean_
     {
-        return empty($this->value->__toString());
+        return new Boolean_(empty($this->value->__toString()));
     }
 
     /**
@@ -177,11 +177,11 @@ class UnicodeString_ implements Stringable, ArrayAccess, DatatypeInterface, Stri
      *
      * @see https://www.php.net/manual/en/function.strlen.php
      *
-     * @return int
+     * @return Integer_
      */
-    public function strlen(): int
+    public function strlen(): Integer_
     {
-        return $this->value->width();
+        return new Integer_($this->value->width());
     }
 
     /**

@@ -80,11 +80,11 @@ final class String_Test extends TestCase
     {
         $data = '';
         $str  = new String_($data);
-        $this->assertTrue($str->isEmpty());
+        $this->assertTrue($str->isEmpty()->isTrue());
 
         $data = 'something';
         $str  = new String_($data);
-        $this->assertFalse($str->isEmpty());
+        $this->assertFalse($str->isEmpty()->isTrue());
     }
 
     public function test__toString()
@@ -117,7 +117,7 @@ final class String_Test extends TestCase
     {
         $data = 'hello world';
         $str  = new String_($data);
-        $this->assertSame(strlen($data), $str->strlen());
+        $this->assertSame(strlen($data), $str->strlen()->getValue());
     }
 
     public function test_offsetExists()

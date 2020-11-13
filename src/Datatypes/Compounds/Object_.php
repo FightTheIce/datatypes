@@ -12,6 +12,8 @@ use Illuminate\Support\Traits\Macroable;
 use ReflectionClass;
 use ReflectionFunction;
 use FightTheIce\Exceptions\InvalidArgumentException;
+use FightTheIce\Datatypes\Scalar\String_;
+use FightTheIce\Datatypes\Scalar\Integer_;
 
 class Object_ implements DatatypeInterface, ResolvableInterface
 {
@@ -79,13 +81,13 @@ class Object_ implements DatatypeInterface, ResolvableInterface
         return $this->object;
     }
 
-    public function getHash(): string
+    public function getHash(): String_
     {
-        return spl_object_hash($this->resolve());
+        return new String_(spl_object_hash($this->resolve()));
     }
 
-    public function getId(): int
+    public function getId(): Integer_
     {
-        return spl_object_id($this->resolve());
+        return new Integer_(spl_object_id($this->resolve()));
     }
 }

@@ -132,11 +132,11 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
      *
      * @see https://www.php.net/manual/en/function.empty.php
      *
-     * @return bool
+     * @return Boolean_
      */
-    public function isEmpty(): bool
+    public function isEmpty(): Boolean_
     {
-        return empty($this->value);
+        return new Boolean_(empty($this->value));
     }
 
     /**
@@ -184,11 +184,11 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
      *
      * @see https://www.php.net/manual/en/function.strlen.php
      *
-     * @return int
+     * @return Integer_
      */
-    public function strlen(): int
+    public function strlen(): Integer_
     {
-        return strlen($this->value);
+        return new Integer_(strlen($this->value));
     }
 
     /**

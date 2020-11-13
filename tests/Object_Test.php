@@ -44,12 +44,12 @@ final class Object_Test extends TestCase
     public function test_getHash()
     {
         $obj = new Object_($this);
-        $this->assertEquals(spl_object_hash($this), $obj->getHash());
+        $this->assertEquals(spl_object_hash($this), $obj->getHash()->__toString());
     }
 
     public function test_getId()
     {
         $obj = new Object_($this);
-        $this->assertEquals(spl_object_id($this), $obj->getId());
+        $this->assertEquals(spl_object_id($this), $obj->getId()->getValue());
     }
 }

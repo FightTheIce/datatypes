@@ -20,18 +20,18 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($data);
         $this->assertSame($data, $mixed->getObject());
 
-        $this->assertFalse($mixed->is_null());
-        $this->assertTrue($mixed->is_empty());
-        $this->assertFalse($mixed->is_string());
-        $this->assertFalse($mixed->is_unicode_string());
-        $this->assertFalse($mixed->is_scalar());
-        $this->assertFalse($mixed->is_float());
-        $this->assertFalse($mixed->is_int());
-        $this->assertFalse($mixed->is_bool());
-        $this->assertFalse($mixed->is_object());
-        $this->assertTrue($mixed->is_array());
-        $this->assertFalse($mixed->is_numeric());
-        $this->assertFalse($mixed->is_closure());
+        $this->assertFalse($mixed->is_null()->IsTrue());
+        $this->assertTrue($mixed->is_empty()->isTrue());
+        $this->assertFalse($mixed->is_string()->isTrue());
+        $this->assertFalse($mixed->is_unicode_string()->isTrue());
+        $this->assertFalse($mixed->is_scalar()->isTrue());
+        $this->assertFalse($mixed->is_float()->isTrue());
+        $this->assertFalse($mixed->is_int()->isTrue());
+        $this->assertFalse($mixed->is_bool()->isTrue());
+        $this->assertFalse($mixed->is_object()->isTrue());
+        $this->assertTrue($mixed->is_array()->isTrue());
+        $this->assertFalse($mixed->is_numeric()->isTrue());
+        $this->assertFalse($mixed->is_closure()->isTrue());
     }
 
     public function test_string()
@@ -40,18 +40,18 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($data);
         $this->assertSame($data, $mixed->getObject());
 
-        $this->assertFalse($mixed->is_null());
-        $this->assertTrue($mixed->is_empty());
-        $this->assertTrue($mixed->is_string());
-        $this->assertFalse($mixed->is_unicode_string());
-        $this->assertTrue($mixed->is_scalar());
-        $this->assertFalse($mixed->is_float());
-        $this->assertFalse($mixed->is_int());
-        $this->assertFalse($mixed->is_bool());
-        $this->assertFalse($mixed->is_object());
-        $this->assertFalse($mixed->is_array());
-        $this->assertFalse($mixed->is_numeric());
-        $this->assertFalse($mixed->is_closure());
+        $this->assertFalse($mixed->is_null()->isTrue());
+        $this->assertTrue($mixed->is_empty()->isTrue());
+        $this->assertTrue($mixed->is_string()->isTrue());
+        $this->assertFalse($mixed->is_unicode_string()->isTrue());
+        $this->assertTrue($mixed->is_scalar()->isTrue());
+        $this->assertFalse($mixed->is_float()->isTrue());
+        $this->assertFalse($mixed->is_int()->isTrue());
+        $this->assertFalse($mixed->is_bool()->isTrue());
+        $this->assertFalse($mixed->is_object()->isTrue());
+        $this->assertFalse($mixed->is_array()->isTrue());
+        $this->assertFalse($mixed->is_numeric()->isTrue());
+        $this->assertFalse($mixed->is_closure()->isTrue());
     }
 
     public function test_unicodestring()
@@ -60,18 +60,18 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($data);
         $this->assertSame($data, $mixed->getObject());
 
-        $this->assertFalse($mixed->is_null());
-        $this->assertFalse($mixed->is_empty());
-        $this->assertTrue($mixed->is_string());
-        $this->assertTrue($mixed->is_unicode_string());
-        $this->assertTrue($mixed->is_scalar());
-        $this->assertFalse($mixed->is_float());
-        $this->assertFalse($mixed->is_int());
-        $this->assertFalse($mixed->is_bool());
-        $this->assertFalse($mixed->is_object());
-        $this->assertFalse($mixed->is_array());
-        $this->assertFalse($mixed->is_numeric());
-        $this->assertFalse($mixed->is_closure());
+        $this->assertFalse($mixed->is_null()->isTrue());
+        $this->assertFalse($mixed->is_empty()->isTrue());
+        $this->assertTrue($mixed->is_string()->isTrue());
+        $this->assertTrue($mixed->is_unicode_string()->isTrue());
+        $this->assertTrue($mixed->is_scalar()->isTrue());
+        $this->assertFalse($mixed->is_float()->isTrue());
+        $this->assertFalse($mixed->is_int()->isTrue());
+        $this->assertFalse($mixed->is_bool()->isTrue());
+        $this->assertFalse($mixed->is_object()->isTrue());
+        $this->assertFalse($mixed->is_array()->isTrue());
+        $this->assertFalse($mixed->is_numeric()->isTrue());
+        $this->assertFalse($mixed->is_closure()->isTrue());
     }
 
     public function test_bool()
@@ -80,18 +80,18 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($data);
         $this->assertSame($data, $mixed->getObject());
 
-        $this->assertFalse($mixed->is_null());
-        $this->assertTrue($mixed->is_empty());
-        $this->assertFalse($mixed->is_string());
-        $this->assertFalse($mixed->is_unicode_string());
-        $this->assertTrue($mixed->is_scalar());
-        $this->assertFalse($mixed->is_float());
-        $this->assertFalse($mixed->is_int());
-        $this->assertTrue($mixed->is_bool());
-        $this->assertFalse($mixed->is_object());
-        $this->assertFalse($mixed->is_array());
-        $this->assertFalse($mixed->is_numeric());
-        $this->assertFalse($mixed->is_closure());
+        $this->assertFalse($mixed->is_null()->isTrue());
+        $this->assertTrue($mixed->is_empty()->isTrue());
+        $this->assertFalse($mixed->is_string()->isTrue());
+        $this->assertFalse($mixed->is_unicode_string()->isTrue());
+        $this->assertTrue($mixed->is_scalar()->isTrue());
+        $this->assertFalse($mixed->is_float()->isTrue());
+        $this->assertFalse($mixed->is_int()->isTrue());
+        $this->assertTrue($mixed->is_bool()->isTrue());
+        $this->assertFalse($mixed->is_object()->isTrue());
+        $this->assertFalse($mixed->is_array()->isTrue());
+        $this->assertFalse($mixed->is_numeric()->isTrue());
+        $this->assertFalse($mixed->is_closure()->isTrue());
     }
 
     public function test_float()
@@ -100,18 +100,18 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($data);
         $this->assertSame($data, $mixed->getObject());
 
-        $this->assertFalse($mixed->is_null());
-        $this->assertFalse($mixed->is_empty());
-        $this->assertFalse($mixed->is_string());
-        $this->assertFalse($mixed->is_unicode_string());
-        $this->assertTrue($mixed->is_scalar());
-        $this->assertTrue($mixed->is_float());
-        $this->assertFalse($mixed->is_int());
-        $this->assertFalse($mixed->is_bool());
-        $this->assertFalse($mixed->is_object());
-        $this->assertFalse($mixed->is_array());
-        $this->assertTrue($mixed->is_numeric());
-        $this->assertFalse($mixed->is_closure());
+        $this->assertFalse($mixed->is_null()->isTrue());
+        $this->assertFalse($mixed->is_empty()->isTrue());
+        $this->assertFalse($mixed->is_string()->isTrue());
+        $this->assertFalse($mixed->is_unicode_string()->isTrue());
+        $this->assertTrue($mixed->is_scalar()->isTrue());
+        $this->assertTrue($mixed->is_float()->isTrue());
+        $this->assertFalse($mixed->is_int()->isTrue());
+        $this->assertFalse($mixed->is_bool()->isTrue());
+        $this->assertFalse($mixed->is_object()->isTrue());
+        $this->assertFalse($mixed->is_array()->isTrue());
+        $this->assertTrue($mixed->is_numeric()->isTrue());
+        $this->assertFalse($mixed->is_closure()->isTrue());
     }
 
     public function test_int()
@@ -120,18 +120,18 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($data);
         $this->assertSame($data, $mixed->getObject());
 
-        $this->assertFalse($mixed->is_null());
-        $this->assertFalse($mixed->is_empty());
-        $this->assertFalse($mixed->is_string());
-        $this->assertFalse($mixed->is_unicode_string());
-        $this->assertTrue($mixed->is_scalar());
-        $this->assertFalse($mixed->is_float());
-        $this->assertTrue($mixed->is_int());
-        $this->assertFalse($mixed->is_bool());
-        $this->assertFalse($mixed->is_object());
-        $this->assertFalse($mixed->is_array());
-        $this->assertTrue($mixed->is_numeric());
-        $this->assertFalse($mixed->is_closure());
+        $this->assertFalse($mixed->is_null()->isTrue());
+        $this->assertFalse($mixed->is_empty()->isTrue());
+        $this->assertFalse($mixed->is_string()->isTrue());
+        $this->assertFalse($mixed->is_unicode_string()->isTrue());
+        $this->assertTrue($mixed->is_scalar()->isTrue());
+        $this->assertFalse($mixed->is_float()->isTrue());
+        $this->assertTrue($mixed->is_int()->isTrue());
+        $this->assertFalse($mixed->is_bool()->isTrue());
+        $this->assertFalse($mixed->is_object()->isTrue());
+        $this->assertFalse($mixed->is_array()->isTrue());
+        $this->assertTrue($mixed->is_numeric()->isTrue());
+        $this->assertFalse($mixed->is_closure()->isTrue());
     }
 
     public function test_object()
@@ -140,18 +140,18 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($data);
         $this->assertSame($data, $mixed->getObject());
 
-        $this->assertFalse($mixed->is_null());
-        $this->assertFalse($mixed->is_empty());
-        $this->assertFalse($mixed->is_string());
-        $this->assertFalse($mixed->is_unicode_string());
-        $this->assertFalse($mixed->is_scalar());
-        $this->assertFalse($mixed->is_float());
-        $this->assertFalse($mixed->is_int());
-        $this->assertFalse($mixed->is_bool());
-        $this->assertTrue($mixed->is_object());
-        $this->assertFalse($mixed->is_array());
-        $this->assertFalse($mixed->is_numeric());
-        $this->assertFalse($mixed->is_closure());
+        $this->assertFalse($mixed->is_null()->isTrue());
+        $this->assertFalse($mixed->is_empty()->isTrue());
+        $this->assertFalse($mixed->is_string()->isTrue());
+        $this->assertFalse($mixed->is_unicode_string()->isTrue());
+        $this->assertFalse($mixed->is_scalar()->isTrue());
+        $this->assertFalse($mixed->is_float()->isTrue());
+        $this->assertFalse($mixed->is_int()->isTrue());
+        $this->assertFalse($mixed->is_bool()->isTrue());
+        $this->assertTrue($mixed->is_object()->isTrue());
+        $this->assertFalse($mixed->is_array()->isTrue());
+        $this->assertFalse($mixed->is_numeric()->isTrue());
+        $this->assertFalse($mixed->is_closure()->isTrue());
     }
 
     public function test_null()
@@ -160,18 +160,18 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($data);
         $this->assertSame($data, $mixed->getObject());
 
-        $this->assertTrue($mixed->is_null());
-        $this->assertTrue($mixed->is_empty());
-        $this->assertFalse($mixed->is_string());
-        $this->assertFalse($mixed->is_unicode_string());
-        $this->assertFalse($mixed->is_scalar());
-        $this->assertFalse($mixed->is_float());
-        $this->assertFalse($mixed->is_int());
-        $this->assertFalse($mixed->is_bool());
-        $this->assertFalse($mixed->is_object());
-        $this->assertFalse($mixed->is_array());
-        $this->assertFalse($mixed->is_numeric());
-        $this->assertFalse($mixed->is_closure());
+        $this->assertTrue($mixed->is_null()->isTrue());
+        $this->assertTrue($mixed->is_empty()->isTrue());
+        $this->assertFalse($mixed->is_string()->isTrue());
+        $this->assertFalse($mixed->is_unicode_string()->isTrue());
+        $this->assertFalse($mixed->is_scalar()->isTrue());
+        $this->assertFalse($mixed->is_float()->isTrue());
+        $this->assertFalse($mixed->is_int()->isTrue());
+        $this->assertFalse($mixed->is_bool()->isTrue());
+        $this->assertFalse($mixed->is_object()->isTrue());
+        $this->assertFalse($mixed->is_array()->isTrue());
+        $this->assertFalse($mixed->is_numeric()->isTrue());
+        $this->assertFalse($mixed->is_closure()->isTrue());
     }
 
     public function test_closure()
@@ -183,18 +183,18 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($data);
         $this->assertSame($data, $mixed->getObject());
 
-        $this->assertFalse($mixed->is_null());
-        $this->assertFalse($mixed->is_empty());
-        $this->assertFalse($mixed->is_string());
-        $this->assertFalse($mixed->is_unicode_string());
-        $this->assertFalse($mixed->is_scalar());
-        $this->assertFalse($mixed->is_float());
-        $this->assertFalse($mixed->is_int());
-        $this->assertFalse($mixed->is_bool());
-        $this->assertTrue($mixed->is_object());
-        $this->assertFalse($mixed->is_array());
-        $this->assertFalse($mixed->is_numeric());
-        $this->assertTrue($mixed->is_closure());
+        $this->assertFalse($mixed->is_null()->isTrue());
+        $this->assertFalse($mixed->is_empty()->isTrue());
+        $this->assertFalse($mixed->is_string()->isTrue());
+        $this->assertFalse($mixed->is_unicode_string()->isTrue());
+        $this->assertFalse($mixed->is_scalar()->isTrue());
+        $this->assertFalse($mixed->is_float()->isTrue());
+        $this->assertFalse($mixed->is_int()->isTrue());
+        $this->assertFalse($mixed->is_bool()->isTrue());
+        $this->assertTrue($mixed->is_object()->isTrue());
+        $this->assertFalse($mixed->is_array()->isTrue());
+        $this->assertFalse($mixed->is_numeric()->isTrue());
+        $this->assertTrue($mixed->is_closure()->isTrue());
     }
 
     public function test_getDataTypeClass()
@@ -304,61 +304,61 @@ final class Mixed_Test extends TestCase
     public function test_describe()
     {
         $mixed = new Mixed_([]);
-        $this->assertEquals('empty array',$mixed->describe());
+        $this->assertEquals('empty array', $mixed->describe());
 
-        $mixed = new Mixed_([1,2,3]);
-        $this->assertEquals('indexed array',$mixed->describe());
+        $mixed = new Mixed_([1, 2, 3]);
+        $this->assertEquals('indexed array', $mixed->describe());
 
-        $mixed = new Mixed_(array('name' => 'William'));
-        $this->assertEquals('associative array',$mixed->describe());
+        $mixed = new Mixed_(['name' => 'William']);
+        $this->assertEquals('associative array', $mixed->describe());
 
-        $mixed = new Mixed_(array($this,'test_describe'));
-        $this->assertEquals('callable array',$mixed->describe());
+        $mixed = new Mixed_([$this, 'test_describe']);
+        $this->assertEquals('callable array', $mixed->describe());
 
         $mixed = new Mixed_($this);
-        $this->assertEquals('object of class Mixed_Test',$mixed->describe());
+        $this->assertEquals('object of class Mixed_Test', $mixed->describe());
 
         $resource = @\fopen('php://memory', 'rb');
-        $mixed = new Mixed_($resource);
-        $this->assertEquals('resource of type stream',$mixed->describe());
+        $mixed    = new Mixed_($resource);
+        $this->assertEquals('resource of type stream', $mixed->describe());
 
         $mixed = new Mixed_(1);
-        $this->assertEquals('positive integer',$mixed->describe());
+        $this->assertEquals('positive integer', $mixed->describe());
 
         $mixed = new Mixed_(+1);
-        $this->assertEquals('positive integer',$mixed->describe());
+        $this->assertEquals('positive integer', $mixed->describe());
 
         $mixed = new Mixed_(-1);
-        $this->assertEquals('negative integer',$mixed->describe());
+        $this->assertEquals('negative integer', $mixed->describe());
 
         $mixed = new Mixed_(0);
-        $this->assertEquals('zero integer',$mixed->describe());
+        $this->assertEquals('zero integer', $mixed->describe());
 
         $mixed = new Mixed_(-1.0);
-        $this->assertEquals('negative float',$mixed->describe());
+        $this->assertEquals('negative float', $mixed->describe());
 
         $mixed = new Mixed_(1.0);
-        $this->assertEquals('positive float',$mixed->describe());
+        $this->assertEquals('positive float', $mixed->describe());
 
         $mixed = new Mixed_(0.0);
-        $this->assertEquals('zero float',$mixed->describe());
+        $this->assertEquals('zero float', $mixed->describe());
 
         $mixed = new Mixed_('');
-        $this->assertEquals('empty string',$mixed->describe());
+        $this->assertEquals('empty string', $mixed->describe());
 
         $mixed = new Mixed_('strtolower');
-        $this->assertEquals('callable string',$mixed->describe());
+        $this->assertEquals('callable string', $mixed->describe());
 
         $mixed = new Mixed_('12345');
-        $this->assertEquals('numeric string',$mixed->describe());
+        $this->assertEquals('numeric string', $mixed->describe());
 
         $mixed = new Mixed_('hello world');
-        $this->assertEquals('string',$mixed->describe());
+        $this->assertEquals('string', $mixed->describe());
 
         $mixed = new Mixed_(true);
-        $this->assertEquals('boolean true',$mixed->describe());
+        $this->assertEquals('boolean true', $mixed->describe());
 
         $mixed = new Mixed_(false);
-        $this->assertEquals('boolean false',$mixed->describe());
+        $this->assertEquals('boolean false', $mixed->describe());
     }
 }

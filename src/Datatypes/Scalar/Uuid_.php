@@ -72,11 +72,11 @@ class Uuid_ implements DatatypeInterface
     /**
      * getInteger.
      *
-     * @return string
+     * @return String_
      */
-    public function getIntegerString()
+    public function getIntegerString(): String_
     {
-        return $this->uuidObj->getInteger()->__toString();
+        return new String_($this->uuidObj->getInteger()->__toString());
     }
 
     /**
@@ -94,7 +94,7 @@ class Uuid_ implements DatatypeInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->value;
     }

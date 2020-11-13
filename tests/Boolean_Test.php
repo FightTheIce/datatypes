@@ -64,9 +64,9 @@ final class Boolean_Test extends TestCase
     public function test_transform()
     {
         $bool = new Boolean_(false);
-        $this->assertSame('false', $bool->transform('true', 'false'));
+        $this->assertSame('false', $bool->transform('true', 'false')->__toString());
 
         $bool = new Boolean_(true);
-        $this->assertSame('true', $bool->transform('true', 'false'));
+        $this->assertSame('true', $bool->transform('true', 'false')->__toString());
     }
 }

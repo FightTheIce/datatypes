@@ -34,19 +34,19 @@ final class Integer_Test extends TestCase
     public function test_isPositive()
     {
         $int = new Integer_(1);
-        $this->assertTrue($int->isPositive());
+        $this->assertTrue($int->isPositive()->isTrue());
 
         $int = new Integer_(-1);
-        $this->assertFalse($int->isPositive());
+        $this->assertFalse($int->isPositive()->isTrue());
     }
 
     public function test_isNegative()
     {
         $int = new Integer_(1);
-        $this->assertFalse($int->isNegative());
+        $this->assertFalse($int->isNegative()->isTrue());
 
         $int = new Integer_(-1);
-        $this->assertTrue($int->isNegative());
+        $this->assertTrue($int->isNegative()->isTrue());
     }
 
     public function test_absolute()

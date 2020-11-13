@@ -34,19 +34,19 @@ final class Float_Test extends TestCase
     public function test_isPositive()
     {
         $float = new Float_(1);
-        $this->assertTrue($float->isPositive());
+        $this->assertTrue($float->isPositive()->isTrue());
 
         $float = new Float_(-1);
-        $this->assertFalse($float->isPositive());
+        $this->assertFalse($float->isPositive()->isTrue());
     }
 
     public function test_isNegative()
     {
         $float = new Float_(1);
-        $this->assertFalse($float->isNegative());
+        $this->assertFalse($float->isNegative()->isTrue());
 
         $float = new Float_(-1);
-        $this->assertTrue($float->isNegative());
+        $this->assertTrue($float->isNegative()->isTrue());
     }
 
     public function test_absolute()
