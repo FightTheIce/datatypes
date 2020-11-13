@@ -29,7 +29,7 @@ class Resource_ implements DatatypeInterface
             if (is_resource($res) == false) {
                 throw new \ErrorException('X-1');
             }
-        
+
             $this->value = $res;
         }
     }
