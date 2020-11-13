@@ -190,22 +190,12 @@ class Array_ extends Collection implements DatatypeInterface
         return (new Arr())->has($this->toArray(), $key);
     }
 
-    public function _toJson(): string
-    {
-        $data = json_encode($this->toArray(), JSON_PRETTY_PRINT);
-        if ($data == false) {
-            throw new \ErrorException(__METHOD__);
-        }
-
-        return $data;
-    }
-
-    public function _toYaml(): string
+    public function toYaml(): string
     {
         return Yaml::dump($this->toArray(), 3);
     }
 
-    public function _toNeon(): string
+    public function toNeon(): string
     {
         return Neon::encode($this->toArray(), Neon::BLOCK);
     }

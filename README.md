@@ -12,7 +12,7 @@ $ composer install fighttheice/datatypes
 
 # Usage
 
-## Arrays
+## [Arrays](docs/Arrays.md)
 
 FightTheIce - Arrays are just an extended class of [Illuminate\Support\Collection](https://github.com/illuminate/collections)
 
@@ -22,7 +22,7 @@ use FightTheIce\Datatypes\Compounds\Array_;
 $arr = new Array_(array(1,2,3));
 ```
 
-## Booleans
+## [Booleans](docs/Booleans.md)
 
 ```php
 use FightTheIce\Datatypes\Scalar\Boolean_;
@@ -30,7 +30,7 @@ use FightTheIce\Datatypes\Scalar\Boolean_;
 $bool = new Boolean_(false);
 ```
 
-## Floats
+## [Floats](docs/Floats.md)
 
 ```php
 use FightTheIce\Datatypes\Scalar\Float_;
@@ -47,7 +47,7 @@ $float = new Float_(1.77)->math();
 //returns Brick\Math\BigDecimal
 ```
 
-## Integers
+## [Integers](docs/Integers.md)
 
 ```php
 use FightTheIce\Datatypes\Scalar\Integer_;
@@ -64,7 +64,7 @@ $float = new Integer_(100)->math();
 //returns Brick\Math\BigInteger
 ```
 
-## Strings
+## [Strings](docs/Strings.md) - [UnicodeStrings](docs/UnicodeStrings.md)
 
 There are two types of strings ... Standard strings and UnicodeStrings. UnicodeStrings are based on [symfony/string](https://github.com/symfony/string)
 
@@ -93,7 +93,7 @@ $resolvedStr = $unknownstring->resolve();
 //returns FightTheIce\Datatypes\Scalar\UnicodeString_
 ```
 
-## Numbers
+## [Numbers](docs/Numbers.md)
 If for some reason you don't know what type of number (integer, or float) you are dealing with. Don't worry FightTheIce has you covered
 
 ```php
@@ -112,7 +112,7 @@ $resolvedNum = $unknownnum->resolve();
 
 Arrays in PHP are everything, and nothing... So lets organize them a bit. FightTheIce lists are just structured arrays that only accept predefined data types. List feature is built on top of [spatie/typed](https://github.com/spatie/typed)
 
-### Boolean List
+### [Boolean List](docs/BooleanList.md)
 ```php
 use FightTheIce\Datatypes\Lists\BooleanList_;
 use FightTheIce\Datatypes\Scalar\Boolean_;
@@ -120,7 +120,7 @@ use FightTheIce\Datatypes\Scalar\Boolean_;
 $boolList = new BooleanList_(array(true,false,new Boolean_(true)));
 ```
 
-### Float List
+### [Float List](docs/FloatList.md)
 ```php
 use FightTheIce\Datatypes\Lists\FloatList_;
 use FightTheIce\Datatypes\Scalar\Float_;
@@ -128,7 +128,7 @@ use FightTheIce\Datatypes\Scalar\Float_;
 $floatList = new FloatList_(array(1.11,-58.123,new Float_(1.99)));
 ```
 
-### Integer List
+### [Integer List](docs/IntegerList.md)
 ```php
 use FightTheIce\Datatypes\Lists\IntegerList_;
 use FightTheIce\Datatypes\Scalar\Integer_;
@@ -136,7 +136,7 @@ use FightTheIce\Datatypes\Scalar\Integer_;
 $intList = new IntegerList_(array(1,2,3,new Integer_(87)));
 ```
 
-### String List
+### [String List](docs/StringList.md)
 ```php
 use FightTheIce\Datatypes\Lists\StringList_;
 use FightTheIce\Datatypes\Scalar\String_;
@@ -153,7 +153,7 @@ use FightTheIce\Datatypes\Scalar\Uuid_;
 $uuid = new Uuid_;
 ```
 
-## Mythical Magic
+## [Mythical Magic - Mixed](docs/Mixed.md)
 If for some reason you don't know what data type you are dealing... which is doubtful.
 FightTheIce has you covered
 ```php

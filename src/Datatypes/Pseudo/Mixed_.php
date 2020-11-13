@@ -194,9 +194,9 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
         return $this->class;
     }
 
-    public function getType(): string
+    public function getType(): String_
     {
-        return $this->gettype;
+        return new String_($this->gettype);
     }
 
     /**
@@ -220,8 +220,8 @@ class Mixed_ implements DatatypeInterface, ResolvableInterface
         return $this->getValue();
     }
 
-    public function describe(): string
+    public function describe(): String_
     {
-        return Nevar::describe($this->object);
+        return new String_(Nevar::describe($this->object));
     }
 }

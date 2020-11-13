@@ -128,7 +128,7 @@ final class Array_Test extends TestCase
         $this->assertTrue($arr->hasDot('0.developers'));
     }
 
-    public function test__toJson()
+    public function test_toYaml()
     {
         $data = [
             1,
@@ -137,10 +137,10 @@ final class Array_Test extends TestCase
         ];
 
         $arr = new \FightTheIce\Datatypes\Compounds\Array_($data);
-        $this->assertSame(json_encode($data, JSON_PRETTY_PRINT), $arr->_toJson());
+        $this->assertSame(Yaml::dump($data, 3), $arr->toYaml());
     }
 
-    public function test__toYaml()
+    public function test_toNeon()
     {
         $data = [
             1,
@@ -149,18 +149,6 @@ final class Array_Test extends TestCase
         ];
 
         $arr = new \FightTheIce\Datatypes\Compounds\Array_($data);
-        $this->assertSame(Yaml::dump($data, 3), $arr->_toYaml());
-    }
-
-    public function test__toNeon()
-    {
-        $data = [
-            1,
-            2,
-            3
-        ];
-
-        $arr = new \FightTheIce\Datatypes\Compounds\Array_($data);
-        $this->assertSame(Neon::encode($data, Neon::BLOCK), $arr->_toNeon());
+        $this->assertSame(Neon::encode($data, Neon::BLOCK), $arr->toNeon());
     }
 }
