@@ -3,6 +3,7 @@
 declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use FightTheIce\Datatypes\Scalar\Uuid_;
+use Ramsey\Uuid\UuidInterface;
 
 final class Uuid_Test extends TestCase
 {
@@ -40,5 +41,12 @@ final class Uuid_Test extends TestCase
     {
         $uuid = new Uuid_('1eb25356-44a3-69ee-ab36-38c98603aedf');
         $this->assertSame('1eb25356-44a3-69ee-ab36-38c98603aedf', $uuid->__toString());
+    }
+
+    public function test_getUuidObj()
+    {
+        $uuid = new Uuid_();
+        $obj  = $uuid->getUuidObj();
+        $this->assertInstanceOf(UuidInterface::class, $obj);
     }
 }

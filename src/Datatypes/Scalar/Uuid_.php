@@ -7,6 +7,7 @@ namespace FightTheIce\Datatypes\Scalar;
 use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use Illuminate\Support\Traits\Macroable;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 class Uuid_ implements DatatypeInterface
 {
@@ -81,9 +82,9 @@ class Uuid_ implements DatatypeInterface
     /**
      * getuuidObj.
      *
-     * @return mixed
+     * @return \Ramsey\Uuid\UuidInterface
      */
-    public function getUuidObj()
+    public function getUuidObj(): UuidInterface
     {
         return $this->uuidObj;
     }
