@@ -12,11 +12,11 @@ namespace Thunder\Nevar;
 final class Nevar
 {
     /**
-     * descrive
+     * descrive.
      *
-     * @param   mixed  $var
+     * @param mixed $var
      *
-     * @return  string
+     * @return string
      */
     public static function describe($var)
     {
