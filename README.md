@@ -18,6 +18,7 @@ FightTheIce - Arrays are just an extended class of [Illuminate\Support\Collectio
 
 ```php
 use FightTheIce\Datatypes\Compounds\Array_;
+
 $arr = new Array_(array(1,2,3));
 ```
 
@@ -25,6 +26,7 @@ $arr = new Array_(array(1,2,3));
 
 ```php
 use FightTheIce\Datatypes\Scalar\Boolean_;
+
 $bool = new Boolean_(false);
 ```
 
@@ -32,6 +34,7 @@ $bool = new Boolean_(false);
 
 ```php
 use FightTheIce\Datatypes\Scalar\Float_;
+
 $float = new Float_(1.23);
 ```
 
@@ -39,6 +42,7 @@ $float = new Float_(1.23);
 
 ```php
 use FightTheIce\Datatypes\Scalar\Integer_;
+
 $int = new Integer_(8);
 ```
 
@@ -49,11 +53,26 @@ There are two types of strings ... Standard strings and UnicodeStrings. UnicodeS
 ```php
 //standard string
 use FightTheIce\Datatypes\Scalar\String_;
+
 $standardStr = new String_('hello world');
 
 //unicode string
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
+
 $unicodeStr = new UnicodeString_('Späßchen');
+```
+
+Sometimes you may not know if your dealing a unicode string. FightTheIce has you covered
+```php
+use FightTheIce\Datatypes\Pseudo\String_;
+
+$unknownstring = new String_('proly not unicode');
+$resolvedStr = $unknownstring->resolve();
+//returns FightTheIce\Datatypes\Scalar\String_
+
+$unknownstring = new String_('Späßchen');
+$resolvedStr = $unknownstring->resolve();
+//returns FightTheIce\Datatypes\Scalar\UnicodeString_
 ```
 
 ## Lists
@@ -72,6 +91,7 @@ $boolList = new BooleanList_(array(true,false,new Boolean_(true)));
 ```php
 use FightTheIce\Datatypes\Lists\FloatList_;
 use FightTheIce\Datatypes\Scalar\Float_;
+
 $floatList = new FloatList_(array(1.11,-58.123,new Float_(1.99)));
 ```
 
@@ -79,6 +99,7 @@ $floatList = new FloatList_(array(1.11,-58.123,new Float_(1.99)));
 ```php
 use FightTheIce\Datatypes\Lists\IntegerList_;
 use FightTheIce\Datatypes\Scalar\Integer_;
+
 $intList = new IntegerList_(array(1,2,3,new Integer_(87)));
 ```
 
@@ -86,5 +107,6 @@ $intList = new IntegerList_(array(1,2,3,new Integer_(87)));
 ```php
 use FightTheIce\Datatypes\Lists\StringList_;
 use FightTheIce\Datatypes\Scalar\String_;
+
 $strList = new StringList_('hello world',new String_('good bye'));
 ```
