@@ -17,25 +17,29 @@ $ composer install fighttheice/datatypes
 FightTheIce - Arrays are just an extended class of [Illuminate\Support\Collection](https://github.com/illuminate/collections)
 
 ```php
-$arr = new FightTheIce\Datatypes\Compounds\Array_(array(1,2,3));
+use FightTheIce\Datatypes\Compounds\Array_;
+$arr = new Array_(array(1,2,3));
 ```
 
 ## Booleans
 
 ```php
-$bool = new FightTheIce\Datatypes\Scalar\Boolean_(false);
+use FightTheIce\Datatypes\Scalar\Boolean_;
+$bool = new Boolean_(false);
 ```
 
 ## Floats
 
 ```php
-$float = new FightTheIce\Datatypes\Scalar\Float_(1.23);
+use FightTheIce\Datatypes\Scalar\Float_;
+$float = new Float_(1.23);
 ```
 
 ## Integers
 
 ```php
-$int = new FightTheIce\Datatypes\Scalar\Integer_(8);
+use FightTheIce\Datatypes\Scalar\Integer_;
+$int = new Integer_(8);
 ```
 
 ## Strings
@@ -44,10 +48,12 @@ There are two types of strings ... Standard strings and UnicodeStrings. UnicodeS
 
 ```php
 //standard string
-$standardStr = new FightTheIce\Datatypes\Scalar\String_('hello world');
+use FightTheIce\Datatypes\Scalar\String_;
+$standardStr = new String_('hello world');
 
 //unicode string
-$unicodeStr = new FightTheIce\Datatypes\Scalar\UnicodeString_('Späßchen');
+use FightTheIce\Datatypes\Scalar\UnicodeString_;
+$unicodeStr = new UnicodeString_('Späßchen');
 ```
 
 ## Lists
@@ -56,20 +62,29 @@ Arrays in PHP are everything, and nothing... So lets organize them a bit. FightT
 
 ### Boolean List
 ```php
-$boolList = new FightTheIce\Datatypes\Lists\BooleanList_(array(true,false,new FightTheIce\Datatypes\Scalar\Boolean_(true)));
+use FightTheIce\Datatypes\Lists\BooleanList_;
+use FightTheIce\Datatypes\Scalar\Boolean_;
+
+$boolList = new BooleanList_(array(true,false,new Boolean_(true)));
 ```
 
 ### Float List
 ```php
-$floatList = new FightTheIce\Datatypes\Lists\FloatList_(array(1.11,-58.123,new FightTheIce\Datatypes\Scalar\Float_(1.99)));
+use FightTheIce\Datatypes\Lists\FloatList_;
+use FightTheIce\Datatypes\Scalar\Float_;
+$floatList = new FloatList_(array(1.11,-58.123,new Float_(1.99)));
 ```
 
 ### Integer List
 ```php
-$intList = new FightTheIce\Datatypes\Lists\IntegerList_(array(1,2,3,new FightTheIce\Datatypes\Scalar\Integer_(87)));
+use FightTheIce\Datatypes\Lists\IntegerList_;
+use FightTheIce\Datatypes\Scalar\Integer_;
+$intList = new IntegerList_(array(1,2,3,new Integer_(87)));
 ```
 
 ### String List
 ```php
-$strList = new FightTheIce\Datatypes\Lists\StringList_('hello world',new FightTheIce\Datatypes\Scalar\String_('good bye'));
+use FightTheIce\Datatypes\Lists\StringList_;
+use FightTheIce\Datatypes\Scalar\String_;
+$strList = new StringList_('hello world',new String_('good bye'));
 ```
