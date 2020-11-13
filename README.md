@@ -38,12 +38,30 @@ use FightTheIce\Datatypes\Scalar\Float_;
 $float = new Float_(1.23);
 ```
 
+Floats by themselves are a bit boring, so you can get a math instance. To do some calculations.
+This returns a [brick/math](https://github.com/brick/math)
+```php
+use FightTheIce\Datatypes\Scalar\Float_;
+
+$float = new Float_(1.77)->math();
+//returns Brick\Math\BigDecimal
+```
+
 ## Integers
 
 ```php
 use FightTheIce\Datatypes\Scalar\Integer_;
 
 $int = new Integer_(8);
+```
+
+Integers by themselves are a bit boring, so you can get a math instance. To do some calculations.
+This returns a [brick/math](https://github.com/brick/math)
+```php
+use FightTheIce\Datatypes\Scalar\Integer_;
+
+$float = new Integer_(100)->math();
+//returns Brick\Math\BigInteger
 ```
 
 ## Strings
