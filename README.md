@@ -49,3 +49,27 @@ $standardStr = new FightTheIce\Datatypes\Scalar\String_('hello world');
 //unicode string
 $unicodeStr = new FightTheIce\Datatypes\Scalar\UnicodeString_('Späßchen');
 ```
+
+## Lists
+
+Arrays in PHP are everything, and nothing... So lets organize them a bit. FightTheIce lists are just structured arrays that only accept predefined data types. List feature is built on top of [spatie/typed](https://github.com/spatie/typed)
+
+### Boolean List
+```php
+$boolList = new FightTheIce\Datatypes\Lists\BooleanList_(array(true,false,new FightTheIce\Datatypes\Scalar\Boolean_(true)));
+```
+
+### Float List
+```php
+$floatList = new FightTheIce\Datatypes\Lists\FloatList_(array(1.11,-58.123,new FightTheIce\Datatypes\Scalar\Float_(1.99)));
+```
+
+### Integer List
+```php
+$intList = new FightTheIce\Datatypes\Lists\IntegerList_(array(1,2,3,new FightTheIce\Datatypes\Scalar\Integer_(87)));
+```
+
+### String List
+```php
+$strList = new FightTheIce\Datatypes\Lists\StringList_('hello world',new FightTheIce\Datatypes\Scalar\String_('good bye'));
+```
