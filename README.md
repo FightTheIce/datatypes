@@ -144,7 +144,7 @@ use FightTheIce\Datatypes\Scalar\String_;
 $strList = new StringList_('hello world',new String_('good bye'));
 ```
 
-## UUID
+## [UUID](docs/Uuids.md)
 UUIDs are built on top of [ramsey/uuid](https://github.com/ramsey/uuid)
 
 ```php
@@ -183,21 +183,21 @@ $resolved = $unknown->resolve();
 ## Useless but fun
 FightTheIce includes some useless but never the less fun data types to
 
-### Objects
+### [Objects](docs/Objects.md)
 ```php
 use FightTheIce\Datatypes\Compounds\Object_;
 
 $obj = new Object_(new stdClass);
 ```
 
-### Nulls
+### [Nulls](docs/Nulls.md)
 ```php
 use FightTheIce\Datatypes\Special\Null_;
 
 $null = new Null_;
 ```
 
-### Resources
+### [Resources](docs/Resources.md)
 ```php
 use FightTheIce\Datatypes\Special\Resource_;
 

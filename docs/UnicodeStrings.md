@@ -1,5 +1,8 @@
 # UnicodeStrings
-FightTheIce datatypes has two types of string classes. This one is called UnicodeString_
+FightTheIce datatypes has two types of string classes. 
+
+This one is called UnicodeString_
+
 UnicodeString_ is just a wrapper class for [symfony/string](https://github.com/symfony/string)
 
 
