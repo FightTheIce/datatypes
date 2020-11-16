@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Scalar;
 
-use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use FightTheIce\Datatypes\Core\Contracts\MathInterface;
 use Illuminate\Support\Traits\Macroable;
 use Brick\Math\BigInteger;
 
-class Integer_ implements DatatypeInterface, MathInterface
+class Integer_ implements MathInterface
 {
     use Macroable;
 
@@ -68,7 +67,7 @@ class Integer_ implements DatatypeInterface, MathInterface
 
     public function __toFloat(): Float_
     {
-        return new Float_($this->math()->toFloat());
+        return new Float_(floatval($this->value));
     }
 
     public function __toInteger(): self

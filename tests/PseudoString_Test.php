@@ -90,17 +90,17 @@ final class PseudoPseudoStringTest extends TestCase
         $this->assertSame($ustr->trimStart('n')->__toString(), $str->ltrim('n')->__toString());
 
         $mixedStr = '      Hç';
-        $str = new PseudoString($mixedStr);
-        $this->assertSame('Hç',$str->ltrim()->__toString());
-        $this->assertInstanceOf(UnicodeString_::class,$str->resolve());
+        $str      = new PseudoString($mixedStr);
+        $this->assertSame('Hç', $str->ltrim()->__toString());
+        $this->assertInstanceOf(UnicodeString_::class, $str->resolve());
 
         $mixedStr = 'Hç';
-        $str = new PseudoString($mixedStr);
-        $this->assertSame('ç',$str->ltrim('H')->__toString());
+        $str      = new PseudoString($mixedStr);
+        $this->assertSame('ç', $str->ltrim('H')->__toString());
 
         $mixedStr = 'çH';
-        $str = new PseudoString($mixedStr);
-        $this->assertSame('H',$str->ltrim('ç')->__toString());
+        $str      = new PseudoString($mixedStr);
+        $this->assertSame('H', $str->ltrim('ç')->__toString());
     }
 
     public function test_rtrim()
@@ -124,17 +124,17 @@ final class PseudoPseudoStringTest extends TestCase
         $this->assertSame($ustr->trimEnd('g')->__toString(), $str->rtrim('g')->__toString());
 
         $mixedStr = 'Hç    ';
-        $str = new PseudoString($mixedStr);
-        $this->assertSame('Hç',$str->rtrim()->__toString());
-        $this->assertInstanceOf(UnicodeString_::class,$str->resolve());
+        $str      = new PseudoString($mixedStr);
+        $this->assertSame('Hç', $str->rtrim()->__toString());
+        $this->assertInstanceOf(UnicodeString_::class, $str->resolve());
 
         $mixedStr = 'Hç';
-        $str = new PseudoString($mixedStr);
-        $this->assertSame('H',$str->rtrim('ç')->__toString());
+        $str      = new PseudoString($mixedStr);
+        $this->assertSame('H', $str->rtrim('ç')->__toString());
 
         $mixedStr = 'çH';
-        $str = new PseudoString($mixedStr);
-        $this->assertSame('ç',$str->rtrim('H')->__toString());
+        $str      = new PseudoString($mixedStr);
+        $this->assertSame('ç', $str->rtrim('H')->__toString());
     }
 
     public function test_trim()

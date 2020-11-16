@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Scalar;
 
-use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use FightTheIce\Datatypes\Core\Contracts\MathInterface;
 use Illuminate\Support\Traits\Macroable;
 use Brick\Math\BigDecimal;
 
-class Float_ implements DatatypeInterface, MathInterface
+class Float_ implements MathInterface
 {
     use Macroable;
 
