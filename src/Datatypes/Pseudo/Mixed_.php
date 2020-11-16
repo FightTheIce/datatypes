@@ -22,11 +22,7 @@ use Thunder\Nevar\Nevar;
 
 class Mixed_ implements DatatypeInterface, ResolvableInterface
 {
-    use Macroable {
-        __call as __parentcall;
-    }
-
-    use ForwardsCalls;
+    use Macroable;
 
     /**
      * object.
