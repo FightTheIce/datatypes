@@ -17,6 +17,29 @@ $ composer install fighttheice/datatypes
 Tests are included in the tests/ directory. If you go to the root of the project and run
 ./vendor/bin/phpunit all the tests will run.
 
+# Summary
+@see - https://www.php.net/manual/en/language.types.intro.php
+
+Datatype         | Primitive Type  | Completed
+------------     | -------------   | -------------
+Boolean (bool)   | Scalar          | Completed
+Integer (int)    | Scalar          | Completed
+Float (double)   | Scalar          | Completed
+String (unicode) | Scalar          | Completed
+Array            | Compound        | Completed
+Object           | Compound        | Completed
+Callable         | Compound        | Not started
+Iterable         | Compound        | Not started
+Resource         | Special         | Completed
+NULL             | Special         | Completed
+mixed            | Pseudo          | Completed
+void             | Pseudo          | Not started
+-                | -               | -
+UUID             | Scalar (string) | Completed
+UnicodeString    | Scalar (string) | Completed
+Datetime         | Scalar (string) | Completed
+
+
 # Usage
 
 ## [Arrays](docs/Arrays.md)
