@@ -13,12 +13,13 @@ class Null_ implements DatatypeInterface
     use Macroable;
 
     /**
-     * __construct
+     * __construct.
      *
-     * @param   null $val
+     * @param null $val
      *
      */
-    public function __construct($val = null) {
+    public function __construct($val = null)
+    {
         if (!is_null($val)) {
             $exception = new InvalidArgumentException('[NULL] is the only valid value.');
             $exception->setComponentName('datatypes');

@@ -15,7 +15,6 @@ use FightTheIce\Datatypes\Scalar\String_;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use FightTheIce\Datatypes\Special\Null_;
 use FightTheIce\Datatypes\Special\Resource_;
-use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 use Closure;
 use Thunder\Nevar\Nevar;
