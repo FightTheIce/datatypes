@@ -20,7 +20,8 @@
         "fighttheice/exceptions": "^0.6.0",
         "ramsey/uuid": "^4.1",
         "symfony/yaml": "^5.1",
-        "nette/neon": "^3.2"
+        "nette/neon": "^3.2",
+        "nesbot/carbon": "^2.41"
     },
     "autoload": {
         "classmap": ["src"],
