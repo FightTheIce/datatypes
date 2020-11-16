@@ -2,6 +2,9 @@
 
 Creating confusion since 2020. Lets make PHP a bit more "typed" (ROFL)....
 
+# License
+The code is currently released under the MIT license. 
+
 # Installation
 
 You can install the package via composer:
@@ -9,6 +12,10 @@ You can install the package via composer:
 ```
 $ composer install fighttheice/datatypes
 ```
+
+# Tests
+Tests are included in the tests/ directory. If you go to the root of the project and run
+./vendor/bin/phpunit all the tests will run.
 
 # Usage
 
