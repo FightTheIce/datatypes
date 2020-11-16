@@ -87,6 +87,8 @@ use FightTheIce\Datatypes\Scalar\UnicodeString_;
 $unicodeStr = new UnicodeString_('Späßchen');
 ```
 
+
+## [Pseudo Strings](docs/PseudoStrings.md)
 Sometimes you may not know if your dealing a unicode string. FightTheIce has you covered
 ```php
 use FightTheIce\Datatypes\Pseudo\String_;
