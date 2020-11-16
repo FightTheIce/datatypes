@@ -102,7 +102,7 @@ $resolvedStr = $unknownstring->resolve();
 //returns FightTheIce\Datatypes\Scalar\UnicodeString_
 ```
 
-## [Numbers](docs/Numbers.md)
+## [Pseudo Numbers](docs/PseudoNumbers.md)
 If for some reason you don't know what type of number (integer, or float) you are dealing with. Don't worry FightTheIce has you covered
 
 ```php
