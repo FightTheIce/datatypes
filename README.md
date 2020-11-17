@@ -34,7 +34,7 @@ Resource         | Special         | Completed
 NULL             | Special         | Completed
 mixed            | Pseudo          | Completed
 void             | Pseudo          | Not started
--                | -               | -
+~                | ~               | ~
 UUID             | Scalar (string) | Completed
 UnicodeString    | Scalar (string) | Completed
 Datetime         | Scalar (string) | Completed
