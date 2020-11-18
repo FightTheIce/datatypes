@@ -5,4 +5,4 @@ parameters:
     paths:
         - src
     excludes_analyse:
-        - src/Functions/*
+        - src/third_party/*

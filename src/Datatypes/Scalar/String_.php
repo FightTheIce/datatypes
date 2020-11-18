@@ -4,28 +4,44 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Scalar;
 
-use ArrayAccess;
-use Illuminate\Support\Traits\Macroable;
-use Stringable;
-use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
+use Thunder\Nevar\Nevar;
 use FightTheIce\Datatypes\Core\Contracts\StringInterface;
+use Illuminate\Support\Traits\Macroable;
+use FightTheIce\Exceptions\UnexpectedValueException;
+use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
+use FightTheIce\Datatypes\Core\Contracts\IntegerInterface;
+use FightTheIce\Datatypes\Core\Contracts\ArrayInterface;
+use FightTheIce\Datatypes\Compound\Array_;
 
-class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInterface
+class String_ implements StringInterface
 {
     use Macroable;
 
     protected string $value = '';
 
-    /**
-     * Create a string.
-     *
-     * @psalm-consistent-constructor
-     *
-     * @param string $value
-     */
     public function __construct(string $value = '')
     {
         $this->value = $value;
+    }
+
+    public function getDatatypeCategory(): string
+    {
+        return 'scalar';
+    }
+
+    public function describe(): string
+    {
+        return Nevar::describe($this->value);
+    }
+
+    public function getPrimitiveType(): string
+    {
+        return 'string';
+    }
+
+    public function __toString(): string
+    {
+        return $this->value;
     }
 
     /**
@@ -36,9 +52,9 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
      *
      * @param string $character_mask
      *
-     * @return String_
+     * @return StringInterface
      */
-    public function ltrim(string $character_mask = " \t\n\r\0\x0B"): String_
+    public function ltrim(string $character_mask = " \t\n\r\0\x0B"): StringInterface
     {
         return new self(ltrim($this->value, $character_mask));
     }
@@ -51,9 +67,9 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
      *
      * @param string $character_mask
      *
-     * @return String_
+     * @return StringInterface
      */
-    public function rtrim(string $character_mask = " \t\n\r\0\x0B"): String_
+    public function rtrim(string $character_mask = " \t\n\r\0\x0B"): StringInterface
     {
         return new self(rtrim($this->value, $character_mask));
     }
@@ -66,9 +82,9 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
      *
      * @param string $character_mask
      *
-     * @return String_
+     * @return StringInterface
      */
-    public function trim(string $character_mask = " \t\n\r\0\x0B"): String_
+    public function trim(string $character_mask = " \t\n\r\0\x0B"): StringInterface
     {
         return new self(trim($this->value, $character_mask));
     }
@@ -82,9 +98,9 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
      * @param int      $start
      * @param int|null $length
      *
-     * @return String_
+     * @return StringInterface
      */
-    public function substr(int $start, ? int $length = null): String_
+    public function substr(int $start, ? int $length = null): StringInterface
     {
         $test = '';
         if ($length === null) {
@@ -94,7 +110,10 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
         }
 
         if ($test == false) {
-            throw new \ErrorException(__METHOD__);
+            $exception = new UnexpectedValueException('Unexpected boolean value.');
+            $exception->setComponentName('datatypes');
+
+            throw $exception;
         }
 
         return new self($test);
@@ -106,9 +125,9 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
      *
      * @see https://www.php.net/manual/en/function.strtolower.php
      *
-     * @return String_
+     * @return StringInterface
      */
-    public function strtolower(): String_
+    public function strtolower(): StringInterface
     {
         return new self(strtolower($this->value));
     }
@@ -119,37 +138,37 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
      *
      * @see https://www.php.net/manual/en/function.strtoupper.php
      *
-     * @return String_
+     * @return StringInterface
      */
-    public function strtoupper(): String_
+    public function strtoupper(): StringInterface
     {
         return new self(strtoupper($this->value));
     }
 
     /**
      * isEmpty
-     * Determine whether the value is empty.
+     * Determine whether a variable is empty.
      *
      * @see https://www.php.net/manual/en/function.empty.php
      *
-     * @return Boolean_
+     * @return BooleanInterface
      */
-    public function isEmpty(): Boolean_
+    public function isEmpty(): BooleanInterface
     {
         return new Boolean_(empty($this->value));
     }
 
     /**
-     * __toString
-     * method allows a class to decide how it will react when it is treated like a string.
+     * strlen
+     * Get string length.
      *
-     * @see https://www.php.net/manual/en/language.oop5.magic.php#object.tostring
+     * @see https://www.php.net/manual/en/function.strlen.phps
      *
-     * @return string
+     * @return IntegerInterface
      */
-    public function __toString(): string
+    public function strlen(): IntegerInterface
     {
-        return $this->value;
+        return new Integer_(strlen($this->value));
     }
 
     /**
@@ -160,13 +179,18 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
      *
      * @param int|int $split_length
      *
-     * @return array
+     * @return ArrayInterface
      */
-    public function str_split(int $split_length = 1): array
+    public function str_split(int $split_length = 1): ArrayInterface
     {
-        $split = str_split($this->value, $split_length);
-        if (!is_array($split)) {
-            throw new \ErrorException(__METHOD__);
+        //we are going stfu the str_split error if there is one so we get false back
+        $split = @str_split($this->value, $split_length);
+
+        if ($split == false) {
+            $exception = new UnexpectedValueException('str_split resulted in a boolean value');
+            $exception->setComponentName('datatypes');
+
+            throw $exception;
         }
 
         if (count($split) == 1) {
@@ -175,148 +199,6 @@ class String_ implements Stringable, ArrayAccess, DatatypeInterface, StringInter
             }
         }
 
-        return $split;
-    }
-
-    /**
-     * strlen
-     * Get string length.
-     *
-     * @see https://www.php.net/manual/en/function.strlen.php
-     *
-     * @return Integer_
-     */
-    public function strlen(): Integer_
-    {
-        return new Integer_(strlen($this->value));
-    }
-
-    /**
-     * offsetExists
-     * Whether an offset exists.
-     *
-     * @see https://www.php.net/manual/en/arrayaccess.offsetexists.php
-     *
-     * @param mixed $offset
-     *
-     * @return bool
-     */
-    public function offsetExists($offset): bool
-    {
-        $explode = $this->str_split();
-
-        return isset($explode[$offset]);
-    }
-
-    /**
-     * offsetGet
-     * Offset to retrieve.
-     *
-     * @see https://www.php.net/manual/en/arrayaccess.offsetget.php
-     *
-     * @param mixed $offset
-     *
-     * @return mixed
-     */
-    public function offsetGet($offset)
-    {
-        if ($this->offsetExists($offset) == false) {
-            throw new \ErrorException(__METHOD__);
-        }
-
-        $explode = $this->str_split();
-
-        return $explode[$offset];
-    }
-
-    /**
-     * offsetSet
-     * Assign a value to the specified offset.
-     *
-     * @see https://www.php.net/manual/en/arrayaccess.offsetset.php
-     *
-     * @param mixed $offset
-     * @param mixed $value
-     */
-    public function offsetSet($offset, $value): void
-    {
-        if (!is_string($value)) {
-            if (is_object($value)) {
-                if (($value instanceof Stringable) or method_exists($value, '__toString')) {
-                    $value = $value->__toString();
-                }
-            }
-
-            if (!is_string($value)) {
-                throw new \ErrorException(__METHOD__ . ' - 5');
-            }
-        }
-
-        if (!is_numeric($offset)) {
-            throw new \ErrorException(__METHOD__ . ' - 1');
-        }
-
-        if ((floor((float) $offset) != $offset) || (ceil((float) $offset) != $offset)) {
-            throw new \ErrorException(__METHOD__ . ' - 2');
-        }
-
-        $explode = $this->str_split();
-
-        //this one needs some logic....
-        if ($this->offsetExists($offset) == true) {
-            $explode[$offset] = $value;
-            $this->value      = implode('', $explode);
-
-            return;
-        }
-
-        //offset may always be equal to zero
-        if (($offset == 0) || ($offset == '0')) {
-            $explode[0]  = $value;
-            $this->value = implode('', $explode);
-
-            return;
-        }
-
-        //offset may never be greater than count($explode)+1
-        //unless offset 0 isn't set
-        if (($this->offsetExists(0) == false) and ($offset > 0)) {
-            throw new \ErrorException(__METHOD__ . ' - 4');
-        }
-
-        $count = count($explode);
-        if ($offset > $count) {
-            throw new \ErrorException(__METHOD__ . ' - 3');
-        }
-
-        $explode[$offset] = $value;
-        $this->value      = implode('', $explode);
-
-        return;
-    }
-
-    /**
-     * offsetUnset
-     * Unset an offset.
-     *
-     * @see https://www.php.net/manual/en/arrayaccess.offsetunset.php
-     *
-     * @param mixed $offset
-     */
-    public function offsetUnset($offset): void
-    {
-        if ($this->offsetExists($offset) == false) {
-            return;
-        }
-
-        $explode = $this->str_split();
-        unset($explode[$offset]);
-
-        $this->value = implode('', $explode);
-    }
-
-    public function getValue()
-    {
-        return $this->value;
+        return new Array_($split);
     }
 }

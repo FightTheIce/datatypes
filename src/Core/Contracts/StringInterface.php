@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Core\Contracts;
 
-use FightTheIce\Datatypes\Scalar\Boolean_;
-use FightTheIce\Datatypes\Scalar\Integer_;
-
-interface StringInterface extends DatatypeInterface
+interface StringInterface extends ScalarInterface
 {
+    public function __toString(): string;
+
     public function ltrim(string $character_mask = " \t\n\r\0\x0B"): StringInterface;
 
     public function rtrim(string $character_mask = " \t\n\r\0\x0B"): StringInterface;
@@ -21,47 +20,9 @@ interface StringInterface extends DatatypeInterface
 
     public function strtoupper(): StringInterface;
 
-    public function isEmpty(): Boolean_;
+    public function isEmpty(): BooleanInterface;
 
-    public function str_split(int $split_length = 1): array;
+    public function strlen(): IntegerInterface;
 
-    public function strlen(): Integer_;
-
-    public function __toString(): string;
-
-    /**
-     * offsetExists.
-     *
-     * @param mixed $offset
-     *
-     * @return bool
-     */
-    public function offsetExists($offset): bool;
-
-    /**
-     * offsetGet.
-     *
-     * @param mixed $offset
-     *
-     * @return mixed
-     */
-    public function offsetGet($offset);
-
-    /**
-     * offsetSet.
-     *
-     * @param mixed $offset
-     * @param mixed $value
-     *
-     * @psalm-return void
-     */
-    public function offsetSet($offset, $value);
-
-    /**
-     * offsetUnset.
-     *
-     * @param mixed $offset
-     *
-     */
-    public function offsetUnset($offset): void;
+    public function str_split(int $split_length = 1): ArrayInterface;
 }

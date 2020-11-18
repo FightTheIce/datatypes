@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Scalar;
 
-use FightTheIce\Datatypes\Core\Contracts\MathInterface;
+use FightTheIce\Datatypes\Core\Contracts\IntegerInterface;
+use Thunder\Nevar\Nevar;
 use Illuminate\Support\Traits\Macroable;
+use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
+use FightTheIce\Datatypes\Core\Contracts\FloatInterface;
 use Brick\Math\BigInteger;
+use FightTheIce\Datatypes\Core\Contracts\NumberInterface;
+use Brick\Math\BigNumber;
 
-class Integer_ implements MathInterface
+class Integer_ implements IntegerInterface
 {
     use Macroable;
 
@@ -19,24 +24,31 @@ class Integer_ implements MathInterface
         $this->value = $value;
     }
 
-    /**
-     * @return int
-     */
-    public function getValue()
+    public function getDatatypeCategory(): string
     {
-        return $this->value;
+        return 'scalar';
     }
 
-    public function isPositive(): Boolean_
+    public function describe(): string
     {
-        if ($this->value >= 0) {
+        return Nevar::describe($this->value);
+    }
+
+    public function getPrimitiveType(): string
+    {
+        return 'integer';
+    }
+
+    public function isPositive(): BooleanInterface
+    {
+        if ($this->value > 0) {
             return new Boolean_(true);
         }
 
         return new Boolean_(false);
     }
 
-    public function isNegative(): Boolean_
+    public function isNegative(): BooleanInterface
     {
         if ($this->value < 0) {
             return new Boolean_(true);
@@ -45,33 +57,47 @@ class Integer_ implements MathInterface
         return new Boolean_(false);
     }
 
-    public function absolute(): self
+    public function isZero(): BooleanInterface
     {
-        return new self(abs($this->value));
+        if ($this->value == 0) {
+            return new Boolean_(true);
+        }
+
+        return new Boolean_(false);
     }
 
-    public function opposite(): self
+    public function getNumber()
     {
-        return new self($this->math()->negated()->toInt());
+        return $this->value;
     }
 
-    public function math(): BigInteger
-    {
-        return BigInteger::of($this->value);
-    }
-
-    public function __toString(): string
-    {
-        return $this->math()->__toString();
-    }
-
-    public function __toFloat(): Float_
+    public function __toFloat(): FloatInterface
     {
         return new Float_(floatval($this->value));
     }
 
-    public function __toInteger(): self
+    public function __toInteger(): IntegerInterface
     {
         return new self($this->value);
+    }
+
+    public function absolute(): NumberInterface
+    {
+        return new self((BigInteger::of($this->value))->abs()->toInt());
+    }
+
+    public function negated(): NumberInterface
+    {
+        return new self((BigInteger::of($this->value))->negated()->toInt());
+    }
+
+    public function negativeabsolute(): NumberInterface
+    {
+        return new self((BigInteger::of($this->value))->abs()->negated()->toInt());
+    }
+
+    public function math(): BigNumber
+    {
+        return BigInteger::of($this->value);
     }
 }

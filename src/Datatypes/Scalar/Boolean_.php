@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Scalar;
 
-use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
+use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
+use Thunder\Nevar\Nevar;
 use Illuminate\Support\Traits\Macroable;
+use FightTheIce\Exceptions\InvalidArgumentException;
 
-class Boolean_ implements DatatypeInterface
+class Boolean_ implements BooleanInterface
 {
     use Macroable;
 
@@ -18,12 +20,28 @@ class Boolean_ implements DatatypeInterface
         $this->value = $value;
     }
 
-    /**
-     * @return bool
-     */
-    public function getValue()
+    public function getDatatypeCategory(): string
     {
-        return $this->value;
+        return 'scalar';
+    }
+
+    public function describe(): string
+    {
+        return Nevar::describe($this->value);
+    }
+
+    public function getPrimitiveType(): string
+    {
+        return 'boolean';
+    }
+
+    public function isFalse(): bool
+    {
+        if ($this->value === false) {
+            return true;
+        }
+
+        return false;
     }
 
     public function isTrue(): bool
@@ -35,22 +53,66 @@ class Boolean_ implements DatatypeInterface
         return false;
     }
 
-    public function isFalse(): bool
-    {
-        return !$this->isTrue();
-    }
-
-    public function inverse(): self
+    public function inverse(): BooleanInterface
     {
         return new self(!$this->value);
     }
 
-    public function transform(string $true, string $false): String_
+    /**
+     * transform.
+     *
+     * @param mixed $trueString
+     * @param mixed $falseString
+     *
+     * @return String_
+     */
+    public function transform($trueString, $falseString): String_
     {
-        if ($this->isTrue()) {
-            return new String_($true);
+        if (is_object($trueString)) {
+            if (!method_exists($trueString, '__toString')) {
+                $exception = new InvalidArgumentException('trueString parameter is expected to be stringable');
+                $exception->setComponentName('datatypes');
+
+                throw $exception;
+            }
+
+            $trueString = $trueString->__toString();
         }
 
-        return new String_($false);
+        if (!is_string($trueString)) {
+            $exception = new InvalidArgumentException('trueString parameter is expected to be a string.');
+            $exception->setComponentName('datatypes');
+
+            throw $exception;
+        }
+
+        if (is_object($falseString)) {
+            if (!method_exists($falseString, '__toString')) {
+                $exception = new InvalidArgumentException('falseString parameter is expected to be stringable');
+                $exception->setComponentName('datatypes');
+
+                throw $exception;
+            }
+
+            $falseString = $falseString->__toString();
+        }
+
+        if (!is_string($falseString)) {
+            $exception = new InvalidArgumentException('falseString parameter is expected to be a string.');
+            $exception->setComponentName('datatypes');
+
+            throw $exception;
+        }
+
+        if ($this->value === true) {
+            return new String_($trueString);
+        }
+
+        return new String_($falseString);
+    }
+
+    public function __toBoolean(): bool
+    {
+        return $this->value;
     }
 }

@@ -6,10 +6,7 @@ namespace FightTheIce\Datatypes\Core\Contracts;
 
 interface DatatypeInterface
 {
-    /**
-     * getValue.
-     *
-     * @return mixed
-     */
-    public function getValue();
+    public function getDatatypeCategory(): string;
+
+    public function describe(): string;
 }
