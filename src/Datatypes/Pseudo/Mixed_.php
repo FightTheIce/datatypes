@@ -12,13 +12,21 @@ use FightTheIce\Datatypes\Compound\Iterable_;
 use FightTheIce\Datatypes\Compound\Callable_;
 use FightTheIce\Datatypes\Compound\Object_;
 use FightTheIce\Datatypes\Scalar\Boolean_;
-use FightTheIce\Datatypes\Scalar\Integer_;
-use FightTheIce\Datatypes\Scalar\Float_;
-use FightTheIce\Datatypes\Scalar\String_;
-use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use FightTheIce\Datatypes\Special\Null_;
 use FightTheIce\Datatypes\Special\Resource_;
 use FightTheIce\Exceptions\InvalidArgumentException;
+use FightTheIce\Datatypes\Pseudo\String_ as PseudoString;
+use FightTheIce\Datatypes\Core\Contracts\StringInterface;
+use FightTheIce\Datatypes\Core\Contracts\ScalarInterface;
+use FightTheIce\Datatypes\Core\Contracts\NumberInterface;
+use FightTheIce\Datatypes\Core\Contracts\CompoundInterface;
+use Closure;
+use FightTheIce\Datatypes\Core\Contracts\PseudoInterface;
+use FightTheIce\Datatypes\Core\Contracts\SpecialInterface;
+use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
+use FightTheIce\Datatypes\Scalar\Integer_;
+use FightTheIce\Datatypes\Scalar\Float_;
+use FightTheIce\Datatypes\Scalar\UnicodeString_;
 
 class Mixed_ implements MixedInterface
 {
@@ -64,18 +72,12 @@ class Mixed_ implements MixedInterface
             $this->concrete = new Object_($mixed);
         } elseif (is_bool($mixed)) {
             $this->concrete = new Boolean_($mixed);
-        } elseif (is_int($mixed)) {
-            $this->concrete = new Integer_($mixed);
-        } elseif (is_float($mixed)) {
-            $this->concrete = new Float_($mixed);
+        } elseif ((is_float($mixed)) || (is_int($mixed))) {
+            $mixing         = new Number_($mixed);
+            $this->concrete = $mixing->resolve();
         } elseif (is_string($mixed)) {
-            if (strlen($mixed) != strlen(utf8_decode($mixed))) {
-                //unicode
-                $this->concrete = new UnicodeString_($mixed);
-            } else {
-                //no unicode
-                $this->concrete = new String_($mixed);
-            }
+            $mixing         = new PseudoString($mixed);
+            $this->concrete = $mixing->resolve();
         } elseif (is_null($mixed)) {
             $this->concrete = new Null_($mixed);
         } elseif (is_resource($mixed)) {
@@ -106,5 +108,105 @@ class Mixed_ implements MixedInterface
     public function describe(): string
     {
         return $this->concrete->describe();
+    }
+
+    public function isCallable(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof Callable_));
+    }
+
+    public function isArray(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof Array_));
+    }
+
+    public function isIterable(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof Iterable_));
+    }
+
+    public function isObject(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof Object_));
+    }
+
+    public function isBoolean(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof Boolean_));
+    }
+
+    public function isInteger(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof Integer_));
+    }
+
+    public function isFloat(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof Float_));
+    }
+
+    public function isString(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof StringInterface));
+    }
+
+    public function isNull(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof Null_));
+    }
+
+    public function isResource(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof Resource_));
+    }
+
+    public function isStandardString(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof String_));
+    }
+
+    public function isUnicodeString(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof UnicodeString_));
+    }
+
+    public function isEmpty(): BooleanInterface
+    {
+        return new Boolean_(empty($this->mixed));
+    }
+
+    public function isScalarType(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof ScalarInterface));
+    }
+
+    public function isNumeric(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof NumberInterface));
+    }
+
+    public function isClosure(): BooleanInterface
+    {
+        return new Boolean_(($this->mixed instanceof Closure));
+    }
+
+    public function isCompoundType(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof CompoundInterface));
+    }
+
+    public function isPseudoType(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof PseudoInterface));
+    }
+
+    public function isSpecialType(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof SpecialInterface));
+    }
+
+    public function resolve()
+    {
+        return $this->concrete;
     }
 }

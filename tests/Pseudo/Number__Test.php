@@ -12,11 +12,7 @@ use FightTheIce\Datatypes\Core\Contracts\ScalarInterface;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Scalar\Integer_;
 use FightTheIce\Datatypes\Scalar\Float_;
-use FightTheIce\Datatypes\Compound\Array_;
-use FightTheIce\Exceptions\UnexpectedValueException;
 use FightTheIce\Exceptions\InvalidArgumentException;
-use FightTheIce\Datatypes\Scalar\String_ as stdString_;
-use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use Brick\Math\BigNumber;
 use Brick\Math\BigInteger;
 use Brick\Math\BigDecimal;
@@ -254,7 +250,7 @@ final class Number_Test extends TestCase
 
     public function test_absolute()
     {
-        $int = new Number_;
+        $int = new Number_();
         $abs = $int->absolute();
         $this->assertIsObject($abs);
         $this->assertInstanceOf(Number_::class, $abs);
@@ -350,45 +346,49 @@ final class Number_Test extends TestCase
         $this->assertTrue(method_exists($float, '__toInteger'));
     }
 
-    public function test_is_float() {
-        $num = new Number_(0.0);
+    public function test_is_float()
+    {
+        $num  = new Number_(0.0);
         $bool = $num->is_float();
         $this->assertIsObject($bool);
-        $this->assertInstanceOf(Boolean_::class,$bool);
+        $this->assertInstanceOf(Boolean_::class, $bool);
         $this->assertTrue($bool->isTrue());
         $this->assertFalse($bool->isFalse());
 
         $this->assertFalse($num->is_integer()->isTrue());
     }
 
-    public function test_is_integer() {
-        $num = new Number_(100);
+    public function test_is_integer()
+    {
+        $num  = new Number_(100);
         $bool = $num->is_integer();
         $this->assertIsObject($bool);
-        $this->assertInstanceOf(Boolean_::class,$bool);
+        $this->assertInstanceOf(Boolean_::class, $bool);
         $this->assertTrue($bool->isTrue());
         $this->assertFalse($bool->isFalse());
 
         $this->assertFalse($num->is_float()->isTrue());
     }
 
-    public function test_resolve() {
-        $num = new Number_;
+    public function test_resolve()
+    {
+        $num     = new Number_();
         $resolve = $num->resolve();
         $this->assertIsObject($resolve);
-        $this->assertInstanceOf(Integer_::class,$resolve);
-        $this->assertSame(0,$resolve->getNumber());
+        $this->assertInstanceOf(Integer_::class, $resolve);
+        $this->assertSame(0, $resolve->getNumber());
 
-        $num = new Number_(1.5123);
+        $num     = new Number_(1.5123);
         $resolve = $num->resolve();
         $this->assertIsObject($resolve);
-        $this->assertInstanceOf(Float_::class,$resolve);
-        $this->assertSame(1.5123,$resolve->getNumber());
+        $this->assertInstanceOf(Float_::class, $resolve);
+        $this->assertSame(1.5123, $resolve->getNumber());
     }
 
-    public function test_construct_exception() {
+    public function test_construct_exception()
+    {
         $this->expectException(InvalidArgumentException::class);
 
-        $num = new Number_(new stdClass);
+        $num = new Number_(new stdClass());
     }
 }
