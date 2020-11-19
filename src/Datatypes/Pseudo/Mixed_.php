@@ -21,12 +21,13 @@ use FightTheIce\Datatypes\Core\Contracts\ScalarInterface;
 use FightTheIce\Datatypes\Core\Contracts\NumberInterface;
 use FightTheIce\Datatypes\Core\Contracts\CompoundInterface;
 use Closure;
-use FightTheIce\Datatypes\Core\Contracts\PseudoInterface;
 use FightTheIce\Datatypes\Core\Contracts\SpecialInterface;
 use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
 use FightTheIce\Datatypes\Scalar\Integer_;
 use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
+use FightTheIce\Datatypes\Scalar\String_;
+use Thunder\Nevar\Nevar;
 
 class Mixed_ implements MixedInterface
 {
@@ -56,20 +57,42 @@ class Mixed_ implements MixedInterface
     {
         if ($mixed instanceof DatatypeInterface) {
             if ($resolveInternal === true) {
-                //resolve here
+                if ($mixed instanceof Null_) {
+                    $mixed = null;
+                } elseif ($mixed instanceof Resource_) {
+                    $mixed = $mixed->__toResource();
+                } elseif ($mixed instanceof StringInterface) {
+                    $mixed = $mixed->__toString();
+                } elseif ($mixed instanceof NumberInterface) {
+                    $mixed = $mixed->getNumber();
+                } elseif ($mixed instanceof Boolean_) {
+                    $mixed = $mixed->__toBoolean();
+                } elseif ($mixed instanceof Mixed_) {
+                    $mixed = $mixed->__toMixed();
+                } elseif ($mixed instanceof Object_) {
+                    $mixed = $mixed->__toObject();
+                } elseif ($mixed instanceof Iterable_) {
+                    $mixed = $mixed->__toIterable();
+                } elseif ($mixed instanceof Callable_) {
+                    $mixed = $mixed->__toCallable();
+                } elseif ($mixed instanceof Array_) {
+                    $mixed = $mixed->__toArray();
+                }
             }
         }
 
         $this->mixed = $mixed;
 
-        if (is_callable($mixed)) {
+        if ($mixed instanceof Void_) {
+            $this->concrete = new Void_();
+        } elseif (is_object($mixed)) {
+            $this->concrete = new Object_($mixed);
+        } elseif (is_callable($mixed)) {
             $this->concrete = new Callable_($mixed);
         } elseif (is_array($mixed)) {
             $this->concrete = new Array_($mixed);
         } elseif (is_iterable($mixed)) {
             $this->concrete = new Iterable_($mixed);
-        } elseif (is_object($mixed)) {
-            $this->concrete = new Object_($mixed);
         } elseif (is_bool($mixed)) {
             $this->concrete = new Boolean_($mixed);
         } elseif ((is_float($mixed)) || (is_int($mixed))) {
@@ -97,17 +120,22 @@ class Mixed_ implements MixedInterface
 
     public function getPrimitiveType(): string
     {
-        return $this->concrete->getPrimitiveType();
+        return 'mixed';
     }
 
     public function getDatatypeCategory(): string
     {
-        return $this->concrete->getDatatypeCategory();
+        return 'pseudo';
     }
 
     public function describe(): string
     {
-        return $this->concrete->describe();
+        $describe = Nevar::describe($this->mixed);
+        if ($describe == 'unknown type') {
+            $describe = $this->concrete->describe();
+        }
+
+        return $describe;
     }
 
     public function isCallable(): BooleanInterface
@@ -195,11 +223,6 @@ class Mixed_ implements MixedInterface
         return new Boolean_(($this->concrete instanceof CompoundInterface));
     }
 
-    public function isPseudoType(): BooleanInterface
-    {
-        return new Boolean_(($this->concrete instanceof PseudoInterface));
-    }
-
     public function isSpecialType(): BooleanInterface
     {
         return new Boolean_(($this->concrete instanceof SpecialInterface));
@@ -208,5 +231,10 @@ class Mixed_ implements MixedInterface
     public function resolve()
     {
         return $this->concrete;
+    }
+
+    public function isVoid(): BooleanInterface
+    {
+        return new Boolean_(($this->concrete instanceof Void_));
     }
 }

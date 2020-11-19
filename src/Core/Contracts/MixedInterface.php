@@ -47,8 +47,6 @@ interface MixedInterface extends PseudoInterface
 
     public function isCompoundType(): BooleanInterface;
 
-    public function isPseudoType(): BooleanInterface;
-
     public function isSpecialType(): BooleanInterface;
 
     /**
@@ -57,4 +55,6 @@ interface MixedInterface extends PseudoInterface
      * @return mixed
      */
     public function resolve();
+
+    public function isVoid(): BooleanInterface;
 }
