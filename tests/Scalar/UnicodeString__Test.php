@@ -167,7 +167,7 @@ final class UnicodeString_Test extends TestCase
         $this->assertTrue($isEmpty->isTrue());
         $this->assertFalse($isEmpty->isFalse());
 
-        $str = new String_('h');
+        $str = new String_('Ç');
         $this->assertTrue($str->isEmpty()->isFalse());
         $this->assertFalse($str->isEmpty()->isTrue());
     }

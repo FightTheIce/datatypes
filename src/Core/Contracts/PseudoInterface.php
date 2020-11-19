@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace FightTheIce\Datatypes\Core\Contracts;
 
-interface DatatypeInterface
+interface PseudoInterface extends DatatypeInterface
 {
-    public function getDatatypeCategory(): string;
-
-    public function describe(): string;
-
     public function getPrimitiveType(): string;
 }
