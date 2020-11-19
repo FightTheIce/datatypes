@@ -95,7 +95,7 @@ class Number_ implements NumberInterface, PseudoNumberInterface
     /**
      * getNumber.
      *
-     * @return int|float
+     * @return int|float|string
      */
     public function getNumber()
     {

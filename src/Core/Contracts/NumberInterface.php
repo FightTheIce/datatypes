@@ -17,7 +17,7 @@ interface NumberInterface extends ScalarInterface
     /**
      * getNumber.
      *
-     * @return int|float
+     * @return int|float|string
      */
     public function getNumber();
 
