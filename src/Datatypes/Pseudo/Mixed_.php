@@ -39,10 +39,10 @@ class Mixed_ implements MixedInterface
     protected $mixed;
 
     /**
-     * __construct
+     * __construct.
      *
-     * @param   mixed $mixed    
-     * @param   bool   $resolveInternal  
+     * @param mixed $mixed
+     * @param bool  $resolveInternal
      */
     public function __construct($mixed = '', bool $resolveInternal = false)
     {
