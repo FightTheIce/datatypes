@@ -14,7 +14,6 @@ use FightTheIce\Datatypes\Compound\Object_;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Special\Null_;
 use FightTheIce\Datatypes\Special\Resource_;
-use FightTheIce\Exceptions\InvalidArgumentException;
 use FightTheIce\Datatypes\Pseudo\String_ as PseudoString;
 use FightTheIce\Datatypes\Core\Contracts\StringInterface;
 use FightTheIce\Datatypes\Core\Contracts\ScalarInterface;
@@ -85,7 +84,7 @@ class Mixed_ implements MixedInterface
 
         if ($mixed instanceof Void_) {
             $this->concrete = new Void_();
-        } elseif (is_object($mixed)) {
+        } elseif ((is_object($mixed)) && (!is_iterable($mixed))) {
             $this->concrete = new Object_($mixed);
         } elseif (is_callable($mixed)) {
             $this->concrete = new Callable_($mixed);
@@ -106,10 +105,7 @@ class Mixed_ implements MixedInterface
         } elseif (is_resource($mixed)) {
             $this->concrete = new Resource_($mixed);
         } else {
-            $exception = new InvalidArgumentException('Unable to determine data type');
-            $exception->setComponentName('datatypes');
-
-            throw $exception;
+            $this->concrete = new Null_();
         }
     }
 

@@ -362,11 +362,9 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($call, true);
         $this->assertInstanceOf(Callable_::class, $mixed->resolve());
 
-        /*
-        $call = new Iterable_(collect(1,2,3));
-        $mixed = new Mixed_($call,true);
-        $this->assertInstanceOf(Iterable_::class,$mixed->resolve());
-        */
+        $call  = new Iterable_(collect([1, 2, 3]));
+        $mixed = new Mixed_($call, true);
+        $this->assertInstanceOf(Iterable_::class, $mixed->resolve());
 
         $call  = new Object_();
         $mixed = new Mixed_($call, true);
@@ -434,11 +432,9 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($mixed, true);
         $this->assertInstanceOf(Callable_::class, $mixed->resolve());
 
-        /*
-        $call = new Iterable_(collect(1,2,3));
-        $mixed = new Mixed_($call,true);
-        $this->assertInstanceOf(Iterable_::class,$mixed->resolve());
-        */
+        $call  = new Iterable_(collect(1, 2, 3));
+        $mixed = new Mixed_($call, true);
+        $this->assertInstanceOf(Iterable_::class, $mixed->resolve());
 
         $call  = new Object_();
         $mixed = new Mixed_($call, true);
@@ -490,5 +486,16 @@ final class Mixed_Test extends TestCase
         $mixed = new Mixed_($call, true);
         $mixed = new Mixed_($mixed, true);
         $this->assertInstanceOf(Null_::class, $mixed->resolve());
+    }
+
+    public function test_construct_iterable()
+    {
+        $call  = collect(1, 2, 3);
+        $mixed = new Mixed_($call);
+        $bool  = $mixed->isIterable();
+        $this->assertIsObject($bool);
+        $this->assertInstanceOf(Boolean_::class, $bool);
+        $this->assertTrue($bool->isTrue());
+        $this->assertFalse($bool->isFalse());
     }
 }
