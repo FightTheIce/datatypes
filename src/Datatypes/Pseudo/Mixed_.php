@@ -14,7 +14,7 @@ use FightTheIce\Datatypes\Compound\Object_;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Special\Null_;
 use FightTheIce\Datatypes\Special\Resource_;
-use FightTheIce\Datatypes\Pseudo\String_ as PseudoString;
+use FightTheIce\Datatypes\Pseudo\String_ as PseudoString_;
 use FightTheIce\Datatypes\Core\Contracts\StringInterface;
 use FightTheIce\Datatypes\Core\Contracts\ScalarInterface;
 use FightTheIce\Datatypes\Core\Contracts\NumberInterface;
@@ -50,62 +50,82 @@ class Mixed_ implements MixedInterface
      * __construct.
      *
      * @param mixed $mixed
-     * @param bool  $resolveInternal
      */
-    public function __construct($mixed = '', bool $resolveInternal = false)
+    public function __construct($mixed = '')
     {
-        if ($mixed instanceof DatatypeInterface) {
-            if ($resolveInternal === true) {
-                if ($mixed instanceof Null_) {
-                    $mixed = null;
-                } elseif ($mixed instanceof Resource_) {
-                    $mixed = $mixed->__toResource();
-                } elseif ($mixed instanceof StringInterface) {
-                    $mixed = $mixed->__toString();
-                } elseif ($mixed instanceof NumberInterface) {
-                    $mixed = $mixed->getNumber();
-                } elseif ($mixed instanceof Boolean_) {
-                    $mixed = $mixed->__toBoolean();
-                } elseif ($mixed instanceof Mixed_) {
-                    $mixed = $mixed->__toMixed();
-                } elseif ($mixed instanceof Object_) {
-                    $mixed = $mixed->__toObject();
-                } elseif ($mixed instanceof Iterable_) {
-                    $mixed = $mixed->__toIterable();
-                } elseif ($mixed instanceof Callable_) {
-                    $mixed = $mixed->__toCallable();
-                } elseif ($mixed instanceof Array_) {
-                    $mixed = $mixed->__toArray();
+        $this->mixed    = $mixed;
+        $this->concrete = new Null_();
+
+        $describe = Nevar::describe($mixed);
+
+        //echo $describe.PHP_EOL;
+        switch ($describe) {
+            case 'empty array':
+            case 'indexed array':
+            case 'associative array':
+                //echo 'Array_'.PHP_EOL;
+                $this->concrete = new Array_($mixed);
+            break;
+
+            case 'callable string':
+            case 'callable array':
+            case 'object of class Closure':
+                //echo 'Callable_'.PHP_EOL;
+                $this->concrete = new Callable_($mixed);
+            break;
+
+            case substr($describe, 0, 15) == 'object of class':
+                if (is_iterable($mixed)) {
+                    //echo 'Iterable_'.PHP_EOL;
+                    $this->concrete = new Iterable_($mixed);
+                } else {
+                    if ($describe == 'object of class FightTheIce\Datatypes\Pseudo\Void_') {
+                        //echo 'Void_'.PHP_EOL;
+                        $this->concrete = new Void_();
+                    } else {
+                        //echo 'Object_'.PHP_EOL;
+                        $this->concrete = new Object_($mixed);
+                    }
                 }
-            }
-        }
+            break;
 
-        $this->mixed = $mixed;
+            case 'positive integer':
+            case 'numeric string':
+            case 'positive float':
+            case 'negative integer':
+            case 'negative float':
+                //echo 'Number_'.PHP_EOL;
+                $mixing         = new Number_($mixed);
+                $this->concrete = $mixing->resolve();
+            break;
 
-        if ($mixed instanceof Void_) {
-            $this->concrete = new Void_();
-        } elseif ((is_object($mixed)) && (!is_iterable($mixed))) {
-            $this->concrete = new Object_($mixed);
-        } elseif (is_callable($mixed)) {
-            $this->concrete = new Callable_($mixed);
-        } elseif (is_array($mixed)) {
-            $this->concrete = new Array_($mixed);
-        } elseif (is_iterable($mixed)) {
-            $this->concrete = new Iterable_($mixed);
-        } elseif (is_bool($mixed)) {
-            $this->concrete = new Boolean_($mixed);
-        } elseif ((is_float($mixed)) || (is_int($mixed))) {
-            $mixing         = new Number_($mixed);
-            $this->concrete = $mixing->resolve();
-        } elseif (is_string($mixed)) {
-            $mixing         = new PseudoString($mixed);
-            $this->concrete = $mixing->resolve();
-        } elseif (is_null($mixed)) {
-            $this->concrete = new Null_($mixed);
-        } elseif (is_resource($mixed)) {
-            $this->concrete = new Resource_($mixed);
-        } else {
-            $this->concrete = new Null_();
+            case 'empty string':
+            case 'string':
+                //echo 'String_'.PHP_EOL;
+                $mixing         = new PseudoString_($mixed);
+                $this->concrete = $mixing->resolve();
+            break;
+
+            case 'unknown type':
+                if (is_null($mixed)) {
+                    //echo 'Null_'.PHP_EOL;
+                    $this->concrete = new Null_($mixed);
+                }
+            break;
+
+            case 'boolean false':
+            case 'boolean true':
+                //echo 'Boolean_'.PHP_EOL;
+                $this->concrete = new Boolean_($mixed);
+            break;
+
+            case substr($describe, 0, 8) == 'resource':
+                //echo 'Resource_'.PHP_EOL;
+                $this->concrete = new Resource_($mixed);
+            break;
+
+            default:
+                throw new \ErrorException(__METHOD__);
         }
     }
 

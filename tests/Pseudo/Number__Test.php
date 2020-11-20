@@ -16,6 +16,7 @@ use FightTheIce\Exceptions\InvalidArgumentException;
 use Brick\Math\BigNumber;
 use Brick\Math\BigInteger;
 use Brick\Math\BigDecimal;
+use Brick\Math\BigRational;
 
 final class Number_Test extends TestCase
 {
@@ -332,11 +333,23 @@ final class Number_Test extends TestCase
         $this->assertInstanceOf(BigNumber::class, $math);
         $this->assertInstanceOf(BigDecimal::class, $math);
 
-        $int  = new Number_();
+        $int  = new Number_(1);
         $math = $int->math();
         $this->assertIsObject($math);
         $this->assertInstanceOf(BigNumber::class, $math);
         $this->assertInstanceOf(BigInteger::class, $math);
+
+        $int  = new Number_('1');
+        $math = $int->math();
+        $this->assertIsObject($math);
+        $this->assertInstanceOf(BigNumber::class, $math);
+        $this->assertInstanceOf(BigRational::class, $math);
+
+        $int  = new Number_('1.123');
+        $math = $int->math();
+        $this->assertIsObject($math);
+        $this->assertInstanceOf(BigNumber::class, $math);
+        $this->assertInstanceOf(BigRational::class, $math);
     }
 
     public function test_hasSubject()

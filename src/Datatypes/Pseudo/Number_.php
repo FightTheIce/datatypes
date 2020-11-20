@@ -15,6 +15,7 @@ use FightTheIce\Datatypes\Scalar\Integer_;
 use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Exceptions\InvalidArgumentException;
 use Brick\Math\BigNumber;
+use FightTheIce\Datatypes\Scalar\NumberString_;
 
 class Number_ implements NumberInterface, PseudoNumberInterface
 {
@@ -35,7 +36,9 @@ class Number_ implements NumberInterface, PseudoNumberInterface
      */
     public function __construct($num = 0)
     {
-        if (is_int($num)) {
+        if (is_string($num)) {
+            $this->concrete = new NumberString_($num);
+        } elseif (is_int($num)) {
             $this->concrete = new Integer_($num);
         } elseif (is_float($num)) {
             $this->concrete = new Float_($num);
