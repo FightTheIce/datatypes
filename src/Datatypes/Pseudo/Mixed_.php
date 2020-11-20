@@ -54,6 +54,8 @@ class Mixed_ implements MixedInterface
     public function __construct($mixed = '')
     {
         $this->mixed    = $mixed;
+
+        //this will shut psalm/phpstan up
         $this->concrete = new Null_();
 
         $describe = Nevar::describe($mixed);
