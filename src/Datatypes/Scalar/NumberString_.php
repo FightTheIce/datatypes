@@ -89,7 +89,6 @@ class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInt
     public function substr(int $start, ? int $length = null): StringInterface
     {
         $value = $this->str->substr($start, $length);
-        file_put_contents('coverage/log7.txt', print_r($value, true));
 
         return new self($this->str->substr($start, $length)->__toString());
     }

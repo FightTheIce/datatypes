@@ -50,6 +50,9 @@ use Spatie\CollectionMacros\Macros\Transpose;
 use Spatie\CollectionMacros\Macros\TryCatch;
 use Spatie\CollectionMacros\Macros\Validate;
 use Spatie\CollectionMacros\Macros\WithSize;
+use Symfony\Component\Yaml\Yaml;
+use Nette\Neon\Neon;
+use FightTheIce\Exceptions\UnexpectedValueException;
 
 class Array_ extends Collection implements ArrayInterface
 {
@@ -236,5 +239,25 @@ class Array_ extends Collection implements ArrayInterface
     public function hasDot(string $key): BooleanInterface
     {
         return new Boolean_((new Arr())->has($this->toArray(), $key));
+    }
+
+    public function __toJson(): string
+    {
+        $value = json_encode($this->items, JSON_PRETTY_PRINT);
+        if ($value===false) {
+            throw new UnexpectedValueException('Unexpected Value');
+        }
+
+        return $value;
+    }
+
+    public function __toYaml(): string
+    {
+        return Yaml::dump($this->items);
+    }
+
+    public function __toNeon(): string
+    {
+        return Neon::encode($this->items, Neon::BLOCK);
     }
 }

@@ -8,6 +8,8 @@ use FightTheIce\Datatypes\Core\Contracts\ArrayInterface;
 use FightTheIce\Datatypes\Core\Contracts\CompoundInterface;
 use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use FightTheIce\Datatypes\Scalar\Boolean_;
+use Symfony\Component\Yaml\Yaml;
+use Nette\Neon\Neon;
 
 final class Array__Test extends TestCase
 {
@@ -196,5 +198,26 @@ final class Array__Test extends TestCase
     {
         $arr = new Array_();
         $this->assertTrue(method_exists($arr, '__toArray'));
+    }
+
+    public function test__toJson()
+    {
+        $data = [1, 2, 3];
+        $arr  = new Array_($data);
+        $this->assertSame(json_encode($data, JSON_PRETTY_PRINT), $arr->__toJson());
+    }
+
+    public function test__toYaml()
+    {
+        $data = [1, 2, 3];
+        $arr  = new Array_($data);
+        $this->assertSame(Yaml::dump($data), $arr->__toYaml());
+    }
+
+    public function test_toNeon()
+    {
+        $data = [1, 2, 3];
+        $arr  = new Array_($data);
+        $this->assertSame(Neon::encode($data, Neon::BLOCK), $arr->__toYaml());
     }
 }

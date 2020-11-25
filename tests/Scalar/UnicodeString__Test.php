@@ -210,7 +210,6 @@ final class UnicodeString__Test extends TestCase
     {
         $str    = new String_();
         $str[0] = '한';
-        file_put_contents('coverage/log.txt', print_r($str, true));
         $this->assertSame('한', $str->__toString());
         $this->assertSame('한', $str[0]->__toString());
     }
