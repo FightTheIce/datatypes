@@ -157,7 +157,7 @@ class String_ implements StringInterface, PseudoStringInterface, ArrayAccess
 
     public function offsetSet($offset, $value): void
     {
-        $this->concrete->offsetSet($offset,$value);
+        $this->concrete->offsetSet($offset, $value);
 
         self::__construct($this->concrete->__toString());
     }
@@ -165,7 +165,7 @@ class String_ implements StringInterface, PseudoStringInterface, ArrayAccess
     public function offsetUnset($offset): void
     {
         $this->concrete->offsetUnset($offset);
-        
+
         self::__construct($this->concrete->__toString());
     }
 }
