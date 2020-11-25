@@ -16,7 +16,7 @@ use FightTheIce\Datatypes\Scalar\Float_;
 use Brick\Math\BigNumber;
 use FightTheIce\Exceptions\ArithmeticError;
 
-final class NumberString_Test extends TestCase
+final class NumberString__Test extends TestCase
 {
     public function test_meta()
     {

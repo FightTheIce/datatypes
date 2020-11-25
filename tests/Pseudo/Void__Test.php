@@ -9,7 +9,7 @@ use FightTheIce\Datatypes\Core\Contracts\PseudoInterface;
 use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 
-final class Void_Test extends TestCase
+final class Void__Test extends TestCase
 {
     public function test_meta()
     {

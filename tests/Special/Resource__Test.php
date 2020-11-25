@@ -10,7 +10,7 @@ use FightTheIce\Datatypes\Core\Contracts\SpecialInterface;
 use FightTheIce\Exceptions\InvalidArgumentException;
 use FightTheIce\Datatypes\Scalar\String_;
 
-final class Resource_Test extends TestCase
+final class Resource__Test extends TestCase
 {
     public function test_meta()
     {

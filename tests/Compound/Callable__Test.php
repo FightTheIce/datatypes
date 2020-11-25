@@ -11,7 +11,7 @@ use Brick\Math\BigInteger;
 use FightTheIce\Datatypes\Scalar\String_;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 
-final class Callable_Test extends TestCase
+final class Callable__Test extends TestCase
 {
     public function test_meta()
     {

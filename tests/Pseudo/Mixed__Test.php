@@ -19,7 +19,7 @@ use FightTheIce\Datatypes\Scalar\String_;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use FightTheIce\Datatypes\Pseudo\Void_;
 
-final class Mixed_Test extends TestCase
+final class Mixed__Test extends TestCase
 {
     public function test_meta()
     {

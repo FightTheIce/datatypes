@@ -13,7 +13,7 @@ use FightTheIce\Datatypes\Core\Contracts\StringInterface;
 use FightTheIce\Datatypes\Scalar\Integer_;
 use FightTheIce\Datatypes\Core\Contracts\IntegerInterface;
 
-final class Object_Test extends TestCase
+final class Object__Test extends TestCase
 {
     public function test_meta()
     {
@@ -45,7 +45,7 @@ final class Object_Test extends TestCase
         $this->assertEquals('object of class stdClass', $obj->describe());
 
         $obj = new Object_($this);
-        $this->assertEquals('object of class Object_Test', $obj->describe());
+        $this->assertEquals('object of class Object__Test', $obj->describe());
 
         /*
         $aclass = new class() {

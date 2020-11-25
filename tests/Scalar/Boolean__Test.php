@@ -8,7 +8,7 @@ use FightTheIce\Datatypes\Core\Contracts\ScalarInterface;
 use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 use FightTheIce\Datatypes\Scalar\String_;
 
-final class Boolean_Test extends TestCase
+final class Boolean__Test extends TestCase
 {
     public function test_meta()
     {

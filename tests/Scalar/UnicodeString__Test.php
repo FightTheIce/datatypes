@@ -12,7 +12,7 @@ use FightTheIce\Datatypes\Scalar\Integer_;
 use FightTheIce\Datatypes\Compound\Array_;
 use Symfony\Component\String\Exception\InvalidArgumentException;
 
-final class UnicodeString_Test extends TestCase
+final class UnicodeString__Test extends TestCase
 {
     public function test_meta()
     {

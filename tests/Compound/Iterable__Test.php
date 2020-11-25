@@ -8,7 +8,7 @@ use FightTheIce\Datatypes\Core\Contracts\IterableInterface;
 use FightTheIce\Datatypes\Core\Contracts\CompoundInterface;
 use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
 
-final class Iterable_Test extends TestCase
+final class Iterable__Test extends TestCase
 {
     public function test_meta()
     {

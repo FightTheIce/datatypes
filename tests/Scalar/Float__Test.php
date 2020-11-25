@@ -13,7 +13,7 @@ use FightTheIce\Datatypes\Scalar\Integer_;
 use Brick\Math\BigNumber;
 use Brick\Math\BigDecimal;
 
-final class Float_Test extends TestCase
+final class Float__Test extends TestCase
 {
     public function test_meta()
     {

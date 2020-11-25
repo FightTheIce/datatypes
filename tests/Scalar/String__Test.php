@@ -12,7 +12,7 @@ use FightTheIce\Datatypes\Scalar\Integer_;
 use FightTheIce\Datatypes\Compound\Array_;
 use FightTheIce\Exceptions\LogicException;
 
-final class String_Test extends TestCase
+final class String__Test extends TestCase
 {
     public function test_meta()
     {

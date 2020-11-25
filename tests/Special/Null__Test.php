@@ -10,7 +10,7 @@ use FightTheIce\Datatypes\Core\Contracts\SpecialInterface;
 use FightTheIce\Exceptions\InvalidArgumentException;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 
-final class Null_Test extends TestCase
+final class Null__Test extends TestCase
 {
     public function test_meta()
     {

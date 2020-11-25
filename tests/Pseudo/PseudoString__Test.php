@@ -16,7 +16,7 @@ use FightTheIce\Exceptions\UnexpectedValueException;
 use FightTheIce\Datatypes\Scalar\String_ as stdString_;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 
-final class PseudoString_Test extends TestCase
+final class PseudoString__Test extends TestCase
 {
     public function test_meta()
     {

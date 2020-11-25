@@ -13,7 +13,7 @@ use FightTheIce\Datatypes\Scalar\Float_;
 use Brick\Math\BigNumber;
 use Brick\Math\BigInteger;
 
-final class Integer_Test extends TestCase
+final class Integer__Test extends TestCase
 {
     public function test_meta()
     {

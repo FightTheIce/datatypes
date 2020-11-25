@@ -18,7 +18,7 @@ use Brick\Math\BigInteger;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigRational;
 
-final class Number_Test extends TestCase
+final class Number__Test extends TestCase
 {
     public function test_meta()
     {
