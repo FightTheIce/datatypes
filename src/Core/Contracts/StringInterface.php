@@ -27,39 +27,37 @@ interface StringInterface extends ScalarInterface
     public function str_split(int $split_length = 1): ArrayInterface;
 
     /**
-     * offsetExists
+     * offsetExists.
      *
-     * @param   mixed  $offset 
+     * @param mixed $offset
      *
-     * @return  bool   
+     * @return bool
      */
     public function offsetExists($offset): bool;
 
     /**
-     * offsetGet
+     * offsetGet.
      *
-     * @param   mixed $offset
-     * 
+     * @param mixed $offset
+     *
      * @return Mixed
      */
     public function offsetGet($offset);
 
     /**
-     * offsetSet
+     * offsetSet.
      *
-     * @param   mixed  $offset 
-     * @param   mixed  $value   
+     * @param mixed $offset
+     * @param mixed $value
      *
-     * @return  void             
      */
     public function offsetSet($offset, $value): void;
 
     /**
-     * offsetUnset
+     * offsetUnset.
      *
-     * @param   mixed  $offset  
+     * @param mixed $offset
      *
-     * @return  void 
      */
     public function offsetUnset($offset): void;
 }

@@ -17,6 +17,7 @@ use FightTheIce\Datatypes\Core\Contracts\ArrayInterface;
 use FightTheIce\Datatypes\Core\Contracts\NumberInterface;
 use FightTheIce\Exceptions\ArithmeticError;
 use ArrayAccess;
+use FightTheIce\Exceptions\LogicException;
 
 class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInterface, ArrayAccess
 {
@@ -26,8 +27,15 @@ class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInt
 
     public function __construct(string $value = '0')
     {
+        if (strlen($value) == 0) {
+            $value = '0';
+        }
+
         $value = str_replace('_', '', $value);
         $value = str_replace(',', '', $value);
+        $value = str_replace(' ', '', $value);
+        $value = ltrim($value, ' ');
+        $value = rtrim($value, ' ');
 
         if (substr($value, 0, 1) == '0') {
             $value = '0' . ltrim($value, '0');
@@ -80,6 +88,9 @@ class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInt
 
     public function substr(int $start, ? int $length = null): StringInterface
     {
+        $value = $this->str->substr($start, $length);
+        file_put_contents('coverage/log7.txt', print_r($value, true));
+
         return new self($this->str->substr($start, $length)->__toString());
     }
 
@@ -214,13 +225,13 @@ class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInt
 
     public function offsetExists($offset): bool
     {
-        return $this->strlen()->getNumber() >= ($offset + 1);
+        return $this->str->offsetExists($offset);
     }
 
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset) == false) {
-            throw new \ErrorException('Undefined offset!');
+            throw new LogicException('Undefined offset!');
         }
 
         $character = $this->substr($offset, 1);
@@ -230,14 +241,13 @@ class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInt
 
     public function offsetSet($offset, $value): void
     {
-        $str          = $this->__toString();
-        $str[$offset] = $value;
-
-        self::__construct($str);
+        $this->str->offsetSet($offset, $value);
+        self::__construct($this->str->__toString());
     }
 
     public function offsetUnset($offset): void
     {
-        throw new \ErrorException(__METHOD__);
+        $this->str->offsetUnset($offset);
+        self::__construct($this->str->__toString());
     }
 }

@@ -111,7 +111,7 @@ class String_ implements StringInterface, ArrayAccess
             $test = substr($this->value, $start, $length);
         }
 
-        if ($test == false) {
+        /* @phpstan-ignore-line */ if ($test === false) {
             $exception = new UnexpectedValueException('Unexpected boolean value.');
             $exception->setComponentName('datatypes');
 

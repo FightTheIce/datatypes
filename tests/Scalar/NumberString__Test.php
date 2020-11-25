@@ -15,6 +15,7 @@ use FightTheIce\Datatypes\Compound\Array_;
 use FightTheIce\Datatypes\Scalar\Float_;
 use Brick\Math\BigNumber;
 use FightTheIce\Exceptions\ArithmeticError;
+use FightTheIce\Exceptions\LogicException;
 
 final class NumberString__Test extends TestCase
 {
@@ -330,5 +331,69 @@ final class NumberString__Test extends TestCase
         $this->expectException(ArithmeticError::class);
         $numstr = new NumberString_('1.21232');
         $numstr->__toInteger();
+    }
+
+    public function test_arrayaccess()
+    {
+        $str    = new NumberString_();
+        $str[0] = '0';
+        $this->assertSame('0', $str->__toString());
+        $this->assertSame('0', $str[0]->__toString());
+    }
+
+    public function test_arrayaccess2()
+    {
+        $str    = new NumberString_();
+        $str[2] = '1';
+        $this->assertSame('1', $str->__toString());
+    }
+
+    public function test_arrayaccess3()
+    {
+        $str    = new NumberString_('1');
+        $str[2] = '100';
+        $this->assertSame('1100', $str->__toString());
+    }
+
+    public function test_arrayaccess_error1()
+    {
+        $str = new NumberString_();
+
+        $error = false;
+        try {
+            $str['name'] = '123';
+        } catch (\Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue($error);
+    }
+
+    public function test_offsetGet_exception()
+    {
+        $this->expectException(LogicException::class);
+        $str    = new NumberString_();
+        $str->offsetGet(1);
+    }
+
+    public function test_offsetUnset()
+    {
+        $str = new NumberString_('1');
+        $str->offsetUnset(0);
+        $this->assertSame('0', $str->__toString());
+    }
+
+    public function test_offsetUnset2()
+    {
+        $str = new NumberString_('12');
+        $str->offsetUnset(0);
+        $this->assertSame('2', $str->__toString());
+    }
+
+    public function test_offsetUnset_exception()
+    {
+        $this->expectException(LogicException::class);
+        $str    = new NumberString_();
+        $str->offsetUnset(1);
     }
 }
