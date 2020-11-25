@@ -14,6 +14,7 @@ use FightTheIce\Datatypes\Scalar\String_ as StdString_;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use ArrayAccess;
+use FightTheIce\Exceptions\LogicException;
 
 class String_ implements StringInterface, PseudoStringInterface, ArrayAccess
 {
@@ -146,7 +147,7 @@ class String_ implements StringInterface, PseudoStringInterface, ArrayAccess
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset) == false) {
-            throw new \ErrorException('Undefined offset!');
+            throw new LogicException('Undefined offset!');
         }
 
         $character = $this->concrete->substr($offset, 1);
@@ -156,14 +157,15 @@ class String_ implements StringInterface, PseudoStringInterface, ArrayAccess
 
     public function offsetSet($offset, $value): void
     {
-        $str          = $this->__toString();
-        $str[$offset] = $value;
+        $this->concrete->offsetSet($offset,$value);
 
-        self::__construct($str);
+        self::__construct($this->concrete->__toString());
     }
 
     public function offsetUnset($offset): void
     {
-        throw new \ErrorException(__METHOD__);
+        $this->concrete->offsetUnset($offset);
+        
+        self::__construct($this->concrete->__toString());
     }
 }
