@@ -10,6 +10,7 @@ use FightTheIce\Exceptions\UnexpectedValueException;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Scalar\Integer_;
 use FightTheIce\Datatypes\Compound\Array_;
+use FightTheIce\Exceptions\LogicException;
 
 final class String_Test extends TestCase
 {
@@ -206,5 +207,69 @@ final class String_Test extends TestCase
     {
         $str = new String_();
         $this->assertTrue(method_exists($str, '__toString'));
+    }
+
+    public function test_arrayaccess()
+    {
+        $str    = new String_();
+        $str[0] = 'h';
+        $this->assertSame('h', $str->__toString());
+        $this->assertSame('h', $str[0]->__toString());
+    }
+
+    public function test_arrayaccess2()
+    {
+        $str    = new String_();
+        $str[2] = 'H';
+        $this->assertSame('  H', $str->__toString());
+    }
+
+    public function test_arrayaccess3()
+    {
+        $str    = new String_();
+        $str[2] = 'Hello';
+        $this->assertSame('  Hello', $str->__toString());
+    }
+
+    public function test_arrayaccess_error1()
+    {
+        $str = new String_();
+
+        $error = false;
+        try {
+            $str['name'] = 'hello world';
+        } catch (\Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue($error);
+    }
+
+    public function test_offsetGet_exception()
+    {
+        $this->expectException(LogicException::class);
+        $str    = new String_();
+        $str->offsetGet(0);
+    }
+
+    public function test_offsetUnset()
+    {
+        $str = new String_('a');
+        $str->offsetUnset(0);
+        $this->assertSame('', $str->__toString());
+    }
+
+    public function test_offsetUnset2()
+    {
+        $str = new String_('ab');
+        $str->offsetUnset(0);
+        $this->assertSame('b', $str->__toString());
+    }
+
+    public function test_offsetUnset_exception()
+    {
+        $this->expectException(LogicException::class);
+        $str    = new String_();
+        $str->offsetUnset(0);
     }
 }

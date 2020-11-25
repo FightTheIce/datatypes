@@ -16,8 +16,9 @@ use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
 use FightTheIce\Datatypes\Core\Contracts\ArrayInterface;
 use FightTheIce\Datatypes\Core\Contracts\NumberInterface;
 use FightTheIce\Exceptions\ArithmeticError;
+use ArrayAccess;
 
-class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInterface
+class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInterface, ArrayAccess
 {
     use Macroable;
 
@@ -209,5 +210,34 @@ class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInt
         }
 
         return new Boolean_(false);
+    }
+
+    public function offsetExists($offset): bool
+    {
+        return $this->strlen()->getNumber() >= ($offset + 1);
+    }
+
+    public function offsetGet($offset)
+    {
+        if ($this->offsetExists($offset) == false) {
+            throw new \ErrorException('Undefined offset!');
+        }
+
+        $character = $this->substr($offset, 1);
+
+        return new self($character->__toString());
+    }
+
+    public function offsetSet($offset, $value): void
+    {
+        $str          = $this->__toString();
+        $str[$offset] = $value;
+
+        self::__construct($str);
+    }
+
+    public function offsetUnset($offset): void
+    {
+        throw new \ErrorException(__METHOD__);
     }
 }

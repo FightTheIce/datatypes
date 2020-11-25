@@ -12,8 +12,10 @@ use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
 use FightTheIce\Datatypes\Core\Contracts\IntegerInterface;
 use FightTheIce\Datatypes\Core\Contracts\ArrayInterface;
 use FightTheIce\Datatypes\Compound\Array_;
+use ArrayAccess;
+use FightTheIce\Exceptions\LogicException;
 
-class String_ implements StringInterface
+class String_ implements StringInterface, ArrayAccess
 {
     use Macroable;
 
@@ -200,5 +202,53 @@ class String_ implements StringInterface
         }
 
         return new Array_($split);
+    }
+
+    public function offsetExists($offset): bool
+    {
+        $x = $this->__toString();
+
+        return isset($x[$offset]);
+    }
+
+    public function offsetGet($offset)
+    {
+        if ($this->offsetExists($offset) == false) {
+            throw new LogicException('Undefined offset!');
+        }
+
+        $character = $this->substr($offset, 1);
+
+        return new self($character->__toString());
+    }
+
+    public function offsetSet($offset, $value): void
+    {
+        //here just to throw an exception for keys
+        //not actually used to build the new string
+        $str          = $this->__toString();
+        $str[$offset] = $value;
+
+        $explode = $this->str_split()->__toArray();
+        if (!isset($explode[$offset])) {
+            for ($a=count($explode); $a < $offset; $a++) {
+                $explode[$a] = ' ';
+            }
+        }
+
+        $explode[$offset] = $value;
+        self::__construct(implode('', $explode));
+    }
+
+    public function offsetUnset($offset): void
+    {
+        if ($this->offsetExists($offset) == false) {
+            throw new LogicException('Undefined offset!');
+        }
+
+        $x = $this->str_split()->__toArray();
+        unset($x[$offset]);
+
+        self::__construct(implode('', $x));
     }
 }

@@ -13,8 +13,9 @@ use Illuminate\Support\Traits\Macroable;
 use FightTheIce\Datatypes\Scalar\String_ as StdString_;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use FightTheIce\Datatypes\Scalar\Boolean_;
+use ArrayAccess;
 
-class String_ implements StringInterface, PseudoStringInterface
+class String_ implements StringInterface, PseudoStringInterface, ArrayAccess
 {
     use Macroable;
 
@@ -135,5 +136,34 @@ class String_ implements StringInterface, PseudoStringInterface
     public function resolve(): StringInterface
     {
         return $this->concrete;
+    }
+
+    public function offsetExists($offset): bool
+    {
+        return $this->concrete->offsetExists($offset);
+    }
+
+    public function offsetGet($offset)
+    {
+        if ($this->offsetExists($offset) == false) {
+            throw new \ErrorException('Undefined offset!');
+        }
+
+        $character = $this->concrete->substr($offset, 1);
+
+        return new self($character->__toString());
+    }
+
+    public function offsetSet($offset, $value): void
+    {
+        $str          = $this->__toString();
+        $str[$offset] = $value;
+
+        self::__construct($str);
+    }
+
+    public function offsetUnset($offset): void
+    {
+        throw new \ErrorException(__METHOD__);
     }
 }

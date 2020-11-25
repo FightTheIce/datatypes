@@ -8,6 +8,7 @@ use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
 use Thunder\Nevar\Nevar;
 use Illuminate\Support\Traits\Macroable;
 use FightTheIce\Exceptions\InvalidArgumentException;
+use FightTheIce\Datatypes\Core\Contracts\StringInterface;
 
 class Boolean_ implements BooleanInterface
 {
@@ -64,9 +65,9 @@ class Boolean_ implements BooleanInterface
      * @param mixed $trueString
      * @param mixed $falseString
      *
-     * @return String_
+     * @return StringInterface
      */
-    public function transform($trueString, $falseString): String_
+    public function transform($trueString, $falseString): StringInterface
     {
         if (is_object($trueString)) {
             if (!method_exists($trueString, '__toString')) {

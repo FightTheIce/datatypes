@@ -205,4 +205,69 @@ final class UnicodeString_Test extends TestCase
         $str = new String_();
         $this->assertTrue(method_exists($str, '__toString'));
     }
+
+    public function test_arrayaccess()
+    {
+        $str    = new String_();
+        $str[0] = '한';
+        file_put_contents('coverage/log.txt', print_r($str, true));
+        $this->assertSame('한', $str->__toString());
+        $this->assertSame('한', $str[0]->__toString());
+    }
+
+    public function test_arrayaccess2()
+    {
+        $str    = new String_();
+        $str[2] = '한';
+        $this->assertSame('  한', $str->__toString());
+    }
+
+    public function test_arrayaccess3()
+    {
+        $str    = new String_();
+        $str[2] = '한국어';
+        $this->assertSame('  한국어', $str->__toString());
+    }
+
+    public function test_arrayaccess_error1()
+    {
+        $str = new String_();
+
+        $error = false;
+        try {
+            $str['name'] = '한국어';
+        } catch (\Exception $e) {
+            $error = true;
+        }
+
+        $this->assertTrue($error);
+    }
+
+    public function test_offsetGet_exception()
+    {
+        $this->expectException(LogicException::class);
+        $str    = new String_();
+        $str->offsetGet(0);
+    }
+
+    public function test_offsetUnset()
+    {
+        $str = new String_('어');
+        $str->offsetUnset(0);
+        $this->assertSame('', $str->__toString());
+    }
+
+    public function test_offsetUnset2()
+    {
+        $str = new String_('한국');
+        $str->offsetUnset(0);
+        $this->assertSame('국', $str->__toString());
+    }
+
+    public function test_offsetUnset_exception()
+    {
+        $this->expectException(LogicException::class);
+        $str    = new String_();
+        $str->offsetUnset(0);
+    }
 }
