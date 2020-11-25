@@ -244,7 +244,7 @@ class Array_ extends Collection implements ArrayInterface
     public function __toJson(): string
     {
         $value = json_encode($this->items, JSON_PRETTY_PRINT);
-        if ($value===false) {
+        if ($value === false) {
             throw new UnexpectedValueException('Unexpected Value');
         }
 
