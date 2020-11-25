@@ -41,8 +41,5 @@ Number           | pseudo
 String           | pseudo
 NumberString     | scalar
 UnicodeString    | scalar
-
-Datatype         | Type
-------------     | ------------ 
 Uuid             | complex
 Datetime         | complex
