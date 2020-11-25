@@ -3,10 +3,25 @@
 declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use FightTheIce\Datatypes\Complex\Uuid_;
-use Ramsey\Uuid\UuidInterface;
+use FightTheIce\Datatypes\Core\Contracts\UuidInterface;
+use FightTheIce\Datatypes\Core\Contracts\ComplexInterface;
+use FightTheIce\Datatypes\Core\Contracts\DatatypeInterface;
+use Ramsey\Uuid\UuidInterface as RUuidInterface;
 
-final class Uuid_Test extends TestCase
+final class Uuid__Test extends TestCase
 {
+    public function test_meta()
+    {
+        $uuid = new Uuid_();
+        $this->assertInstanceOf(Uuid_::class, $uuid);
+
+        $this->assertInstanceOf(UuidInterface::class, $uuid);
+        $this->assertInstanceOf(ComplexInterface::class, $uuid);
+        $this->assertInstanceOf(DatatypeInterface::class, $uuid);
+
+        $this->assertClassHasAttribute('macros', Uuid_::class);
+    }
+
     public function test_construct_no_args()
     {
         $uuid = new Uuid_();
@@ -41,7 +56,7 @@ final class Uuid_Test extends TestCase
     {
         $uuid = new Uuid_();
         $obj  = $uuid->getUuidObj();
-        $this->assertInstanceOf(UuidInterface::class, $obj);
+        $this->assertInstanceOf(RUuidInterface::class, $obj);
     }
 
     public function test_construct_exception()

@@ -43,3 +43,4 @@ NumberString     | scalar
 UnicodeString    | scalar
 Uuid             | complex
 Datetime         | complex
+Closure          | complex
