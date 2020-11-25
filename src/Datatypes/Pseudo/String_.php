@@ -147,7 +147,10 @@ class String_ implements StringInterface, PseudoStringInterface, ArrayAccess
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset) == false) {
-            throw new LogicException('Undefined offset!');
+            $exception  = new LogicException('Undefined offset!');
+            $exception->setComponentName('datatypes');
+
+            throw $exception;
         }
 
         $character = $this->concrete->substr($offset, 1);

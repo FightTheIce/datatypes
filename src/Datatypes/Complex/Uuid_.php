@@ -41,7 +41,10 @@ class Uuid_ implements UuidInterface
             } elseif (is_string($seed)) {
                 $this->uuidObj = Uuid::fromString($seed);
             } else {
-                throw new InvalidArgumentException('Parameter $seed is required to be a string or null');
+                $exception = new InvalidArgumentException('Parameter $seed is required to be a string or null');
+                $exception->setComponentName('datatypes');
+
+                throw $exception;
             }
         }
     }

@@ -27,6 +27,7 @@ use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use FightTheIce\Datatypes\Scalar\String_;
 use Thunder\Nevar\Nevar;
+use FightTheIce\Exceptions\InvalidArgumentException;
 
 class Mixed_ implements MixedInterface
 {
@@ -127,7 +128,10 @@ class Mixed_ implements MixedInterface
             break;
 
             default:
-                throw new \ErrorException(__METHOD__);
+                $exception = new InvalidArgumentException('Uhmm help');
+                $exception->setComponentName('datatypes');
+
+                throw $exception;
         }
     }
 

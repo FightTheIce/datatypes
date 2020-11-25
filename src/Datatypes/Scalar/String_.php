@@ -214,7 +214,10 @@ class String_ implements StringInterface, ArrayAccess
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset) == false) {
-            throw new LogicException('Undefined offset!');
+            $exception = new LogicException('Undefined offset!');
+            $exception->setComponentName('datatypes');
+
+            throw $exception;
         }
 
         $character = $this->substr($offset, 1);
@@ -243,7 +246,10 @@ class String_ implements StringInterface, ArrayAccess
     public function offsetUnset($offset): void
     {
         if ($this->offsetExists($offset) == false) {
-            throw new LogicException('Undefined offset!');
+            $exception = new LogicException('Undefined offset!');
+            $exception->setComponentName('datatypes');
+
+            throw $exception;
         }
 
         $x = $this->str_split()->__toArray();
