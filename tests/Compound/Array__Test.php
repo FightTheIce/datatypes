@@ -218,6 +218,6 @@ final class Array__Test extends TestCase
     {
         $data = [1, 2, 3];
         $arr  = new Array_($data);
-        $this->assertSame(Neon::encode($data, Neon::BLOCK), $arr->__toYaml());
+        $this->assertSame(Neon::encode($data, Neon::BLOCK), $arr->__toNeon());
     }
 }
