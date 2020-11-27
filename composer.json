@@ -21,7 +21,8 @@
         "ramsey/uuid": "^4.1",
         "symfony/yaml": "^5.1",
         "nette/neon": "^3.2",
-        "nesbot/carbon": "^2.41"
+        "nesbot/carbon": "^2.41",
+        "roave/dont": "^1.1"
     },
     "autoload": {
         "classmap": ["src"]

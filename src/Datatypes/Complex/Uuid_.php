@@ -11,10 +11,16 @@ use Ramsey\Uuid\UuidInterface as RUuidInterface;
 use FightTheIce\Datatypes\Core\Contracts\StringInterface;
 use FightTheIce\Datatypes\Scalar\NumberString_;
 use FightTheIce\Exceptions\InvalidArgumentException;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Uuid_ implements UuidInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     /**
      * uuidObj.
@@ -47,6 +53,8 @@ class Uuid_ implements UuidInterface
                 throw $exception;
             }
         }
+
+        $this->hasConstructorRun();
     }
 
     public function __toUuid(): string

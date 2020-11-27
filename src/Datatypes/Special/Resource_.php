@@ -10,10 +10,16 @@ use Thunder\Nevar\Nevar;
 use FightTheIce\Exceptions\InvalidArgumentException;
 use FightTheIce\Datatypes\Core\Contracts\StringInterface;
 use FightTheIce\Datatypes\Scalar\String_;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Resource_ implements ResourceInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     /**
      * resource.
@@ -41,6 +47,8 @@ class Resource_ implements ResourceInterface
         }
 
         $this->resource = $res;
+
+        $this->hasConstructorRun();
     }
 
     public function get_type(): StringInterface

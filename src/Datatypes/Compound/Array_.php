@@ -53,10 +53,16 @@ use Spatie\CollectionMacros\Macros\WithSize;
 use Symfony\Component\Yaml\Yaml;
 use Nette\Neon\Neon;
 use FightTheIce\Exceptions\UnexpectedValueException;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Array_ extends Collection implements ArrayInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     /**
      * The items contained in the collection.
@@ -120,6 +126,8 @@ class Array_ extends Collection implements ArrayInterface
             $class = new $class();
             $this->macro($name, $class->__invoke());
         }
+
+        $this->hasConstructorRun();
     }
 
     public function getPrimitiveType(): string

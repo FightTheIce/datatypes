@@ -28,10 +28,16 @@ use FightTheIce\Datatypes\Scalar\UnicodeString_;
 use FightTheIce\Datatypes\Scalar\String_;
 use Thunder\Nevar\Nevar;
 use FightTheIce\Exceptions\InvalidArgumentException;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Mixed_ implements MixedInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     /**
      * mixed.
@@ -133,6 +139,8 @@ class Mixed_ implements MixedInterface
 
                 throw $exception;
         }
+
+        $this->hasConstructorRun();
     }
 
     public function __toMixed()

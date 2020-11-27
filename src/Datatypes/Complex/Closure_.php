@@ -7,10 +7,16 @@ namespace FightTheIce\Datatypes\Complex;
 use FightTheIce\Datatypes\Core\Contracts\ClosureInterface;
 use Illuminate\Support\Traits\Macroable;
 use Closure;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Closure_ implements ClosureInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     /**
      * closure.
@@ -26,6 +32,8 @@ class Closure_ implements ClosureInterface
         }
 
         $this->closure = $exec;
+
+        $this->hasConstructorRun();
     }
 
     public function __toClosure(): Closure

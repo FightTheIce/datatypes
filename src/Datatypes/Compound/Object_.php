@@ -17,10 +17,16 @@ use FightTheIce\Datatypes\Scalar\Integer_;
 use stdClass;
 use FightTheIce\Exceptions\InvalidArgumentException;
 use Closure;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Object_ implements ObjectInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     /**
      * object.
@@ -48,6 +54,8 @@ class Object_ implements ObjectInterface
         }
 
         $this->object = $obj;
+
+        $this->hasConstructorRun();
     }
 
     /**

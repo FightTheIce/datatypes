@@ -7,10 +7,16 @@ namespace FightTheIce\Datatypes\Compound;
 use FightTheIce\Datatypes\Core\Contracts\IterableInterface;
 use Illuminate\Support\Traits\Macroable;
 use Thunder\Nevar\Nevar;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Iterable_ implements IterableInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     /**
      * iterate.
@@ -22,6 +28,8 @@ class Iterable_ implements IterableInterface
     public function __construct(iterable $it = [])
     {
         $this->iterate = $it;
+
+        $this->hasConstructorRun();
     }
 
     public function __toIterable()

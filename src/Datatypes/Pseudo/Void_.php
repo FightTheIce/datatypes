@@ -8,10 +8,16 @@ use FightTheIce\Datatypes\Core\Contracts\VoidInterface;
 use Illuminate\Support\Traits\Macroable;
 use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
 use FightTheIce\Datatypes\Scalar\Boolean_;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Void_ implements VoidInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     public function __toVoid(): void
     {

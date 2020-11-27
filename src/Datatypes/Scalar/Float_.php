@@ -12,16 +12,24 @@ use FightTheIce\Datatypes\Core\Contracts\IntegerInterface;
 use Brick\Math\BigDecimal;
 use FightTheIce\Datatypes\Core\Contracts\NumberInterface;
 use Brick\Math\BigNumber;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Float_ implements FloatInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     protected float $value = 0.00;
 
     public function __construct(float $value = 0)
     {
         $this->value = $value;
+
+        $this->hasConstructorRun();
     }
 
     public function getDatatypeCategory(): string

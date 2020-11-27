@@ -9,16 +9,24 @@ use Thunder\Nevar\Nevar;
 use Illuminate\Support\Traits\Macroable;
 use FightTheIce\Exceptions\InvalidArgumentException;
 use FightTheIce\Datatypes\Core\Contracts\StringInterface;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Boolean_ implements BooleanInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     protected bool $value = false;
 
     public function __construct(bool $value = false)
     {
         $this->value = $value;
+
+        $this->hasConstructorRun();
     }
 
     public function getDatatypeCategory(): string

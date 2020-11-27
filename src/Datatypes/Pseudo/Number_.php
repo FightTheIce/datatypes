@@ -16,10 +16,16 @@ use FightTheIce\Datatypes\Scalar\Float_;
 use FightTheIce\Exceptions\InvalidArgumentException;
 use Brick\Math\BigNumber;
 use FightTheIce\Datatypes\Scalar\NumberString_;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Number_ implements NumberInterface, PseudoNumberInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     /**
      * concrete
@@ -48,6 +54,8 @@ class Number_ implements NumberInterface, PseudoNumberInterface
 
             throw $exception;
         }
+
+        $this->hasConstructorRun();
     }
 
     public function is_float(): BooleanInterface

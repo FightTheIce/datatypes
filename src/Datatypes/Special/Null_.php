@@ -9,10 +9,16 @@ use Illuminate\Support\Traits\Macroable;
 use FightTheIce\Exceptions\InvalidArgumentException;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Null_ implements NullInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     /**
      * __construct.
@@ -27,6 +33,8 @@ class Null_ implements NullInterface
 
             throw $exception;
         }
+
+        $this->hasConstructorRun();
     }
 
     /**

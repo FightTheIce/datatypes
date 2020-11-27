@@ -10,10 +10,16 @@ use Thunder\Nevar\Nevar;
 use FightTheIce\Datatypes\Scalar\Boolean_;
 use FightTheIce\Datatypes\Core\Contracts\BooleanInterface;
 use Closure;
+use Dont\DontGet;
+use Dont\DontSet;
+use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class Callable_ implements CallableInterface
 {
     use Macroable;
+    use DontGet;
+    use DontSet;
+    use PreventConstructorFromRunningTwice;
 
     /**
      * call.
@@ -34,6 +40,8 @@ class Callable_ implements CallableInterface
         }
 
         $this->call = $call;
+
+        $this->hasConstructorRun();
     }
 
     public function getPrimitiveType(): string
