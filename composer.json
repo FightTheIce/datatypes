@@ -22,7 +22,8 @@
         "symfony/yaml": "^5.1",
         "nette/neon": "^3.2",
         "nesbot/carbon": "^2.41",
-        "roave/dont": "^1.1"
+        "roave/dont": "^1.1",
+        "infection/infection": "^0.20.2"
     },
     "autoload": {
         "classmap": ["src"]

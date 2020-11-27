@@ -16,22 +16,18 @@ use ArrayAccess;
 use FightTheIce\Exceptions\LogicException;
 use Dont\DontGet;
 use Dont\DontSet;
-use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class String_ implements StringInterface, ArrayAccess
 {
     use Macroable;
     use DontGet;
     use DontSet;
-    use PreventConstructorFromRunningTwice;
 
     protected string $value = '';
 
     public function __construct(string $value = '')
     {
         $this->value = $value;
-
-        $this->hasConstructorRun();
     }
 
     public function getDatatypeCategory(): string

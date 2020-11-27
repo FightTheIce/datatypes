@@ -17,14 +17,12 @@ use ArrayAccess;
 use FightTheIce\Exceptions\LogicException;
 use Dont\DontGet;
 use Dont\DontSet;
-use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class String_ implements StringInterface, PseudoStringInterface, ArrayAccess
 {
     use Macroable;
     use DontGet;
     use DontSet;
-    use PreventConstructorFromRunningTwice;
 
     /**
      * concrete
@@ -43,8 +41,6 @@ class String_ implements StringInterface, PseudoStringInterface, ArrayAccess
             //no unicode
             $this->concrete = new StdString_($str);
         }
-
-        $this->hasConstructorRun();
     }
 
     public function __toString(): string

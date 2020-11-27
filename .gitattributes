@@ -16,4 +16,3 @@ phpunit.xml.dist export-ignore
 proxy-manager.png export-ignore
 psalm.xml export-ignore
 /docs export-ignore
-

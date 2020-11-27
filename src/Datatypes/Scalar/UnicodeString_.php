@@ -18,22 +18,18 @@ use ArrayAccess;
 use FightTheIce\Exceptions\LogicException;
 use Dont\DontGet;
 use Dont\DontSet;
-use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class UnicodeString_ implements UnicodeStringInterface, ArrayAccess
 {
     use Macroable;
     use DontGet;
     use DontSet;
-    use PreventConstructorFromRunningTwice;
 
     protected AbstractString $value;
 
     public function __construct(string $value = '')
     {
         $this->value = s($value);
-
-        $this->hasConstructorRun();
     }
 
     public function getDatatypeCategory(): string

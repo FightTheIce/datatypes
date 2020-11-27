@@ -20,14 +20,12 @@ use ArrayAccess;
 use FightTheIce\Exceptions\LogicException;
 use Dont\DontGet;
 use Dont\DontSet;
-use FightTheIce\Datatypes\Core\Traits\PreventConstructorFromRunningTwice;
 
 class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInterface, ArrayAccess
 {
     use Macroable;
     use DontGet;
     use DontSet;
-    use PreventConstructorFromRunningTwice;
 
     protected StringInterface $str;
 
@@ -70,8 +68,6 @@ class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInt
         }
 
         $this->str = new String_($value);
-
-        $this->hasConstructorRun();
     }
 
     public function __toString(): string
