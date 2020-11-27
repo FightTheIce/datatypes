@@ -230,6 +230,9 @@ class NumberString_ implements NumberStringInterface, IntegerInterface, FloatInt
         return new Boolean_(false);
     }
 
+    /**
+     * @param mixed $offset
+     */
     public function offsetExists($offset): bool
     {
         return $this->str->offsetExists($offset);

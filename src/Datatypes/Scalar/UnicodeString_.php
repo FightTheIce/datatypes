@@ -184,6 +184,9 @@ class UnicodeString_ implements UnicodeStringInterface, ArrayAccess
         return new Array_($split);
     }
 
+    /**
+     * @param mixed $offset
+     */
     public function offsetExists($offset): bool
     {
         $x = $this->__toString();
