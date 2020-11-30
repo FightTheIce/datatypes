@@ -35,6 +35,8 @@ class Resource_ implements ResourceInterface
      */
     public function __construct($res = null)
     {
+        $this->hasConstructorRun();
+
         if (is_null($res)) {
             $res = @\fopen('php://memory', 'rb');
         }
@@ -47,8 +49,6 @@ class Resource_ implements ResourceInterface
         }
 
         $this->resource = $res;
-
-        $this->hasConstructorRun();
     }
 
     public function get_type(): StringInterface

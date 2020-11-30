@@ -36,6 +36,8 @@ class Uuid_ implements UuidInterface
      */
     public function __construct($seed = null)
     {
+        $this->hasConstructorRun();
+
         if (is_null($seed)) {
             //generate a uuid
             $this->uuidObj = Uuid::uuid6();
@@ -53,8 +55,6 @@ class Uuid_ implements UuidInterface
                 throw $exception;
             }
         }
-
-        $this->hasConstructorRun();
     }
 
     public function __toUuid(): string

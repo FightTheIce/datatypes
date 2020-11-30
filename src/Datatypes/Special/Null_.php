@@ -27,14 +27,14 @@ class Null_ implements NullInterface
      */
     public function __construct($null = null)
     {
+        $this->hasConstructorRun();
+
         if (!is_null($null)) {
             $exception = new InvalidArgumentException('Parameter $null is expected to be null');
             $exception->setComponentName('datatypes');
 
             throw $exception;
         }
-
-        $this->hasConstructorRun();
     }
 
     /**

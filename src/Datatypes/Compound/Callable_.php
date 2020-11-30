@@ -35,13 +35,13 @@ class Callable_ implements CallableInterface
      */
     public function __construct(?callable $call = null)
     {
+        $this->hasConstructorRun();
+
         if (is_null($call)) {
             $call = 'trim';
         }
 
         $this->call = $call;
-
-        $this->hasConstructorRun();
     }
 
     public function getPrimitiveType(): string

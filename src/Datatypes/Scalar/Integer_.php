@@ -27,9 +27,9 @@ class Integer_ implements IntegerInterface
 
     public function __construct(int $value = 0)
     {
-        $this->value = $value;
-
         $this->hasConstructorRun();
+
+        $this->value = $value;
     }
 
     public function getDatatypeCategory(): string

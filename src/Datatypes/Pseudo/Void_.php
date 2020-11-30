@@ -19,6 +19,11 @@ class Void_ implements VoidInterface
     use DontSet;
     use PreventConstructorFromRunningTwice;
 
+    public function __construct()
+    {
+        $this->hasConstructorRun();
+    }
+
     public function __toVoid(): void
     {
     }

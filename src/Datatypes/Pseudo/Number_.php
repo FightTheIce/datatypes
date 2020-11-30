@@ -42,6 +42,8 @@ class Number_ implements NumberInterface, PseudoNumberInterface
      */
     public function __construct($num = 0)
     {
+        $this->hasConstructorRun();
+
         if (is_string($num)) {
             $this->concrete = new NumberString_($num);
         } elseif (is_int($num)) {
@@ -54,8 +56,6 @@ class Number_ implements NumberInterface, PseudoNumberInterface
 
             throw $exception;
         }
-
-        $this->hasConstructorRun();
     }
 
     public function is_float(): BooleanInterface

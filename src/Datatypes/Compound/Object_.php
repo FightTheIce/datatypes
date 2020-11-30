@@ -42,6 +42,8 @@ class Object_ implements ObjectInterface
      */
     public function __construct($obj = null)
     {
+        $this->hasConstructorRun();
+
         if (is_null($obj)) {
             $obj = new stdClass();
         }
@@ -54,8 +56,6 @@ class Object_ implements ObjectInterface
         }
 
         $this->object = $obj;
-
-        $this->hasConstructorRun();
     }
 
     /**

@@ -27,9 +27,9 @@ class Float_ implements FloatInterface
 
     public function __construct(float $value = 0)
     {
-        $this->value = $value;
-
         $this->hasConstructorRun();
+
+        $this->value = $value;
     }
 
     public function getDatatypeCategory(): string

@@ -78,6 +78,8 @@ class Array_ extends Collection implements ArrayInterface
      */
     public function __construct($items = [])
     {
+        $this->hasConstructorRun();
+
         $this->items = $this->getArrayableItems($items);
 
         $macros = [
@@ -126,8 +128,6 @@ class Array_ extends Collection implements ArrayInterface
             $class = new $class();
             $this->macro($name, $class->__invoke());
         }
-
-        $this->hasConstructorRun();
     }
 
     public function getPrimitiveType(): string

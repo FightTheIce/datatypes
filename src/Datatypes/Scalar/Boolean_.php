@@ -24,9 +24,9 @@ class Boolean_ implements BooleanInterface
 
     public function __construct(bool $value = false)
     {
-        $this->value = $value;
-
         $this->hasConstructorRun();
+
+        $this->value = $value;
     }
 
     public function getDatatypeCategory(): string

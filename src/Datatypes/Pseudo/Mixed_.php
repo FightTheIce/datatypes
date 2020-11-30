@@ -60,6 +60,8 @@ class Mixed_ implements MixedInterface
      */
     public function __construct($mixed = '')
     {
+        $this->hasConstructorRun();
+
         $this->mixed    = $mixed;
 
         //this will shut psalm/phpstan up
@@ -139,8 +141,6 @@ class Mixed_ implements MixedInterface
 
                 throw $exception;
         }
-
-        $this->hasConstructorRun();
     }
 
     public function __toMixed()

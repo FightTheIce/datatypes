@@ -220,4 +220,15 @@ final class Array__Test extends TestCase
         $arr  = new Array_($data);
         $this->assertSame(Neon::encode($data, Neon::BLOCK), $arr->__toNeon());
     }
+
+    public function test_arrayaccess()
+    {
+        $arr = new Array_();
+
+        $this->assertFalse($arr->offsetExists(0));
+
+        $arr[0] = 'hello world';
+        $this->assertSame('hello world', $arr[0]);
+        $this->assertTrue($arr->offsetExists(0));
+    }
 }

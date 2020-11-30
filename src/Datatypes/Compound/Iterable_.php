@@ -27,9 +27,9 @@ class Iterable_ implements IterableInterface
 
     public function __construct(iterable $it = [])
     {
-        $this->iterate = $it;
-
         $this->hasConstructorRun();
+
+        $this->iterate = $it;
     }
 
     public function __toIterable()

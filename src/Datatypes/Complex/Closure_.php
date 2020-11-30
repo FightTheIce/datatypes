@@ -27,13 +27,13 @@ class Closure_ implements ClosureInterface
 
     public function __construct(? Closure $exec = null)
     {
+        $this->hasConstructorRun();
+
         if (is_null($exec)) {
             $exec = function (): void {};
         }
 
         $this->closure = $exec;
-
-        $this->hasConstructorRun();
     }
 
     public function __toClosure(): Closure
