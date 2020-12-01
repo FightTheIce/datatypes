@@ -9,15 +9,27 @@ use FightTheIce\Datatypes\Scalar\Float_;
 
 $float = new Float_(10.7);
 
-$isPositive = $float->isPositive(); //returns FightTheIce\Datatypes\Scalar\Boolean_
-$isNegative = $float->isNegative(); //returns FightTheIce\Datatypes\Scalar\Boolean_
-$isZero     = $float->isZero(); //returns FightTheIce\Datatypes\Scalar\Boolean_
+$isPositive = $float->isPositive(); 
+//returns FightTheIce\Datatypes\Scalar\Boolean_
 
-$toInteger = $float->__toInteger(); //this uses intval() - returns Integer_
+$isNegative = $float->isNegative(); 
+//returns FightTheIce\Datatypes\Scalar\Boolean_
 
-$abs = $float->absolute(); //returns FightTheIce\Datatypes\Scalar\Float_
-$negated = $float->negated(); //returns FightTheIce\Datatypes\Scalar\Float_;
-$negativeabs = $float->negativeabsolute(); //returns FightTheIce\Datatypes\Scalar\Float_
+$isZero     = $float->isZero(); 
+//returns FightTheIce\Datatypes\Scalar\Boolean_
 
-$math = $float->math(); //returns Brick\Math\BigDecimal
+$toInteger = $float->__toInteger(); 
+//this uses intval() - returns Integer_
+
+$abs = $float->absolute(); 
+//returns FightTheIce\Datatypes\Scalar\Float_
+
+$negated = $float->negated(); 
+//returns FightTheIce\Datatypes\Scalar\Float_;
+
+$negativeabs = $float->negativeabsolute(); 
+//returns FightTheIce\Datatypes\Scalar\Float_
+
+$math = $float->math(); 
+//returns Brick\Math\BigDecimal
 ```

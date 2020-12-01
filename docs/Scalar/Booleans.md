@@ -9,10 +9,15 @@ use FightTheIce\Datatypes\Scalar\Boolean_;
 
 $bool = new Boolean_(true);
 
-$isTrue = $bool->isTrue(); //returns true
-$isFalse = $bool->isFalse(); //returns false;
+$isTrue = $bool->isTrue(); 
+//returns true
 
-$newBool = $bool->inverse(); //returns the opposite boolean
+$isFalse = $bool->isFalse(); 
+//returns false;
 
-$stringRep = $newBool->transform('true condition','false condition'); //returns FightTheIce\Datatypes\Scalar\String_
+$newBool = $bool->inverse(); 
+//returns the opposite boolean
+
+$stringRep = $newBool->transform('true condition','false condition'); 
+//returns FightTheIce\Datatypes\Scalar\String_
 ```
