@@ -38,3 +38,6 @@ Datatype                                   | Type
 [Uuid](docs/Complex/Uuids.md)                      | complex
 [Datetime](docs/Complex/Datetimes.md)              | complex
 [Closure](docs/Complex/Closures.md)                | complex
+
+# Releases
+While releases have been made (even marked as production worthy) this project is still experimental.
